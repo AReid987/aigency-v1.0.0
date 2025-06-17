@@ -201,106 +201,148 @@ class ExtractApp(App):
         details_tab = self.query_one("#details-tab", TabPane)
         details_tab.mount(MarkdownViewer(id="content-details", classes="content-details"))
         
-        # Set up extract tab
+        # Set up extract tab - create all elements at once to ensure they're available
         extract_tab = self.query_one("#extract-tab", TabPane)
-        with extract_tab:
-            with Container(classes="extraction-form"):
-                with Horizontal(classes="form-row"):
-                    yield Label("URL:", classes="form-label")
-                    yield Input(placeholder="YouTube URL or article URL", id="url-input", classes="form-input")
-                
-                with Horizontal(classes="form-row"):
-                    yield Label("Type:", classes="form-label")
-                    yield Select(
-                        [(label, value) for value, label in [
-                            ("youtube", "YouTube Video"),
-                            ("article", "Article"),
-                        ]],
-                        id="content-type-select",
-                        value="youtube",
-                        classes="form-input"
-                    )
-                
-                with Horizontal(classes="form-row"):
-                    yield Label("Pattern:", classes="form-label")
-                    yield Select(
-                        [(pattern, pattern) for pattern in get_pattern_names()],
-                        id="pattern-select",
-                        value="youtube_summary" if "youtube_summary" in get_pattern_names() else get_pattern_names()[0] if get_pattern_names() else "",
-                        classes="form-input"
-                    )
-                
-                with Horizontal(classes="form-row"):
-                    yield Label("Provider:", classes="form-label")
-                    yield Select(
-                        [(provider, provider) for provider in self.available_providers],
-                        id="provider-select",
-                        value=self.default_provider,
-                        classes="form-input"
-                    )
-                
-                with Horizontal(classes="button-container"):
-                    yield Button("Extract", id="extract-button", variant="primary")
-                
-                yield Static("", id="extract-status", classes="status-message")
         
-        # Set up stitch tab
+        # Create a container for the extraction form
+        extraction_form = Container(classes="extraction-form")
+        
+        # URL input row
+        url_row = Horizontal(classes="form-row")
+        url_row.mount(Label("URL:", classes="form-label"))
+        url_row.mount(Input(placeholder="YouTube URL or article URL", id="url-input", classes="form-input"))
+        extraction_form.mount(url_row)
+        
+        # Content type row
+        type_row = Horizontal(classes="form-row")
+        type_row.mount(Label("Type:", classes="form-label"))
+        type_row.mount(Select(
+            [(label, value) for value, label in [
+                ("youtube", "YouTube Video"),
+                ("article", "Article"),
+            ]],
+            id="content-type-select",
+            value="youtube",
+            classes="form-input"
+        ))
+        extraction_form.mount(type_row)
+        
+        # Pattern row
+        pattern_row = Horizontal(classes="form-row")
+        pattern_row.mount(Label("Pattern:", classes="form-label"))
+        pattern_row.mount(Select(
+            [(pattern, pattern) for pattern in get_pattern_names()],
+            id="pattern-select",
+            value="youtube_summary" if "youtube_summary" in get_pattern_names() else get_pattern_names()[0] if get_pattern_names() else "",
+            classes="form-input"
+        ))
+        extraction_form.mount(pattern_row)
+        
+        # Provider row
+        provider_row = Horizontal(classes="form-row")
+        provider_row.mount(Label("Provider:", classes="form-label"))
+        provider_row.mount(Select(
+            [(provider, provider) for provider in self.available_providers],
+            id="provider-select",
+            value=self.default_provider,
+            classes="form-input"
+        ))
+        extraction_form.mount(provider_row)
+        
+        # Button row
+        button_row = Horizontal(classes="button-container")
+        button_row.mount(Button("Extract", id="extract-button", variant="primary"))
+        extraction_form.mount(button_row)
+        
+        # Status message
+        extraction_form.mount(Static("", id="extract-status", classes="status-message"))
+        
+        # Mount the form to the tab
+        extract_tab.mount(extraction_form)
+        
+        # Set up stitch tab - create all elements at once to ensure they're available
         stitch_tab = self.query_one("#stitch-tab", TabPane)
-        with stitch_tab:
-            with Container(classes="extraction-form"):
-                with Horizontal(classes="form-row"):
-                    yield Label("URL:", classes="form-label")
-                    yield Input(placeholder="YouTube URL or article URL", id="stitch-url-input", classes="form-input")
-                
-                with Horizontal(classes="form-row"):
-                    yield Label("Stitch:", classes="form-label")
-                    yield Select(
-                        self._get_stitch_options(),
-                        id="stitch-select",
-                        classes="form-input"
-                    )
-                
-                with Horizontal(classes="form-row"):
-                    yield Label("Provider:", classes="form-label")
-                    yield Select(
-                        [(provider, provider) for provider in self.available_providers],
-                        id="stitch-provider-select",
-                        value=self.default_provider,
-                        classes="form-input"
-                    )
-                
-                with Horizontal(classes="button-container"):
-                    yield Button("Run Stitch", id="run-stitch-button", variant="primary")
-                    yield Button("Create New", id="create-stitch-button", variant="success")
-                
-                yield Static("", id="stitch-status", classes="status-message")
+        
+        # Create a container for the stitch form
+        stitch_form = Container(classes="extraction-form")
+        
+        # URL input row
+        stitch_url_row = Horizontal(classes="form-row")
+        stitch_url_row.mount(Label("URL:", classes="form-label"))
+        stitch_url_row.mount(Input(placeholder="YouTube URL or article URL", id="stitch-url-input", classes="form-input"))
+        stitch_form.mount(stitch_url_row)
+        
+        # Stitch select row
+        stitch_select_row = Horizontal(classes="form-row")
+        stitch_select_row.mount(Label("Stitch:", classes="form-label"))
+        stitch_select_row.mount(Select(
+            self._get_stitch_options(),
+            id="stitch-select",
+            classes="form-input"
+        ))
+        stitch_form.mount(stitch_select_row)
+        
+        # Provider row
+        stitch_provider_row = Horizontal(classes="form-row")
+        stitch_provider_row.mount(Label("Provider:", classes="form-label"))
+        stitch_provider_row.mount(Select(
+            [(provider, provider) for provider in self.available_providers],
+            id="stitch-provider-select",
+            value=self.default_provider,
+            classes="form-input"
+        ))
+        stitch_form.mount(stitch_provider_row)
+        
+        # Button row
+        stitch_button_row = Horizontal(classes="button-container")
+        stitch_button_row.mount(Button("Run Stitch", id="run-stitch-button", variant="primary"))
+        stitch_button_row.mount(Button("Create New", id="create-stitch-button", variant="success"))
+        stitch_form.mount(stitch_button_row)
+        
+        # Status message
+        stitch_form.mount(Static("", id="stitch-status", classes="status-message"))
+        
+        # Mount the form to the tab
+        stitch_tab.mount(stitch_form)
         
         # Set up settings tab
         settings_tab = self.query_one("#settings-tab", TabPane)
-        with settings_tab:
-            with Container(classes="extraction-form"):
-                with Horizontal(classes="form-row"):
-                    yield Label("Default Provider:", classes="form-label")
-                    yield Select(
-                        [(provider, provider) for provider in self.available_providers],
-                        id="default-provider-select",
-                        value=self.default_provider,
-                        classes="form-input"
-                    )
-                
-                with Horizontal(classes="form-row"):
-                    yield Label("Database Path:", classes="form-label")
-                    yield Input(
-                        value=self.db.db_path,
-                        id="db-path-input",
-                        disabled=True,
-                        classes="form-input"
-                    )
-                
-                with Horizontal(classes="button-container"):
-                    yield Button("Save Settings", id="save-settings-button", variant="primary")
-                
-                yield Static("", id="settings-status", classes="status-message")
+        
+        # Create a container for the settings form
+        settings_form = Container(classes="extraction-form")
+        
+        # Default provider row
+        default_provider_row = Horizontal(classes="form-row")
+        default_provider_row.mount(Label("Default Provider:", classes="form-label"))
+        default_provider_row.mount(Select(
+            [(provider, provider) for provider in self.available_providers],
+            id="default-provider-select",
+            value=self.default_provider,
+            classes="form-input"
+        ))
+        settings_form.mount(default_provider_row)
+        
+        # Database path row
+        db_path_row = Horizontal(classes="form-row")
+        db_path_row.mount(Label("Database Path:", classes="form-label"))
+        db_path_row.mount(Input(
+            value=self.db.db_path,
+            id="db-path-input",
+            disabled=True,
+            classes="form-input"
+        ))
+        settings_form.mount(db_path_row)
+        
+        # Button row
+        settings_button_row = Horizontal(classes="button-container")
+        settings_button_row.mount(Button("Save Settings", id="save-settings-button", variant="primary"))
+        settings_form.mount(settings_button_row)
+        
+        # Status message
+        settings_form.mount(Static("", id="settings-status", classes="status-message"))
+        
+        # Mount the form to the tab
+        settings_tab.mount(settings_form)
         
         # Log that the app is mounted
         self.logger.info("App mounted successfully")
@@ -349,6 +391,9 @@ class ExtractApp(App):
         tabs = self.query_one(Tabs)
         tabs.active = "extract-tab"
         
+        # Make sure the tab is fully rendered
+        self.refresh()
+        
         # Use a longer delay to ensure the tab is fully rendered
         self.set_timer(1.0, self._ensure_extract_tab_ready)
     
@@ -362,14 +407,29 @@ class ExtractApp(App):
             
         # Try to find the extract tab content
         try:
+            # First, make sure the tab is fully rendered by forcing a refresh
+            self.refresh()
+            
+            # Try to find the URL input directly with a more specific selector
+            try:
+                url_input = self.query_one("#extract-tab #url-input")
+                if url_input:
+                    url_input.focus()
+                    self.logger.info("Successfully focused URL input")
+                    return
+            except Exception:
+                # If direct query fails, continue with the fallback approach
+                pass
+                
+            # Fallback: try to find the extract tab and then search within it
             extract_tab = self.query_one("#extract-tab", TabPane)
             
             # Check if the tab has been populated with content
             inputs = extract_tab.query("Input")
             if not inputs:
                 self.logger.error("Extract tab has no input elements, waiting for UI to update")
-                # Try again after a delay
-                self.set_timer(0.5, self._ensure_extract_tab_ready)
+                # Try again after a longer delay
+                self.set_timer(1.0, self._ensure_extract_tab_ready)
                 return
                 
             # Find the URL input specifically
@@ -386,8 +446,8 @@ class ExtractApp(App):
                 self.logger.error("URL input not found in extract tab")
         except Exception as e:
             self.logger.error(f"Error while focusing URL input: {e}")
-            # Try again after a delay
-            self.set_timer(0.5, self._ensure_extract_tab_ready)
+            # Try again after a longer delay
+            self.set_timer(1.0, self._ensure_extract_tab_ready)
     
     def action_new_stitch(self) -> None:
         """Focus the stitch tab."""
@@ -396,6 +456,9 @@ class ExtractApp(App):
         # First, switch to the stitch tab
         tabs = self.query_one(Tabs)
         tabs.active = "stitch-tab"
+        
+        # Make sure the tab is fully rendered
+        self.refresh()
         
         # Use a longer delay to ensure the tab is fully rendered
         self.set_timer(1.0, self._ensure_stitch_tab_ready)
@@ -410,14 +473,29 @@ class ExtractApp(App):
             
         # Try to find the stitch tab content
         try:
+            # First, make sure the tab is fully rendered by forcing a refresh
+            self.refresh()
+            
+            # Try to find the URL input directly with a more specific selector
+            try:
+                url_input = self.query_one("#stitch-tab #stitch-url-input")
+                if url_input:
+                    url_input.focus()
+                    self.logger.info("Successfully focused stitch URL input")
+                    return
+            except Exception:
+                # If direct query fails, continue with the fallback approach
+                pass
+                
+            # Fallback: try to find the stitch tab and then search within it
             stitch_tab = self.query_one("#stitch-tab", TabPane)
             
             # Check if the tab has been populated with content
             inputs = stitch_tab.query("Input")
             if not inputs:
                 self.logger.error("Stitch tab has no input elements, waiting for UI to update")
-                # Try again after a delay
-                self.set_timer(0.5, self._ensure_stitch_tab_ready)
+                # Try again after a longer delay
+                self.set_timer(1.0, self._ensure_stitch_tab_ready)
                 return
                 
             # Find the URL input specifically
@@ -434,8 +512,8 @@ class ExtractApp(App):
                 self.logger.error("Stitch URL input not found in stitch tab")
         except Exception as e:
             self.logger.error(f"Error while focusing stitch URL input: {e}")
-            # Try again after a delay
-            self.set_timer(0.5, self._ensure_stitch_tab_ready)
+            # Try again after a longer delay
+            self.set_timer(1.0, self._ensure_stitch_tab_ready)
     
     def action_focus_search(self) -> None:
         """Focus the search input."""

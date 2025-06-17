@@ -23,6 +23,7 @@
   "dependencies": {
     "@aigency/web": "link:/Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/web",
     "@clerk/clerk-react": "^5.32.0",
+    "@tailwindcss/postcss": "^4.1.10",
     "axios": "^1.10.0"
   }
 }
