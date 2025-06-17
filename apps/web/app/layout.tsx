@@ -59,13 +59,3 @@ export default function RootLayout({
     </ClerkProvider>
   );
 }
-}) {
-  return (
-    <html lang="en" suppressHydrationWarning className="dark">
-      <body className={`${inter.variable} font-sans antialiased`}>
-        {children}
-        <Toaster />
-      </body>
-    </html>
-  );
-}
