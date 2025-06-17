@@ -1,0 +1,32 @@
+{
+  "name": "@aigency/extract",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "pdm run dev",
+    "tui": "python run_tui.py",
+    "build": "pdm build",
+    "start": "pdm run start",
+    "lint": "pdm run lint",
+    "test": "pdm run test"
+  },
+  "turbo": {
+    "tasks": {
+      "dev": {
+        "command": "pdm run dev"
+      },
+      "tui": {
+        "command": "python run_tui.py"
+      },
+      "build": {
+        "command": "pdm build"
+      },
+      "lint": {
+        "command": "pdm run lint"
+      },
+      "test": {
+        "command": "pdm run test"
+      }
+    }
+  }
+}

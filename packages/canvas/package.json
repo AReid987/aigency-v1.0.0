@@ -1,0 +1,56 @@
+{
+    "name": "@aigency/canvas",
+    "version": "0.1.0",
+    "private": true,
+    "description": "Unified canvas package combining ArchVision and BrainCraft capabilities",
+    "exports": {
+        ".": "./src/index.ts",
+        "./styles.css": "./src/styles.css",
+        "./components/*": "./src/components/*.tsx",
+        "./hooks/*": "./src/hooks/*.ts",
+        "./services/*": "./src/services/*.ts"
+    },
+    "types": "./src/index.ts",
+    "scripts": {
+        "lint": "eslint . --max-warnings 0",
+        "check-types": "tsc --noEmit",
+        "dev": "vite",
+        "build": "tsc && vite build",
+        "preview": "vite preview",
+        "serve:demo": "vite serve demo.html"
+    },
+    "dependencies": {
+        "@mantine/core": "^7.16.0",
+        "@mantine/hooks": "^7.16.0",
+        "@react-three/drei": "^9.117.3",
+        "@react-three/fiber": "^8.17.10",
+        "axios": "^1.6.2",
+        "clsx": "^2.1.0",
+        "lucide-react": "^0.453.0",
+        "mermaid": "^11.4.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "reactflow": "^11.11.4",
+        "tailwind-merge": "^2.2.0",
+        "three": "^0.158.0"
+    },
+    "devDependencies": {
+        "@repo/eslint-config": "workspace:*",
+        "@repo/typescript-config": "workspace:*",
+        "@types/node": "^20.10.6",
+        "@types/react": "^18.2.46",
+        "@types/react-dom": "^18.2.0",
+        "@types/three": "^0.158.0",
+        "@vitejs/plugin-react": "^4.2.1",
+        "autoprefixer": "^10.4.21",
+        "eslint": "^8.56.0",
+        "postcss": "^8.4.47",
+        "tailwindcss": "^3.4.17",
+        "typescript": "^5.3.3",
+        "vite": "^5.0.12"
+    },
+    "peerDependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    }
+}

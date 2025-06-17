@@ -1,0 +1,1 @@
+"""Aigency Extract app module."""

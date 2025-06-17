@@ -1,0 +1,28 @@
+{
+  "name": "aigency",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "dev:js": "turbo run dev --filter=!./apps/extract",
+    "dev:extract": "cd apps/extract && pdm run dev",
+    "tui:extract": "cd apps/extract && .venv/bin/python run_tui.py",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "turbo": "^2.5.4",
+    "typescript": "5.8.3"
+  },
+  "packageManager": "pnpm@10.12.1",
+  "engines": {
+    "node": ">=18 <22"
+  },
+  "dependencies": {
+    "@aigency/web": "link:/Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/web",
+    "@clerk/clerk-react": "^5.32.0",
+    "axios": "^1.10.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "outputs": ["dist/**", "build/**"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "cache": true,
+      "dependsOn": ["^build"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "lint": {},
+    "test": {}
+  }
+}

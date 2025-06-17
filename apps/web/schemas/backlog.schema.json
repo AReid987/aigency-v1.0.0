@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Backlog",
+  "description": "Schema for project backlog structure",
+  "type": "object",
+  "properties": {
+    "epics": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Epic"
+      }
+    },
+    "totalComplexity": {
+      "type": "number",
+      "minimum": 0
+    },
+    "progress": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    }
+  },
+  "required": ["epics", "totalComplexity", "progress"],
+  "definitions": {
+    "Task": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["todo", "in-progress", "done"]
+        },
+        "complexity": {
+          "type": "number",
+          "minimum": 0
+        },
+        "epicId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "title", "status", "complexity", "epicId", "createdAt", "updatedAt"]
+    },
+    "Epic": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        },
+        "complexity": {
+          "type": "number",
+          "minimum": 0
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Task"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["id", "title", "complexity", "tasks", "createdAt", "updatedAt"]
+    }
+  }
+}

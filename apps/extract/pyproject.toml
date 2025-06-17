@@ -1,0 +1,78 @@
+[project]
+name = "aigency-extract"
+version = "0.1.0"
+description = "Extract and organize insights from YouTube videos and articles"
+authors = [
+    {name = "Your Name", email = "your.email@example.com"},
+]
+dependencies = [
+    "textual>=0.38.1",
+    "typer>=0.9.0",
+    "pytube>=15.0.0",
+    "pydantic>=2.4.2",
+    "sqlite-utils>=3.35",
+    "requests>=2.31.0",
+    "beautifulsoup4>=4.12.2",
+    "rich>=13.5.2",
+    "httpx>=0.24.1",
+    "python-dotenv>=1.0.0",
+]
+requires-python = ">=3.9"
+readme = "README.md"
+license = {text = "MIT"}
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "black>=23.7.0",
+    "isort>=5.12.0",
+    "mypy>=1.5.1",
+    "ruff>=0.0.292",
+]
+
+[project.scripts]
+extract = "aigency_extract.app.cli:app"
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "black>=23.7.0",
+    "isort>=5.12.0",
+    "mypy>=1.5.1",
+    "ruff>=0.0.292",
+]
+
+[tool.pdm.scripts]
+dev = "python -m aigency_extract.app.cli"
+start = "python -m aigency_extract.tui_main"
+tui = "python -m aigency_extract.tui_main"
+lint = "ruff check ."
+test = "pytest tests/"
+format = "black ."
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.ruff]
+line-length = 88
+target-version = "py39"
+select = ["E", "F", "I"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true

@@ -1,0 +1,17 @@
+{
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "workbench.editorAssociations": {
+    "*.md": "default"
+  },
+  "workbench.editor.defaultBinaryEditor": "default",
+  "files.associations": {
+    "*.md": "markdown"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "vscode.markdown-language-features"
+  }
+}
