@@ -359,3 +359,25 @@ AttributeError: property 'log' of 'ExtractApp' object has no setter
 2025-06-17 15:19:27,150 - ExtractApp - INFO - Initializing ExtractApp
 2025-06-17 15:19:27,156 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
 2025-06-17 15:19:27,156 - ExtractApp - INFO - Default provider: mistral
+2025-06-17 16:19:06,531 - ExtractApp - INFO - Action: new_extract
+2025-06-17 16:19:07,537 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:08,039 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:08,541 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:09,043 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:09,547 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:10,049 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:10,551 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:11,053 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:11,555 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:12,057 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:12,559 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:13,063 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:13,565 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:14,066 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:14,575 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:15,076 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:15,578 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:16,080 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:16,588 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:17,090 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
+2025-06-17 16:19:17,592 - ExtractApp - ERROR - Extract tab has no input elements, waiting for UI to update
