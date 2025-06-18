@@ -7,12 +7,12 @@ export default function Home() {
   return (
     <main
       className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
-      data-oid="a1nbdm2"
+      data-oid="upuo_eu"
     >
-      <Navigation data-oid="8av:mvx" />
-      <HeroSection data-oid="ie9p8mi" />
-      <StatsSection data-oid="5zr-vw9" />
-      <FeaturesSection data-oid="pnhqi6-" />
+      <Navigation data-oid="mcjhk8o" />
+      <HeroSection data-oid="k7tc.uv" />
+      <StatsSection data-oid="a.njpqa" />
+      <FeaturesSection data-oid="mhp.u8d" />
     </main>
   );
 }

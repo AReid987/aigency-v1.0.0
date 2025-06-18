@@ -177,12 +177,108 @@ class ExtractApp(App):
             
             # Main content area
             with Vertical(id="main-content"):
-                yield Tabs(
-                    TabPane("Details", id="details-tab"),
-                    TabPane("Extract", id="extract-tab"),
-                    TabPane("Stitch", id="stitch-tab"),
-                    TabPane("Settings", id="settings-tab"),
-                )
+                with Tabs() as tabs:
+                    # Details tab
+                    with TabPane("Details", id="details-tab"):
+                        yield MarkdownViewer(id="content-details", classes="content-details")
+                    
+                    # Extract tab
+                    with TabPane("Extract", id="extract-tab"):
+                        with Container(classes="extraction-form"):
+                            with Horizontal(classes="form-row"):
+                                yield Label("URL:", classes="form-label")
+                                yield Input(placeholder="YouTube URL or article URL", id="url-input", classes="form-input")
+                            
+                            with Horizontal(classes="form-row"):
+                                yield Label("Type:", classes="form-label")
+                                yield Select(
+                                    [(label, value) for value, label in [
+                                        ("youtube", "YouTube Video"),
+                                        ("article", "Article"),
+                                    ]],
+                                    id="content-type-select",
+                                    value="youtube",
+                                    classes="form-input"
+                                )
+                            
+                            with Horizontal(classes="form-row"):
+                                yield Label("Pattern:", classes="form-label")
+                                yield Select(
+                                    [(pattern, pattern) for pattern in get_pattern_names()],
+                                    id="pattern-select",
+                                    value="youtube_summary" if "youtube_summary" in get_pattern_names() else get_pattern_names()[0] if get_pattern_names() else "",
+                                    classes="form-input"
+                                )
+                            
+                            with Horizontal(classes="form-row"):
+                                yield Label("Provider:", classes="form-label")
+                                yield Select(
+                                    [(provider, provider) for provider in self.available_providers],
+                                    id="provider-select",
+                                    value=self.default_provider,
+                                    classes="form-input"
+                                )
+                            
+                            with Horizontal(classes="button-container"):
+                                yield Button("Extract", id="extract-button", variant="primary")
+                            
+                            yield Static("", id="extract-status", classes="status-message")
+                    
+                    # Stitch tab
+                    with TabPane("Stitch", id="stitch-tab"):
+                        with Container(classes="extraction-form"):
+                            with Horizontal(classes="form-row"):
+                                yield Label("URL:", classes="form-label")
+                                yield Input(placeholder="YouTube URL or article URL", id="stitch-url-input", classes="form-input")
+                            
+                            with Horizontal(classes="form-row"):
+                                yield Label("Stitch:", classes="form-label")
+                                yield Select(
+                                    self._get_stitch_options(),
+                                    id="stitch-select",
+                                    classes="form-input"
+                                )
+                            
+                            with Horizontal(classes="form-row"):
+                                yield Label("Provider:", classes="form-label")
+                                yield Select(
+                                    [(provider, provider) for provider in self.available_providers],
+                                    id="stitch-provider-select",
+                                    value=self.default_provider,
+                                    classes="form-input"
+                                )
+                            
+                            with Horizontal(classes="button-container"):
+                                yield Button("Run Stitch", id="run-stitch-button", variant="primary")
+                                yield Button("Create New", id="create-stitch-button", variant="success")
+                            
+                            yield Static("", id="stitch-status", classes="status-message")
+                    
+                    # Settings tab
+                    with TabPane("Settings", id="settings-tab"):
+                        with Container(classes="extraction-form"):
+                            with Horizontal(classes="form-row"):
+                                yield Label("Default Provider:", classes="form-label")
+                                yield Select(
+                                    [(provider, provider) for provider in self.available_providers],
+                                    id="default-provider-select",
+                                    value=self.default_provider,
+                                    classes="form-input"
+                                )
+                            
+                            with Horizontal(classes="form-row"):
+                                yield Label("Database Path:", classes="form-label")
+                                yield Input(
+                                    value=self.db.db_path,
+                                    id="db-path-input",
+                                    disabled=True,
+                                    classes="form-input"
+                                )
+                            
+                            with Horizontal(classes="button-container"):
+                                yield Button("Save Settings", id="save-settings-button", variant="primary")
+                            
+                            yield Static("", id="settings-status", classes="status-message")
         
         yield Footer()
     
@@ -197,114 +293,8 @@ class ExtractApp(App):
         # Load initial data
         self.refresh_content_list()
         
-        # Set up details tab
-        details_tab = self.query_one("#details-tab", TabPane)
-        details_tab.mount(MarkdownViewer(id="content-details", classes="content-details"))
-        
-        # Set up extract tab - using with blocks to ensure proper mounting
-        extract_tab = self.query_one("#extract-tab", TabPane)
-        with extract_tab:
-            with Container(classes="extraction-form"):
-                with Horizontal(classes="form-row"):
-                    Label("URL:", classes="form-label")
-                    Input(placeholder="YouTube URL or article URL", id="url-input", classes="form-input")
-                
-                with Horizontal(classes="form-row"):
-                    Label("Type:", classes="form-label")
-                    Select(
-                        [(label, value) for value, label in [
-                            ("youtube", "YouTube Video"),
-                            ("article", "Article"),
-                        ]],
-                        id="content-type-select",
-                        value="youtube",
-                        classes="form-input"
-                    )
-                
-                with Horizontal(classes="form-row"):
-                    Label("Pattern:", classes="form-label")
-                    Select(
-                        [(pattern, pattern) for pattern in get_pattern_names()],
-                        id="pattern-select",
-                        value="youtube_summary" if "youtube_summary" in get_pattern_names() else get_pattern_names()[0] if get_pattern_names() else "",
-                        classes="form-input"
-                    )
-                
-                with Horizontal(classes="form-row"):
-                    Label("Provider:", classes="form-label")
-                    Select(
-                        [(provider, provider) for provider in self.available_providers],
-                        id="provider-select",
-                        value=self.default_provider,
-                        classes="form-input"
-                    )
-                
-                with Horizontal(classes="button-container"):
-                    Button("Extract", id="extract-button", variant="primary")
-                
-                Static("", id="extract-status", classes="status-message")
-        
-        # Set up stitch tab
-        stitch_tab = self.query_one("#stitch-tab", TabPane)
-        with stitch_tab:
-            with Container(classes="extraction-form"):
-                with Horizontal(classes="form-row"):
-                    Label("URL:", classes="form-label")
-                    Input(placeholder="YouTube URL or article URL", id="stitch-url-input", classes="form-input")
-                
-                with Horizontal(classes="form-row"):
-                    Label("Stitch:", classes="form-label")
-                    Select(
-                        self._get_stitch_options(),
-                        id="stitch-select",
-                        classes="form-input"
-                    )
-                
-                with Horizontal(classes="form-row"):
-                    Label("Provider:", classes="form-label")
-                    Select(
-                        [(provider, provider) for provider in self.available_providers],
-                        id="stitch-provider-select",
-                        value=self.default_provider,
-                        classes="form-input"
-                    )
-                
-                with Horizontal(classes="button-container"):
-                    Button("Run Stitch", id="run-stitch-button", variant="primary")
-                    Button("Create New", id="create-stitch-button", variant="success")
-                
-                Static("", id="stitch-status", classes="status-message")
-        
-        # Set up settings tab
-        settings_tab = self.query_one("#settings-tab", TabPane)
-        with settings_tab:
-            with Container(classes="extraction-form"):
-                with Horizontal(classes="form-row"):
-                    Label("Default Provider:", classes="form-label")
-                    Select(
-                        [(provider, provider) for provider in self.available_providers],
-                        id="default-provider-select",
-                        value=self.default_provider,
-                        classes="form-input"
-                    )
-                
-                with Horizontal(classes="form-row"):
-                    Label("Database Path:", classes="form-label")
-                    Input(
-                        value=self.db.db_path,
-                        id="db-path-input",
-                        disabled=True,
-                        classes="form-input"
-                    )
-                
-                with Horizontal(classes="button-container"):
-                    Button("Save Settings", id="save-settings-button", variant="primary")
-                
-                Static("", id="settings-status", classes="status-message")
-        
         # Log that the app is mounted
         self.logger.info("App mounted successfully")
-    
     def _get_stitch_options(self) -> List[tuple]:
         """Get options for stitch select."""
         stitches = self.db.get_all_stitches()

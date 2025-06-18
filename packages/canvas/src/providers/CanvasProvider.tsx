@@ -90,7 +90,7 @@ export function CanvasProvider({ children, config = {} }: CanvasProviderProps) {
   return (
     <CanvasContext.Provider
       value={{ state, config: mergedConfig, dispatch }}
-      data-oid="uwk1iu5"
+      data-oid="ps8..05"
     >
       {children}
     </CanvasContext.Provider>

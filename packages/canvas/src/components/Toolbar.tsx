@@ -41,10 +41,10 @@ export const Toolbar: React.FC<ToolbarProps> = ({
   return (
     <div
       className="w-16 bg-white border-r border-gray-200 flex flex-col items-center py-4 gap-4"
-      data-oid="pi3crln"
+      data-oid="-575-o."
     >
       {/* Mode Selector */}
-      <div className="flex flex-col gap-2" data-oid="x4n.:08">
+      <div className="flex flex-col gap-2" data-oid="xiz1omw">
         {modes.map(({ label, value, icon }) => (
           <button
             key={value}
@@ -55,27 +55,27 @@ export const Toolbar: React.FC<ToolbarProps> = ({
             }`}
             onClick={() => onModeChange(value)}
             title={label}
-            data-oid="h51u-d0"
+            data-oid="b8kg24s"
           >
-            <span role="img" aria-label={label} data-oid="p2qj1-o">
+            <span role="img" aria-label={label} data-oid="icv_c_:">
               {icon}
             </span>
           </button>
         ))}
       </div>
 
-      <div className="w-full h-px bg-gray-200 my-2" data-oid="y85frba" />
+      <div className="w-full h-px bg-gray-200 my-2" data-oid="_r_.lls" />
 
       {/* Tools */}
-      <div className="flex flex-col gap-2" data-oid="pwwk3u.">
+      <div className="flex flex-col gap-2" data-oid="eurmkd.">
         {tools.map(({ id, label, icon }) => (
           <button
             key={id}
             className="w-12 h-12 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
             title={label}
-            data-oid="u02s2nn"
+            data-oid="ymroec3"
           >
-            <span role="img" aria-label={label} data-oid="akz88yv">
+            <span role="img" aria-label={label} data-oid="_xurs_e">
               {icon}
             </span>
           </button>
@@ -85,13 +85,13 @@ export const Toolbar: React.FC<ToolbarProps> = ({
       {/* AI Toggle */}
       {enableAI && (
         <>
-          <div className="w-full h-px bg-gray-200 my-2" data-oid="y_ncyts" />
+          <div className="w-full h-px bg-gray-200 my-2" data-oid="dad9wg." />
           <button
             className="w-12 h-12 rounded-lg bg-purple-100 hover:bg-purple-200 flex items-center justify-center"
             title="AI Assistant"
-            data-oid="-2j_son"
+            data-oid="5a:ck9g"
           >
-            <span role="img" aria-label="AI" data-oid="1rerogu">
+            <span role="img" aria-label="AI" data-oid="7iwsnyv">
               🤖
             </span>
           </button>

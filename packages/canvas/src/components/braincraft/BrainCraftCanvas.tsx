@@ -71,23 +71,23 @@ export const BrainCraftCanvas: React.FC<BrainCraftCanvasProps> = ({
   ];
 
   return (
-    <div className="flex h-full" data-oid="na42.xl">
+    <div className="flex h-full" data-oid="mjtvd3l">
       {/* Main Diagram Area */}
-      <div className="flex-1 flex flex-col" data-oid="9ai0.4t">
+      <div className="flex-1 flex flex-col" data-oid="4e11y_f">
         {/* Diagram Type Selector */}
-        <div className="bg-white border-b p-4" data-oid="ji3wuzg">
-          <div className="flex items-center gap-4" data-oid="m.lk1:h">
-            <label className="text-sm font-medium" data-oid="fz5nf_z">
+        <div className="bg-white border-b p-4" data-oid="6te_4nd">
+          <div className="flex items-center gap-4" data-oid="vpi3y4m">
+            <label className="text-sm font-medium" data-oid="m0.mqsu">
               Diagram Type:
             </label>
             <select
               value={selectedType}
               onChange={(e) => setSelectedType(e.target.value as DiagramType)}
               className="px-3 py-1 border rounded text-sm"
-              data-oid="wwr8z:s"
+              data-oid="zx4s-wz"
             >
               {diagramTypes.map(({ label, value }) => (
-                <option key={value} value={value} data-oid="vxow0q4">
+                <option key={value} value={value} data-oid="qow0:zz">
                   {label}
                 </option>
               ))}
@@ -96,33 +96,33 @@ export const BrainCraftCanvas: React.FC<BrainCraftCanvasProps> = ({
         </div>
 
         {/* Diagram Display */}
-        <div className="flex-1 overflow-auto" data-oid="yoormlo">
+        <div className="flex-1 overflow-auto" data-oid="l9d58p-">
           <DiagramPanel
             code={currentDiagram?.code || ""}
             type={currentDiagram?.type || selectedType}
             isLoading={isGenerating}
-            data-oid="ivg5og2"
+            data-oid=":.9_.88"
           />
         </div>
       </div>
 
       {/* Chat Interface */}
-      <div className="w-96 border-l flex flex-col" data-oid="xthqogs">
-        <div className="bg-white border-b p-4" data-oid="lm2336r">
-          <h3 className="font-semibold" data-oid="jijmx6v">
+      <div className="w-96 border-l flex flex-col" data-oid="ys37j.g">
+        <div className="bg-white border-b p-4" data-oid="jqluy6c">
+          <h3 className="font-semibold" data-oid="0fqvrpi">
             AI Assistant
           </h3>
-          <p className="text-sm text-gray-600" data-oid=":5piygz">
+          <p className="text-sm text-gray-600" data-oid="kfzpzz0">
             Describe the diagram you want to create
           </p>
         </div>
 
-        <div className="flex-1" data-oid="qa0jqwb">
+        <div className="flex-1" data-oid="t23rron">
           <ChatInterface
             onSendMessage={handleSendMessage}
             isLoading={isGenerating}
             messages={messages}
-            data-oid="q.iijj-"
+            data-oid="xaey4ji"
           />
         </div>
       </div>

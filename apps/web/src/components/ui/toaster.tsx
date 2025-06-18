@@ -200,24 +200,24 @@ function Toaster() {
   const { theme } = useTheme();
 
   return (
-    <ToastProvider data-oid="sl65j:3">
+    <ToastProvider data-oid="51uh_jm">
       {toasts.map(function ({ id, title, description, action, ...props }) {
         return (
-          <Toast key={id} {...props} data-oid="l1cd9it">
-            <div className="grid gap-1" data-oid="x_fvpd2">
-              {title && <ToastTitle data-oid="ujj233p">{title}</ToastTitle>}
+          <Toast key={id} {...props} data-oid="uri0mlz">
+            <div className="grid gap-1" data-oid="xdmbgiq">
+              {title && <ToastTitle data-oid="ln6w1qw">{title}</ToastTitle>}
               {description && (
-                <ToastDescription data-oid="xsg6nfp">
+                <ToastDescription data-oid="y_24r:i">
                   {description}
                 </ToastDescription>
               )}
             </div>
             {action}
-            <ToastClose data-oid="2sxqk0o" />
+            <ToastClose data-oid="7kh1a5:" />
           </Toast>
         );
       })}
-      <ToastViewport data-oid="m-ii8x3" />
+      <ToastViewport data-oid="3..o0j:" />
     </ToastProvider>
   );
 }

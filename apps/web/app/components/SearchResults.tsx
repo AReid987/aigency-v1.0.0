@@ -6,25 +6,25 @@ interface SearchResultsProps {
 
 export default function SearchResults({ results }: SearchResultsProps) {
   return (
-    <div className="space-y-4" data-oid="ke6:qcb">
+    <div className="space-y-4" data-oid="_07r8pp">
       {results.map((result) => (
         <div
           key={result.url}
           className="p-4 border rounded-md"
-          data-oid="esu8f_o"
+          data-oid="lonix8n"
         >
           <a
             href={result.url}
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-600 hover:underline"
-            data-oid="q43f99l"
+            data-oid="3bv5u65"
           >
-            <h3 className="font-semibold" data-oid="05j6ura">
+            <h3 className="font-semibold" data-oid="vf0qm3i">
               {result.title}
             </h3>
           </a>
-          <p className="text-sm text-gray-600" data-oid=":26ei3e">
+          <p className="text-sm text-gray-600" data-oid="_xbh_18">
             {result.snippet}
           </p>
         </div>

@@ -106,7 +106,7 @@ export default function KnowledgeGraph({ data }: KnowledgeGraphProps) {
       width="100%"
       height="500"
       style={{ border: "1px solid #ddd" }}
-      data-oid="r0vf7sx"
+      data-oid="cc2egnl"
     />
   );
 }

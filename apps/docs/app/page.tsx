@@ -12,16 +12,16 @@ const ThemeImage = (props: Props) => {
 
   return (
     <>
-      <Image {...rest} src={srcLight} className="imgLight" data-oid="vwpu6pm" />
-      <Image {...rest} src={srcDark} className="imgDark" data-oid="0tk8q9o" />
+      <Image {...rest} src={srcLight} className="imgLight" data-oid="ap:a6_y" />
+      <Image {...rest} src={srcDark} className="imgDark" data-oid="6gq4lic" />
     </>
   );
 };
 
 export default function Home() {
   return (
-    <div className={styles.page} data-oid="i87wj36">
-      <main className={styles.main} data-oid="7q15r5.">
+    <div className={styles.page} data-oid="r5h47l8">
+      <main className={styles.main} data-oid="cyg1jqs">
         <ThemeImage
           className={styles.logo}
           srcLight="turborepo-dark.svg"
@@ -30,24 +30,24 @@ export default function Home() {
           width={180}
           height={38}
           priority
-          data-oid="8-x1:-_"
+          data-oid="rrtbwp8"
         />
 
-        <ol data-oid="g23gyl7">
-          <li data-oid="2:krgs_">
+        <ol data-oid="z0suk9s">
+          <li data-oid="livxtlm">
             Get started by editing{" "}
-            <code data-oid="jw2no.8">apps/docs/app/page.tsx</code>
+            <code data-oid="4gacrin">apps/docs/app/page.tsx</code>
           </li>
-          <li data-oid="g:.uqp3">Save and see your changes instantly.</li>
+          <li data-oid="zuj44_z">Save and see your changes instantly.</li>
         </ol>
 
-        <div className={styles.ctas} data-oid=".viruy5">
+        <div className={styles.ctas} data-oid="4ytjwyr">
           <a
             className={styles.primary}
             href="https://vercel.com/new/clone?demo-description=Learn+to+implement+a+monorepo+with+a+two+Next.js+sites+that+has+installed+three+local+packages.&demo-image=%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F4K8ZISWAzJ8X1504ca0zmC%2F0b21a1c6246add355e55816278ef54bc%2FBasic.png&demo-title=Monorepo+with+Turborepo&demo-url=https%3A%2F%2Fexamples-basic-web.vercel.sh%2F&from=templates&project-name=Monorepo+with+Turborepo&repository-name=monorepo-turborepo&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fturborepo%2Ftree%2Fmain%2Fexamples%2Fbasic&root-directory=apps%2Fdocs&skippable-integrations=1&teamSlug=vercel&utm_source=create-turbo"
             target="_blank"
             rel="noopener noreferrer"
-            data-oid="tgt69yu"
+            data-oid="lr703at"
           >
             <Image
               className={styles.logo}
@@ -55,7 +55,7 @@ export default function Home() {
               alt="Vercel logomark"
               width={20}
               height={20}
-              data-oid="6lt304a"
+              data-oid="ihucnzg"
             />
             Deploy now
           </a>
@@ -64,21 +64,21 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
             className={styles.secondary}
-            data-oid="wefa8j:"
+            data-oid="f7vn..g"
           >
             Read our docs
           </a>
         </div>
-        <Button appName="docs" className={styles.secondary} data-oid="buhqv73">
+        <Button appName="docs" className={styles.secondary} data-oid="zoy3vm-">
           Open alert
         </Button>
       </main>
-      <footer className={styles.footer} data-oid="yg1fjpy">
+      <footer className={styles.footer} data-oid="6.le_dr">
         <a
           href="https://vercel.com/templates?search=turborepo&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
-          data-oid="-8o8d-e"
+          data-oid=".pm:jta"
         >
           <Image
             aria-hidden
@@ -86,7 +86,7 @@ export default function Home() {
             alt="Window icon"
             width={16}
             height={16}
-            data-oid="e:b5esg"
+            data-oid="hy6.gdl"
           />
           Examples
         </a>
@@ -94,7 +94,7 @@ export default function Home() {
           href="https://turborepo.com?utm_source=create-turbo"
           target="_blank"
           rel="noopener noreferrer"
-          data-oid="q24mnpp"
+          data-oid="ewxor0k"
         >
           <Image
             aria-hidden
@@ -102,7 +102,7 @@ export default function Home() {
             alt="Globe icon"
             width={16}
             height={16}
-            data-oid="0qba967"
+            data-oid="bf769as"
           />
           Go to turborepo.com →
         </a>

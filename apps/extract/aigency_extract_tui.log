@@ -386,3 +386,25 @@ AttributeError: property 'log' of 'ExtractApp' object has no setter
 2025-06-17 16:29:46,998 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
 2025-06-17 16:29:46,998 - ExtractApp - INFO - Default provider: mistral
 2025-06-17 16:29:47,044 - ExtractApp - INFO - Mounting app
+2025-06-17 17:01:02,283 - run_tui - INFO - Starting TUI application
+2025-06-17 17:01:02,287 - ExtractApp - INFO - Initializing ExtractApp
+2025-06-17 17:01:02,292 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
+2025-06-17 17:01:02,292 - ExtractApp - INFO - Default provider: mistral
+2025-06-17 17:01:02,326 - ExtractApp - INFO - Mounting app
+2025-06-17 17:18:08,500 - run_tui - INFO - Starting TUI application
+2025-06-17 17:18:08,507 - ExtractApp - INFO - Initializing ExtractApp
+2025-06-17 17:18:08,512 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
+2025-06-17 17:18:08,512 - ExtractApp - INFO - Default provider: mistral
+2025-06-17 17:18:08,563 - ExtractApp - INFO - Mounting app
+2025-06-17 19:47:13,103 - run_tui - INFO - Starting TUI application
+2025-06-17 19:47:13,107 - ExtractApp - INFO - Initializing ExtractApp
+2025-06-17 19:47:13,113 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
+2025-06-17 19:47:13,113 - ExtractApp - INFO - Default provider: mistral
+2025-06-17 19:47:13,143 - ExtractApp - INFO - Mounting app
+2025-06-17 19:56:44,082 - run_tui - INFO - Starting TUI application
+2025-06-17 19:56:44,086 - ExtractApp - INFO - Initializing ExtractApp
+2025-06-17 19:56:44,089 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
+2025-06-17 19:56:44,089 - ExtractApp - INFO - Default provider: mistral
+2025-06-17 19:56:44,165 - ExtractApp - INFO - Mounting app
+2025-06-17 19:56:44,165 - ExtractApp - INFO - App mounted successfully
+2025-06-17 20:57:54,736 - ExtractApp - INFO - New button pressed, switching to extract tab

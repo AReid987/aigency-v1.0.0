@@ -17,7 +17,7 @@ export const ViewSelector: React.FC<ViewSelectorProps> = ({
   onViewChange,
 }) => {
   return (
-    <div className="flex gap-2 p-2 bg-white rounded shadow" data-oid="3z21a7j">
+    <div className="flex gap-2 p-2 bg-white rounded shadow" data-oid="1hzxnlj">
       {views.map(({ label, value }) => (
         <button
           key={value}
@@ -27,7 +27,7 @@ export const ViewSelector: React.FC<ViewSelectorProps> = ({
               : "bg-gray-100 hover:bg-gray-200"
           }`}
           onClick={() => onViewChange(value)}
-          data-oid="o3tgvbu"
+          data-oid="k:ur8jl"
         >
           {label}
         </button>

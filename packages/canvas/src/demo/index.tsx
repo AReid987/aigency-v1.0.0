@@ -25,25 +25,25 @@ function Demo() {
         defaultView: "2d",
         defaultMode: "hybrid",
       }}
-      data-oid="41bx8_1"
+      data-oid="i:6gdy3"
     >
-      <div className="w-full h-full relative" data-oid="z5yn3db">
+      <div className="w-full h-full relative" data-oid="rzcgscc">
         <InfiniteCanvas
           mode={mode}
           defaultView={view}
           onViewChange={setView}
           onModeChange={setMode}
-          data-oid="b.gt8is"
+          data-oid="wvibi5o"
         />
 
-        <div className="absolute top-4 left-4 z-10" data-oid="7946wqt">
-          <Toolbar mode={mode} onModeChange={setMode} data-oid="wmsrqe6" />
+        <div className="absolute top-4 left-4 z-10" data-oid="ua5p7li">
+          <Toolbar mode={mode} onModeChange={setMode} data-oid="m_gob9o" />
         </div>
-        <div className="absolute top-4 right-4 z-10" data-oid="5bc6i:2">
+        <div className="absolute top-4 right-4 z-10" data-oid="hk8zope">
           <ViewSelector
             currentView={view}
             onViewChange={setView}
-            data-oid=":qt8lnp"
+            data-oid="7kdma-u"
           />
         </div>
       </div>
@@ -54,8 +54,8 @@ function Demo() {
 const root = document.getElementById("root");
 if (root) {
   ReactDOM.createRoot(root).render(
-    <React.StrictMode data-oid="tsk5qil">
-      <Demo data-oid="4piqr:f" />
+    <React.StrictMode data-oid="mj.fdhe">
+      <Demo data-oid="c-gcqhy" />
     </React.StrictMode>,
   );
 }

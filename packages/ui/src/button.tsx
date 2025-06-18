@@ -13,7 +13,7 @@ export const Button = ({ children, className, appName }: ButtonProps) => {
     <button
       className={className}
       onClick={() => alert(`Hello from your ${appName} app!`)}
-      data-oid="hja47m-"
+      data-oid="rjq.ln5"
     >
       {children}
     </button>

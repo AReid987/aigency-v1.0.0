@@ -122,7 +122,7 @@ export const ArchVisionCanvas: React.FC<ArchVisionCanvasProps> = ({
   }, [transformedData, setNodes]);
 
   return (
-    <div className="w-full h-full relative" data-oid="fg_:1l0">
+    <div className="w-full h-full relative" data-oid="n0df0ef">
       <ReactFlow
         nodes={reactFlowNodes}
         edges={edges}
@@ -131,26 +131,26 @@ export const ArchVisionCanvas: React.FC<ArchVisionCanvasProps> = ({
         onConnect={onConnect}
         fitView
         className={view === "3d" ? "perspective-canvas" : ""}
-        data-oid="d83mof9"
+        data-oid="d1t_hby"
       >
         <Background
           variant={view === "iso" ? "dots" : "lines"}
           gap={view === "iso" ? 20 : 12}
-          data-oid="z.raln-"
+          data-oid="7ozshyo"
         />
 
-        <Controls data-oid="b5a3hvp" />
+        <Controls data-oid="caahxsx" />
 
-        <Panel position="top-left" data-oid="sc-enqw">
-          <div className="bg-white p-2 rounded shadow" data-oid="fkjhk-4">
-            <h3 className="font-semibold text-sm mb-2" data-oid="9_93i18">
+        <Panel position="top-left" data-oid="iwl72an">
+          <div className="bg-white p-2 rounded shadow" data-oid="3r5745d">
+            <h3 className="font-semibold text-sm mb-2" data-oid="73uv22:">
               ArchVision Tools
             </h3>
-            <div className="flex gap-2" data-oid="_shtjgm">
+            <div className="flex gap-2" data-oid="e_pv3qi">
               <button
                 onClick={handleAutoLayout}
                 className="px-2 py-1 text-xs bg-blue-500 text-white rounded hover:bg-blue-600"
-                data-oid="qpb4aqe"
+                data-oid="9pcq58-"
               >
                 Auto Layout
               </button>
@@ -172,7 +172,7 @@ export const ArchVisionCanvas: React.FC<ArchVisionCanvasProps> = ({
                     },
                   ]);
                 }}
-                data-oid="5.m61kh"
+                data-oid="o-ioq74"
               >
                 Add Node
               </button>
@@ -180,12 +180,12 @@ export const ArchVisionCanvas: React.FC<ArchVisionCanvasProps> = ({
           </div>
         </Panel>
 
-        <Panel position="top-right" data-oid="rvt0vxh">
-          <div className="bg-white p-2 rounded shadow" data-oid="5h:t81c">
-            <div className="text-xs text-gray-600 mb-1" data-oid="f0rrfta">
+        <Panel position="top-right" data-oid="1ctz08h">
+          <div className="bg-white p-2 rounded shadow" data-oid="6d9kqj5">
+            <div className="text-xs text-gray-600 mb-1" data-oid="4pw7k9e">
               View: {view.toUpperCase()}
             </div>
-            <div className="flex gap-1" data-oid="mq8:e_o">
+            <div className="flex gap-1" data-oid="_inkevt">
               {(["2d", "3d", "iso"] as ViewType[]).map((v) => (
                 <button
                   key={v}
@@ -195,7 +195,7 @@ export const ArchVisionCanvas: React.FC<ArchVisionCanvasProps> = ({
                       ? "bg-blue-500 text-white"
                       : "bg-gray-100 hover:bg-gray-200"
                   }`}
-                  data-oid="kw0z28u"
+                  data-oid="-t3cpmj"
                 >
                   {v.toUpperCase()}
                 </button>
@@ -205,7 +205,7 @@ export const ArchVisionCanvas: React.FC<ArchVisionCanvasProps> = ({
         </Panel>
       </ReactFlow>
 
-      <style jsx data-oid="369l_bm">{`
+      <style jsx data-oid="wfg51lr">{`
         .perspective-canvas {
           transform-style: preserve-3d;
         }

@@ -88,15 +88,15 @@ export const InfiniteCanvas: React.FC<InfiniteCanvasProps> = ({
   );
 
   return (
-    <div className="w-full h-full flex" data-oid="2:oa5dm">
+    <div className="w-full h-full flex" data-oid="vlj4pvj">
       <Toolbar
         mode={mode}
         onModeChange={handleModeChange}
         enableAI={enableAI}
-        data-oid="4ceiohp"
+        data-oid="8cqgyrf"
       />
 
-      <div className="flex-1 relative" data-oid="jt28qh.">
+      <div className="flex-1 relative" data-oid="32aywk:">
         {(mode === "archvision" || mode === "hybrid") && (
           <ReactFlow
             nodes={nodes}
@@ -106,15 +106,15 @@ export const InfiniteCanvas: React.FC<InfiniteCanvasProps> = ({
             onConnect={onConnect}
             onNodeClick={(_, node) => console.log("Selected node:", node)}
             fitView
-            data-oid="b.k6i8t"
+            data-oid="jx4c97j"
           >
-            <Background data-oid=":mas.af" />
-            <Controls data-oid="67quux2" />
-            <Panel position="top-right" data-oid="30nih:2">
+            <Background data-oid="9vx0:ah" />
+            <Controls data-oid="p_1ahpw" />
+            <Panel position="top-right" data-oid="7kjqrgs">
               <ViewSelector
                 currentView={currentView}
                 onViewChange={handleViewChange}
-                data-oid="ggw6d7m"
+                data-oid="n2l3q3p"
               />
             </Panel>
           </ReactFlow>
@@ -123,19 +123,19 @@ export const InfiniteCanvas: React.FC<InfiniteCanvasProps> = ({
         {(mode === "braincraft" || mode === "hybrid") && (
           <div
             className="absolute top-0 right-0 w-1/3 h-full bg-white shadow-lg"
-            data-oid="n0htr8j"
+            data-oid="bo8zn4g"
           >
             <DiagramPanel
               code={currentDiagram?.code || ""}
               type={currentDiagram?.type}
               isLoading={isGenerating}
-              data-oid="3tjsm1y"
+              data-oid="xbx0-hc"
             />
 
             <ChatInterface
               onSendMessage={handleDiagramGenerate}
               isLoading={isGenerating}
-              data-oid="fbl4e_8"
+              data-oid="s1sya8b"
             />
           </div>
         )}

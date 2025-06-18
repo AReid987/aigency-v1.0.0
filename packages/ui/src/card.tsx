@@ -17,12 +17,11 @@ export function Card({
       href={`${href}?utm_source=create-turbo&utm_medium=basic&utm_campaign=create-turbo"`}
       rel="noopener noreferrer"
       target="_blank"
-      data-oid="nu:5_7g"
     >
-      <h2 data-oid="utdbyab">
-        {title} <span data-oid="mulln66">-&gt;</span>
+      <h2>
+        {title} <span>-&gt;</span>
       </h2>
-      <p data-oid="f6lsbhb">{children}</p>
+      <p>{children}</p>
     </a>
   );
 }

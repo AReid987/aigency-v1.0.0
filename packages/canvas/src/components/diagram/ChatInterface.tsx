@@ -44,14 +44,14 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-full" data-oid="mdj7.5v">
+    <div className="flex flex-col h-full" data-oid="at_zi9h">
       {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4" data-oid="ln3vp4o">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4" data-oid="86o0e60">
         {messages.map((message) => (
           <div
             key={message.id}
             className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}
-            data-oid="0hm5qw0"
+            data-oid="g2amfit"
           >
             <div
               className={`max-w-[80%] rounded-lg p-3 ${
@@ -59,25 +59,25 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                   ? "bg-blue-500 text-white"
                   : "bg-gray-100"
               }`}
-              data-oid="ql29blt"
+              data-oid="lp1h3fv"
             >
-              <p className="whitespace-pre-wrap" data-oid="0yk8e:e">
+              <p className="whitespace-pre-wrap" data-oid="3act-bi">
                 {message.content}
               </p>
               {message.diagramCode && (
-                <div className="mt-2 text-xs opacity-75" data-oid="zjxs5to">
+                <div className="mt-2 text-xs opacity-75" data-oid="m71yiw.">
                   [Diagram Generated]
                 </div>
               )}
             </div>
           </div>
         ))}
-        <div ref={messagesEndRef} data-oid="qp_:67f" />
+        <div ref={messagesEndRef} data-oid="tfmz6vf" />
       </div>
 
       {/* Input Area */}
-      <form onSubmit={handleSubmit} className="border-t p-4" data-oid="6u30fq.">
-        <div className="flex items-end gap-2" data-oid="pku.i0a">
+      <form onSubmit={handleSubmit} className="border-t p-4" data-oid="doak4ou">
+        <div className="flex items-end gap-2" data-oid="bu5:znm">
           <textarea
             ref={inputRef}
             value={input}
@@ -86,7 +86,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
             placeholder="Describe the diagram you want to create..."
             className="flex-1 min-h-[80px] max-h-[160px] p-2 border rounded resize-none"
             disabled={isLoading}
-            data-oid="sp.4al4"
+            data-oid="fe_x8i5"
           />
 
           <button
@@ -97,7 +97,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 ? "bg-gray-300 cursor-not-allowed"
                 : "bg-blue-500 hover:bg-blue-600 text-white"
             }`}
-            data-oid="k1vwqny"
+            data-oid="yqih:q0"
           >
             {isLoading ? "Generating..." : "Send"}
           </button>

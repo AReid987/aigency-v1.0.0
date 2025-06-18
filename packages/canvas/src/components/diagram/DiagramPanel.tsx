@@ -61,8 +61,8 @@ export const DiagramPanel: React.FC<DiagramPanelProps> = ({
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-64" data-oid="1l0xwtc">
-        <div className="text-gray-500" data-oid="i6t.qib">
+      <div className="flex items-center justify-center h-64" data-oid="-khgins">
+        <div className="text-gray-500" data-oid="d_v9aae">
           Generating diagram...
         </div>
       </div>
@@ -70,18 +70,18 @@ export const DiagramPanel: React.FC<DiagramPanelProps> = ({
   }
 
   return (
-    <div className="w-full h-full" data-oid="gyu42rb">
-      <div className="p-4 border-b" data-oid="3hczgef">
-        <h3 className="text-lg font-semibold" data-oid="hrmqec1">
+    <div className="w-full h-full" data-oid="fpnie7r">
+      <div className="p-4 border-b" data-oid="_7rc8.:">
+        <h3 className="text-lg font-semibold" data-oid="o_3li.l">
           {type.charAt(0).toUpperCase() + type.slice(1)} Diagram
         </h3>
       </div>
 
-      <div className="p-4" data-oid="yw5f9i9">
+      <div className="p-4" data-oid="biso34b">
         {error ? (
           <div
             className="text-red-500 p-4 border border-red-200 rounded"
-            data-oid="7qqrp_6"
+            data-oid="sdzeben"
           >
             Error: {error}
           </div>
@@ -89,7 +89,7 @@ export const DiagramPanel: React.FC<DiagramPanelProps> = ({
           <div
             ref={containerRef}
             className="w-full min-h-64 flex items-center justify-center"
-            data-oid="3xc56br"
+            data-oid="whb8m8z"
           />
         )}
       </div>

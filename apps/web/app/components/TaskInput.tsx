@@ -22,11 +22,11 @@ export default function TaskInput({ onSubmit }: TaskInputProps) {
   };
 
   return (
-    <div className="task-input" data-oid="talw37t">
-      <h3 data-oid="2mdp-81">Create New Task</h3>
-      <form onSubmit={handleSubmit} data-oid="gxcgfa_">
-        <div className="form-group" data-oid="9v:eeu.">
-          <label htmlFor="title" data-oid=".dtmq1g">
+    <div className="task-input" data-oid="gm6dm9n">
+      <h3 data-oid="6c1v:c_">Create New Task</h3>
+      <form onSubmit={handleSubmit} data-oid="x5xw2tf">
+        <div className="form-group" data-oid="ymwm3_6">
+          <label htmlFor="title" data-oid="knwao:k">
             Title
           </label>
           <input
@@ -36,11 +36,11 @@ export default function TaskInput({ onSubmit }: TaskInputProps) {
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Enter task title"
             required
-            data-oid="ma411q6"
+            data-oid="_k_7fd0"
           />
         </div>
-        <div className="form-group" data-oid="ox6h_em">
-          <label htmlFor="description" data-oid="s10e:3n">
+        <div className="form-group" data-oid="orlr3rn">
+          <label htmlFor="description" data-oid="3i167pd">
             Description
           </label>
           <textarea
@@ -49,11 +49,11 @@ export default function TaskInput({ onSubmit }: TaskInputProps) {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Enter task description"
             className="w-full p-2 border rounded-md min-h-[100px]"
-            data-oid="dh9sqr0"
+            data-oid="4meebm:"
           />
         </div>
-        <div className="form-group" data-oid="l:3pa9k">
-          <label htmlFor="complexity" data-oid="cvk.dsy">
+        <div className="form-group" data-oid="uo5s_1w">
+          <label htmlFor="complexity" data-oid="_mh9196">
             Complexity
           </label>
           <input
@@ -63,13 +63,13 @@ export default function TaskInput({ onSubmit }: TaskInputProps) {
             onChange={(e) => setComplexity(Number(e.target.value))}
             min="0"
             required
-            data-oid="_j0ocf5"
+            data-oid="0sd0t3i"
           />
         </div>
         <button
           type="submit"
           className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 mt-2"
-          data-oid="k0o9ffc"
+          data-oid="cljkbma"
         >
           Create Task
         </button>

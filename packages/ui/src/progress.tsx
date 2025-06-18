@@ -15,12 +15,10 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(
           className,
         )}
         {...props}
-        data-oid=":e:.w58"
       >
         <div
           className="h-full w-full flex-1 bg-primary transition-all"
           style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
-          data-oid="_ok08xu"
         />
       </div>
     );

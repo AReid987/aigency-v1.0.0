@@ -14,20 +14,20 @@ export default function ConversationalInput({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4" data-oid="91fg21z">
+    <form onSubmit={handleSubmit} className="space-y-4" data-oid="wjpq5ch">
       <textarea
         value={input}
         onChange={(e) => setInput(e.target.value)}
         placeholder="Describe your product idea..."
         className="w-full p-2 border rounded-md min-h-[100px]"
         required
-        data-oid="20ajq-q"
+        data-oid="3spo:p-"
       />
 
       <button
         type="submit"
         className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-        data-oid="2l6:xys"
+        data-oid="vepdpx9"
       >
         Submit Idea
       </button>
