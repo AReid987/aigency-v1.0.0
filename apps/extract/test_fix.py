@@ -57,9 +57,12 @@ def test_tui_app():
             
         logger.info(f"Using PYTHONPATH: {env.get('PYTHONPATH')}")
         
-        # Start the TUI app process
+        # Start the TUI app process using the tui_main.py file
+        tui_main_path = os.path.join(src_dir, "aigency_extract", "tui_main.py")
+        logger.info(f"Running TUI app from: {tui_main_path}")
+        
         process = subprocess.Popen(
-            ["python", "-m", "aigency_extract.app.tui"],
+            ["python", tui_main_path],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,

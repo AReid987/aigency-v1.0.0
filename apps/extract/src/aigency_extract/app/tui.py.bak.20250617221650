@@ -174,15 +174,6 @@ class ExtractApp(App):
                 # Content list
                 yield Static("Extracts", classes="heading")
                 yield DataTable(id="content-table", classes="content-list")
-                # Add columns to the table
-                table = self.query_one("#content-table", DataTable)
-                table.add_columns("ID", "Title", "Type", "Date", "Pattern")
-                # Add columns to the table
-                table = self.query_one("#content-table", DataTable)
-                table.add_columns("ID", "Title", "Type", "Date", "Pattern")
-                # Add columns to the table
-                table = self.query_one("#content-table", DataTable)
-                table.add_columns("ID", "Title", "Type", "Date", "Pattern")
             
             # Main content area
             with Vertical(id="main-content"):
@@ -291,16 +282,20 @@ class ExtractApp(App):
         
         yield Footer()
     
-                def on_mount(self) -> None:
-        # Set up the UI when the app is mounted
+    def on_mount(self) -> None:
+        """Set up the UI when the app is mounted."""
         self.logger.info("Mounting app")
+        
+        # Set up content table
+        table = self.query_one("#content-table", DataTable)
+        table.add_columns("ID", "Title", "Type", "Date", "Pattern")
         
         # Load initial data
         self.refresh_content_list()
         
         # Log that the app is mounted
         self.logger.info("App mounted successfully")
-def _get_stitch_options(self) -> List[tuple]:
+    def _get_stitch_options(self) -> List[tuple]:
         """Get options for stitch select."""
         stitches = self.db.get_all_stitches()
         options = []
@@ -314,29 +309,25 @@ def _get_stitch_options(self) -> List[tuple]:
         
         return options
     
-                def refresh_content_list(self) -> None:
-        # Refresh the content list from the database
-        try:
-            table = self.query_one("#content-table", DataTable)
-            
-            # Clear the table
-            table.clear()
-            
-            # Get content from database
-            results = self.db.search_content(limit=100)
-            
-            # Add to table
-            for content in results:
-                table.add_row(
-                    str(content.id),
-                    content.title[:50] + ("..." if len(content.title) > 50 else ""),
-                    content.content_type.value,
-                    content.extracted_at.strftime("%Y-%m-%d") if content.extracted_at else "",
-                    content.extraction_pattern
-                )
-        except Exception as e:
-            self.logger.error(f"Error refreshing content list: {e}")
-def action_refresh(self) -> None:
+    def refresh_content_list(self) -> None:
+        """Refresh the content list from the database."""
+        table = self.query_one("#content-table", DataTable)
+        table.clear()
+        
+        # Get content from database
+        results = self.db.search_content(limit=100)
+        
+        # Add to table
+        for content in results:
+            table.add_row(
+                str(content.id),
+                content.title[:50] + ("..." if len(content.title) > 50 else ""),
+                content.content_type.value,
+                content.extracted_at.strftime("%Y-%m-%d") if content.extracted_at else "",
+                content.extraction_pattern
+            )
+    
+    def action_refresh(self) -> None:
         """Refresh the content list."""
         self.refresh_content_list()
     

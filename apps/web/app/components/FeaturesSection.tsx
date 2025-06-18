@@ -87,7 +87,7 @@ export function FeaturesSection() {
             className="text-3xl md:text-4xl font-bold text-white mb-8"
             data-oid="74sb7a-"
           >
-            We're Solving
+            We&apos;re Solving
           </h2>
           <div
             className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
@@ -123,7 +123,7 @@ export function FeaturesSection() {
             className="text-2xl md:text-3xl font-bold text-white mb-4 relative z-10"
             data-oid="j5c:kuk"
           >
-            This isn't just a SaaS — it's a founder workflow transformer.
+            This isn&apos;t just a SaaS — it&apos;s a founder workflow transformer.
           </h3>
           <p
             className="text-slate-400 mb-8 max-w-2xl mx-auto relative z-10"

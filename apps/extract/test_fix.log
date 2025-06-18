@@ -1,0 +1,32 @@
+2025-06-17 22:16:58,164 - test_fix - INFO - Starting test script
+2025-06-17 22:16:58,164 - test_fix - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-17 22:16:58,164 - test_fix - INFO - Running fix script...
+2025-06-17 22:16:58,886 - test_fix - INFO - Fix script output: 
+2025-06-17 22:16:58,887 - test_fix - INFO - Testing TUI application...
+2025-06-17 22:16:58,887 - test_fix - INFO - Using PYTHONPATH: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src
+2025-06-17 22:16:58,912 - test_fix - INFO - Waiting for 5 seconds to check for immediate crashes...
+2025-06-17 22:17:03,926 - test_fix - ERROR - TUI app crashed with exit code 1
+2025-06-17 22:17:03,930 - test_fix - ERROR - Stdout: 
+2025-06-17 22:17:03,930 - test_fix - ERROR - Stderr: /opt/homebrew/opt/python@3.11/bin/python3.11: No module named aigency_extract.app.tui
+
+2025-06-17 22:17:03,933 - test_fix - ERROR - Test failed - TUI app is still not working
+2025-06-17 22:18:18,562 - test_fix - INFO - Starting test script
+2025-06-17 22:18:18,562 - test_fix - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-17 22:18:18,562 - test_fix - INFO - Running fix script...
+2025-06-17 22:18:18,664 - test_fix - INFO - Fix script output: 
+2025-06-17 22:18:18,664 - test_fix - INFO - Testing TUI application...
+2025-06-17 22:18:18,664 - test_fix - INFO - Using PYTHONPATH: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src
+2025-06-17 22:18:18,665 - test_fix - INFO - Running TUI app from: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/tui_main.py
+2025-06-17 22:18:18,689 - test_fix - INFO - Waiting for 5 seconds to check for immediate crashes...
+2025-06-17 22:18:23,705 - test_fix - ERROR - TUI app crashed with exit code 1
+2025-06-17 22:18:23,706 - test_fix - ERROR - Stdout: 
+2025-06-17 22:18:23,706 - test_fix - ERROR - Stderr: Traceback (most recent call last):
+  File "/Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/tui_main.py", line 3, in <module>
+    from aigency_extract.app.tui import run_tui
+  File "/Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/__init__.py", line 3, in <module>
+    from aigency_extract.app.cli import app
+  File "/Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/cli.py", line 8, in <module>
+    import typer
+ModuleNotFoundError: No module named 'typer'
+
+2025-06-17 22:18:23,706 - test_fix - ERROR - Test failed - TUI app is still not working

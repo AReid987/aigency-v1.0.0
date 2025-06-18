@@ -180,9 +180,6 @@ class ExtractApp(App):
                 # Add columns to the table
                 table = self.query_one("#content-table", DataTable)
                 table.add_columns("ID", "Title", "Type", "Date", "Pattern")
-                # Add columns to the table
-                table = self.query_one("#content-table", DataTable)
-                table.add_columns("ID", "Title", "Type", "Date", "Pattern")
             
             # Main content area
             with Vertical(id="main-content"):
@@ -291,7 +288,7 @@ class ExtractApp(App):
         
         yield Footer()
     
-                def on_mount(self) -> None:
+            def on_mount(self) -> None:
         # Set up the UI when the app is mounted
         self.logger.info("Mounting app")
         
@@ -314,7 +311,7 @@ def _get_stitch_options(self) -> List[tuple]:
         
         return options
     
-                def refresh_content_list(self) -> None:
+            def refresh_content_list(self) -> None:
         # Refresh the content list from the database
         try:
             table = self.query_one("#content-table", DataTable)

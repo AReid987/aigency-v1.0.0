@@ -1,0 +1,30 @@
+2025-06-17 22:16:50,897 - fix_tui - INFO - Starting fix script
+2025-06-17 22:16:50,897 - fix_tui - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-17 22:16:50,897 - fix_tui - INFO - Using TUI file at: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 22:16:50,898 - fix_tui - INFO - Created backup at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617221650
+2025-06-17 22:16:50,899 - fix_tui - INFO - Added columns to DataTable in compose method
+2025-06-17 22:16:50,899 - fix_tui - INFO - Fixed on_mount method
+2025-06-17 22:16:50,899 - fix_tui - INFO - Fixed refresh_content_list method
+2025-06-17 22:16:50,899 - fix_tui - INFO - Successfully updated /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 22:16:50,899 - fix_tui - INFO - Backup saved at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617221650
+2025-06-17 22:16:50,899 - fix_tui - INFO - Fix completed successfully
+2025-06-17 22:16:58,861 - fix_tui - INFO - Starting fix script
+2025-06-17 22:16:58,861 - fix_tui - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-17 22:16:58,861 - fix_tui - INFO - Using TUI file at: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 22:16:58,862 - fix_tui - INFO - Created backup at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617221658
+2025-06-17 22:16:58,862 - fix_tui - INFO - Added columns to DataTable in compose method
+2025-06-17 22:16:58,862 - fix_tui - INFO - Fixed on_mount method
+2025-06-17 22:16:58,862 - fix_tui - INFO - Fixed refresh_content_list method
+2025-06-17 22:16:58,862 - fix_tui - INFO - Successfully updated /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 22:16:58,862 - fix_tui - INFO - Backup saved at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617221658
+2025-06-17 22:16:58,862 - fix_tui - INFO - Fix completed successfully
+2025-06-17 22:18:18,648 - fix_tui - INFO - Starting fix script
+2025-06-17 22:18:18,648 - fix_tui - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-17 22:18:18,648 - fix_tui - INFO - Using TUI file at: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 22:18:18,652 - fix_tui - INFO - Created backup at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617221818
+2025-06-17 22:18:18,652 - fix_tui - INFO - Added columns to DataTable in compose method
+2025-06-17 22:18:18,652 - fix_tui - INFO - Fixed on_mount method
+2025-06-17 22:18:18,652 - fix_tui - INFO - Fixed refresh_content_list method
+2025-06-17 22:18:18,653 - fix_tui - INFO - Successfully updated /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 22:18:18,654 - fix_tui - INFO - Backup saved at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617221818
+2025-06-17 22:18:18,654 - fix_tui - INFO - Fix completed successfully
