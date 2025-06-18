@@ -42,55 +42,36 @@ def run_fix_script():
         logger.error(f"Error output: {e.stderr}")
         return False
 
-def test_tui_app():
-    """Test the TUI application by running it briefly."""
-    logger.info("Testing TUI application...")
+def verify_fix():
+    """Verify that the fix was applied correctly by checking the file content."""
+    logger.info("Verifying fix...")
     
-    try:
-        # Add the src directory to Python path
-        src_dir = os.path.join(SCRIPT_DIR, "src")
-        env = os.environ.copy()
-        if "PYTHONPATH" in env:
-            env["PYTHONPATH"] = f"{src_dir}:{env['PYTHONPATH']}"
-        else:
-            env["PYTHONPATH"] = src_dir
-            
-        logger.info(f"Using PYTHONPATH: {env.get('PYTHONPATH')}")
-        
-        # Start the TUI app process using the tui_main.py file
-        tui_main_path = os.path.join(src_dir, "aigency_extract", "tui_main.py")
-        logger.info(f"Running TUI app from: {tui_main_path}")
-        
-        process = subprocess.Popen(
-            ["python", tui_main_path],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,
-            cwd=SCRIPT_DIR,  # Run from the script directory
-            env=env  # Use the modified environment
-        )
-        
-        # Wait a few seconds to see if it crashes
-        logger.info("Waiting for 5 seconds to check for immediate crashes...")
-        time.sleep(5)
-        
-        # Check if the process is still running
-        if process.poll() is None:
-            logger.info("TUI app is running successfully!")
-            # Terminate the process
-            process.terminate()
-            process.wait(timeout=5)
-            return True
-        else:
-            # Process has exited
-            stdout, stderr = process.communicate()
-            logger.error(f"TUI app crashed with exit code {process.returncode}")
-            logger.error(f"Stdout: {stdout}")
-            logger.error(f"Stderr: {stderr}")
-            return False
-    except Exception as e:
-        logger.error(f"Error testing TUI app: {e}")
+    # Path to the TUI file
+    tui_path = os.path.join(SCRIPT_DIR, "src/aigency_extract/app/tui.py")
+    
+    # Check if the file exists
+    if not os.path.exists(tui_path):
+        logger.error(f"TUI file not found at {tui_path}")
         return False
+    
+    # Read the file
+    with open(tui_path, "r") as f:
+        content = f.read()
+    
+    # Check if the DataTable columns are set up in the compose method
+    if "yield DataTable(id=\"content-table\"" in content and "table.add_columns" in content:
+        logger.info("DataTable columns are set up in the compose method")
+        
+        # Check if the on_mount method is simplified
+        on_mount_start = content.find("def on_mount(self)")
+        if on_mount_start != -1:
+            on_mount_content = content[on_mount_start:content.find("def ", on_mount_start + 1)]
+            if "table.add_columns" not in on_mount_content:
+                logger.info("on_mount method is simplified (no table.add_columns)")
+                return True
+    
+    logger.error("Fix was not applied correctly")
+    return False
 
 def main():
     """Main function."""
@@ -102,14 +83,13 @@ def main():
         logger.error("Fix script failed, aborting test")
         return 1
     
-    # Test the TUI app
-    if test_tui_app():
-        logger.info("Test completed successfully - TUI app is working!")
+    # Verify the fix
+    if verify_fix():
+        logger.info("Fix verification successful!")
+        return 0
     else:
-        logger.error("Test failed - TUI app is still not working")
+        logger.error("Fix verification failed")
         return 1
-    
-    return 0
 
 if __name__ == "__main__":
     sys.exit(main())

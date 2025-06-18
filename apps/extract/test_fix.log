@@ -30,3 +30,19 @@
 ModuleNotFoundError: No module named 'typer'
 
 2025-06-17 22:18:23,706 - test_fix - ERROR - Test failed - TUI app is still not working
+2025-06-17 22:19:21,296 - test_fix - INFO - Starting test script
+2025-06-17 22:19:21,297 - test_fix - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-17 22:19:21,297 - test_fix - INFO - Running fix script...
+2025-06-17 22:19:21,342 - test_fix - INFO - Fix script output: 
+2025-06-17 22:19:21,342 - test_fix - INFO - Verifying fix...
+2025-06-17 22:19:21,342 - test_fix - INFO - DataTable columns are set up in the compose method
+2025-06-17 22:19:21,342 - test_fix - INFO - on_mount method is simplified (no table.add_columns)
+2025-06-17 22:19:21,342 - test_fix - INFO - Fix verification successful!
+2025-06-17 22:20:08,622 - test_fix - INFO - Starting test script
+2025-06-17 22:20:08,623 - test_fix - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-17 22:20:08,624 - test_fix - INFO - Running fix script...
+2025-06-17 22:20:08,744 - test_fix - INFO - Fix script output: 
+2025-06-17 22:20:08,744 - test_fix - INFO - Verifying fix...
+2025-06-17 22:20:08,744 - test_fix - INFO - DataTable columns are set up in the compose method
+2025-06-17 22:20:08,744 - test_fix - INFO - on_mount method is simplified (no table.add_columns)
+2025-06-17 22:20:08,744 - test_fix - INFO - Fix verification successful!
