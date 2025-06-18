@@ -408,3 +408,28 @@ AttributeError: property 'log' of 'ExtractApp' object has no setter
 2025-06-17 19:56:44,165 - ExtractApp - INFO - Mounting app
 2025-06-17 19:56:44,165 - ExtractApp - INFO - App mounted successfully
 2025-06-17 20:57:54,736 - ExtractApp - INFO - New button pressed, switching to extract tab
+2025-06-17 22:58:21,206 - run_tui - INFO - Starting TUI application
+2025-06-17 22:58:21,221 - ExtractApp - INFO - Initializing ExtractApp
+2025-06-17 22:58:21,226 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
+2025-06-17 22:58:21,227 - ExtractApp - INFO - Default provider: mistral
+2025-06-17 23:00:16,757 - run_tui - INFO - Starting TUI application
+2025-06-17 23:00:16,762 - ExtractApp - INFO - Initializing ExtractApp
+2025-06-17 23:00:16,766 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
+2025-06-17 23:00:16,766 - ExtractApp - INFO - Default provider: mistral
+2025-06-17 23:00:16,854 - ExtractApp - INFO - Mounting app
+2025-06-17 23:00:16,855 - ExtractApp - INFO - App mounted successfully
+2025-06-17 23:33:07,508 - ExtractApp - INFO - Action: new_extract
+2025-06-17 23:33:21,043 - run_tui - INFO - Starting TUI application
+2025-06-17 23:33:21,050 - ExtractApp - INFO - Initializing ExtractApp
+2025-06-17 23:33:21,056 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
+2025-06-17 23:33:21,056 - ExtractApp - INFO - Default provider: mistral
+2025-06-17 23:33:21,234 - ExtractApp - INFO - Mounting app
+2025-06-17 23:33:21,235 - ExtractApp - INFO - App mounted successfully
+2025-06-17 23:33:49,371 - ExtractApp - INFO - Action: new_extract
+2025-06-17 23:49:22,803 - run_tui - INFO - Starting TUI application
+2025-06-17 23:49:22,814 - ExtractApp - INFO - Initializing ExtractApp
+2025-06-17 23:49:22,832 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
+2025-06-17 23:49:22,832 - ExtractApp - INFO - Default provider: mistral
+2025-06-17 23:49:22,993 - ExtractApp - INFO - Mounting app
+2025-06-17 23:49:22,995 - ExtractApp - INFO - App mounted successfully
+2025-06-17 23:49:30,092 - ExtractApp - INFO - New button pressed, switching to extract tab

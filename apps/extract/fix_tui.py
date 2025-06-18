@@ -5,6 +5,7 @@ import os
 import sys
 import logging
 import shutil
+import re
 from datetime import datetime
 from pathlib import Path
 
@@ -67,12 +68,16 @@ def fix_tui_file():
         logger.error("Could not find end of DataTable line")
         return False
     
-    # Replace the DataTable line to include columns
+    # Replace the DataTable line to include columns directly
     old_datatable_line = content[datatable_line:datatable_line_end+1]
-    new_datatable_line = 'yield DataTable(id="content-table", classes="content-list")\n                # Add columns to the table\n                table = self.query_one("#content-table", DataTable)\n                table.add_columns("ID", "Title", "Type", "Date", "Pattern")'
+    new_datatable_line = 'yield DataTable(id="content-table", classes="content-list", show_header=True)'
     
     content = content.replace(old_datatable_line, new_datatable_line)
-    logger.info("Added columns to DataTable in compose method")
+    logger.info("Updated DataTable initialization")
+    
+    # Remove any duplicate column setup code
+    content = re.sub(r'# Add columns to the table\s+table = self\.query_one\("#content-table", DataTable\)\s+table\.add_columns\("ID", "Title", "Type", "Date", "Pattern"\)', '', content)
+    logger.info("Removed duplicate column setup code")
     
     # Fix the on_mount method
     on_mount_start = content.find("def on_mount(self)")
@@ -91,11 +96,16 @@ def fix_tui_file():
         # Set up the UI when the app is mounted
         self.logger.info("Mounting app")
         
+        # Set up content table columns
+        table = self.query_one("#content-table", DataTable)
+        table.add_columns("ID", "Title", "Type", "Date", "Pattern")
+        
         # Load initial data
         self.refresh_content_list()
         
         # Log that the app is mounted
         self.logger.info("App mounted successfully")
+    
 """
     
     content = content.replace(old_on_mount, new_on_mount)
@@ -136,10 +146,23 @@ def fix_tui_file():
                 )
         except Exception as e:
             self.logger.error(f"Error refreshing content list: {e}")
+    
 """
     
     content = content.replace(old_refresh, new_refresh)
     logger.info("Fixed refresh_content_list method")
+    
+    # Fix any indentation issues
+    # This is a simple approach - for a more robust solution, a proper Python parser would be better
+    content = re.sub(r'\n\s+def ', r'\n    def ', content)
+    
+    # Fix the run_tui function indentation
+    run_tui_start = content.find("def run_tui()")
+    if run_tui_start != -1:
+        # Make sure it's not indented
+        content = content[:run_tui_start] + "\n\ndef run_tui()" + content[run_tui_start+len("def run_tui()"):]
+    
+    logger.info("Fixed indentation issues")
     
     # Write the updated content back to the file
     with open(tui_path, "w") as f:

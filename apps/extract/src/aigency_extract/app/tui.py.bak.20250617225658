@@ -134,6 +134,7 @@ class ExtractApp(App):
         ("f", "focus_search", "Search"),
         ("s", "new_stitch", "New Stitch"),
     ]
+    
     def __init__(self):
         """Initialize the application."""
         super().__init__()
@@ -156,6 +157,7 @@ class ExtractApp(App):
         
         self.logger.info(f"Available providers: {self.available_providers}")
         self.logger.info(f"Default provider: {self.default_provider}")
+    
     def compose(self) -> ComposeResult:
         """Compose the UI layout."""
         yield Header()
@@ -171,14 +173,25 @@ class ExtractApp(App):
                 
                 # Content list
                 yield Static("Extracts", classes="heading")
-                yield DataTable(id="content-table", classes="content-list", show_header=True)
-                
-                
-                
-                
-                
-                
-                
+                yield DataTable(id="content-table", classes="content-list")
+                # Add columns to the table
+                table = self.query_one("#content-table", DataTable)
+                table.add_columns("ID", "Title", "Type", "Date", "Pattern")
+                # Add columns to the table
+                table = self.query_one("#content-table", DataTable)
+                table.add_columns("ID", "Title", "Type", "Date", "Pattern")
+                # Add columns to the table
+                table = self.query_one("#content-table", DataTable)
+                table.add_columns("ID", "Title", "Type", "Date", "Pattern")
+                # Add columns to the table
+                table = self.query_one("#content-table", DataTable)
+                table.add_columns("ID", "Title", "Type", "Date", "Pattern")
+                # Add columns to the table
+                table = self.query_one("#content-table", DataTable)
+                table.add_columns("ID", "Title", "Type", "Date", "Pattern")
+                # Add columns to the table
+                table = self.query_one("#content-table", DataTable)
+                table.add_columns("ID", "Title", "Type", "Date", "Pattern")
             
             # Main content area
             with Vertical(id="main-content"):
@@ -286,19 +299,17 @@ class ExtractApp(App):
                             yield Static("", id="settings-status", classes="status-message")
         
         yield Footer()
+    
     def on_mount(self) -> None:
         # Set up the UI when the app is mounted
         self.logger.info("Mounting app")
-        
-        # Set up content table columns
-        table = self.query_one("#content-table", DataTable)
-        table.add_columns("ID", "Title", "Type", "Date", "Pattern")
         
         # Load initial data
         self.refresh_content_list()
         
         # Log that the app is mounted
         self.logger.info("App mounted successfully")
+    
     def _get_stitch_options(self) -> List[tuple]:
         """Get options for stitch select."""
         stitches = self.db.get_all_stitches()
@@ -312,6 +323,7 @@ class ExtractApp(App):
             options.append((str(stitch.id), stitch.name))
         
         return options
+    
     def refresh_content_list(self) -> None:
         # Refresh the content list from the database
         try:
@@ -334,36 +346,26 @@ class ExtractApp(App):
                 )
         except Exception as e:
             self.logger.error(f"Error refreshing content list: {e}")
+    
     def action_refresh(self) -> None:
         """Refresh the content list."""
         self.refresh_content_list()
-            def action_new_extract(self) -> None:
+    
+    def action_new_extract(self) -> None:
         """Focus the extract tab."""
         self.logger.info("Action: new_extract")
         
-        try:
-            # First, check if the extract tab exists
-            tabs = self.query_one(Tabs)
-            tab_ids = [tab.id for tab in tabs.query("TabPane")]
-            
-            if "extract-tab" not in tab_ids:
-                self.logger.error(f"Extract tab not found. Available tabs: {tab_ids}")
-                self.notify("Error: Extract tab not found", severity="error")
-                return
-            
-            # Switch to the extract tab
-            tabs.active = "extract-tab"
-            
-            # Make sure the tab is fully rendered
-            self.refresh()
-            
-            # Use a longer delay to ensure the tab is fully rendered
-            self.set_timer(1.0, self._ensure_extract_tab_ready)
-        except Exception as e:
-            self.logger.error(f"Error in action_new_extract: {e}")
-            self.notify(f"Error: {str(e)}", severity="error")
-
-def _ensure_extract_tab_ready(self) -> None:
+        # First, switch to the extract tab
+        tabs = self.query_one(Tabs)
+        tabs.active = "extract-tab"
+        
+        # Make sure the tab is fully rendered
+        self.refresh()
+        
+        # Use a longer delay to ensure the tab is fully rendered
+        self.set_timer(1.0, self._ensure_extract_tab_ready)
+    
+    def _ensure_extract_tab_ready(self) -> None:
         """Ensure the extract tab is ready and then focus the URL input."""
         # Check if we're on the extract tab
         tabs = self.query_one(Tabs)
@@ -414,33 +416,22 @@ def _ensure_extract_tab_ready(self) -> None:
             self.logger.error(f"Error while focusing URL input: {e}")
             # Try again after a longer delay
             self.set_timer(1.0, self._ensure_extract_tab_ready)
-            def action_new_stitch(self) -> None:
+    
+    def action_new_stitch(self) -> None:
         """Focus the stitch tab."""
         self.logger.info("Action: new_stitch")
         
-        try:
-            # First, check if the stitch tab exists
-            tabs = self.query_one(Tabs)
-            tab_ids = [tab.id for tab in tabs.query("TabPane")]
-            
-            if "stitch-tab" not in tab_ids:
-                self.logger.error(f"Stitch tab not found. Available tabs: {tab_ids}")
-                self.notify("Error: Stitch tab not found", severity="error")
-                return
-            
-            # Switch to the stitch tab
-            tabs.active = "stitch-tab"
-            
-            # Make sure the tab is fully rendered
-            self.refresh()
-            
-            # Use a longer delay to ensure the tab is fully rendered
-            self.set_timer(1.0, self._ensure_stitch_tab_ready)
-        except Exception as e:
-            self.logger.error(f"Error in action_new_stitch: {e}")
-            self.notify(f"Error: {str(e)}", severity="error")
-
-def _ensure_stitch_tab_ready(self) -> None:
+        # First, switch to the stitch tab
+        tabs = self.query_one(Tabs)
+        tabs.active = "stitch-tab"
+        
+        # Make sure the tab is fully rendered
+        self.refresh()
+        
+        # Use a longer delay to ensure the tab is fully rendered
+        self.set_timer(1.0, self._ensure_stitch_tab_ready)
+    
+    def _ensure_stitch_tab_ready(self) -> None:
         """Ensure the stitch tab is ready and then focus the URL input."""
         # Check if we're on the stitch tab
         tabs = self.query_one(Tabs)
@@ -491,6 +482,7 @@ def _ensure_stitch_tab_ready(self) -> None:
             self.logger.error(f"Error while focusing stitch URL input: {e}")
             # Try again after a longer delay
             self.set_timer(1.0, self._ensure_stitch_tab_ready)
+    
     def action_focus_search(self) -> None:
         """Focus the search input."""
         search_input = self.query_one("#search-input", Input)
@@ -582,33 +574,21 @@ def _ensure_stitch_tab_ready(self) -> None:
             )
     
     @on(Button.Pressed, "#new-button")
-            def new_extract(self) -> None:
-        """Create a new extract."""
-        self.logger.info("Creating new extract")
+    def new_extract(self) -> None:
+        """Switch to extract tab."""
+        self.logger.info("New button pressed, switching to extract tab")
         
-        try:
-            # First, check if the extract tab exists
-            tabs = self.query_one(Tabs)
-            tab_ids = [tab.id for tab in tabs.query("TabPane")]
-            
-            if "extract-tab" not in tab_ids:
-                self.logger.error(f"Extract tab not found. Available tabs: {tab_ids}")
-                self.notify("Error: Extract tab not found", severity="error")
-                return
-            
-            # Switch to the extract tab
-            tabs.active = "extract-tab"
-            
-            # Make sure the tab is fully rendered
-            self.refresh()
-            
-            # Use a longer delay to ensure the tab is fully rendered
-            self.set_timer(1.0, self._ensure_extract_tab_ready)
-        except Exception as e:
-            self.logger.error(f"Error in new_extract: {e}")
-            self.notify(f"Error: {str(e)}", severity="error")
-
-def _focus_url_input(self, retry_count=0) -> None:
+        # First, switch to the extract tab
+        tabs = self.query_one(Tabs)
+        tabs.active = "extract-tab"
+        
+        # Make sure the tab is fully rendered
+        self.refresh()
+        
+        # Use a longer delay to ensure the tab is fully rendered
+        self.set_timer(1.0, self._ensure_extract_tab_ready)
+    
+    def _focus_url_input(self, retry_count=0) -> None:
         """Focus the URL input after a short delay."""
         # Limit retries to prevent infinite recursion
         if retry_count >= 5:
@@ -644,6 +624,7 @@ def _focus_url_input(self, retry_count=0) -> None:
             self.logger.error(f"Failed to focus URL input: {e}")
             # Try again with incremented retry count after a longer delay
             self.set_timer(0.5, lambda: self._focus_url_input(retry_count + 1))
+            
     def _focus_stitch_url_input(self, retry_count=0) -> None:
         """Focus the stitch URL input after a short delay."""
         # Limit retries to prevent infinite recursion
@@ -978,7 +959,6 @@ def _focus_url_input(self, retry_count=0) -> None:
         
         status.update("Settings saved!")
         status.add_class("success-message")
-    
 
 def run_tui() -> None:
     """Run the TUI application."""

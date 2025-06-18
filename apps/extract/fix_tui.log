@@ -58,3 +58,50 @@
 2025-06-17 22:20:08,728 - fix_tui - INFO - Successfully updated /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
 2025-06-17 22:20:08,728 - fix_tui - INFO - Backup saved at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617222008
 2025-06-17 22:20:08,728 - fix_tui - INFO - Fix completed successfully
+2025-06-17 22:56:58,279 - fix_tui - INFO - Starting fix script
+2025-06-17 22:56:58,279 - fix_tui - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-17 22:56:58,279 - fix_tui - INFO - Using TUI file at: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 22:56:58,280 - fix_tui - INFO - Created backup at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617225658
+2025-06-17 22:56:58,281 - fix_tui - INFO - Added columns to DataTable in compose method
+2025-06-17 22:56:58,281 - fix_tui - INFO - Fixed on_mount method
+2025-06-17 22:56:58,281 - fix_tui - INFO - Fixed refresh_content_list method
+2025-06-17 22:56:58,281 - fix_tui - INFO - Fixed indentation issues
+2025-06-17 22:56:58,281 - fix_tui - INFO - Successfully updated /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 22:56:58,281 - fix_tui - INFO - Backup saved at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617225658
+2025-06-17 22:56:58,281 - fix_tui - INFO - Fix completed successfully
+2025-06-17 23:00:04,502 - fix_tui - INFO - Starting fix script
+2025-06-17 23:00:04,502 - fix_tui - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-17 23:00:04,502 - fix_tui - INFO - Using TUI file at: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 23:00:04,503 - fix_tui - INFO - Created backup at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617230004
+2025-06-17 23:00:04,504 - fix_tui - INFO - Updated DataTable initialization
+2025-06-17 23:00:04,504 - fix_tui - INFO - Removed duplicate column setup code
+2025-06-17 23:00:04,504 - fix_tui - INFO - Fixed on_mount method
+2025-06-17 23:00:04,504 - fix_tui - INFO - Fixed refresh_content_list method
+2025-06-17 23:00:04,504 - fix_tui - INFO - Fixed indentation issues
+2025-06-17 23:00:04,504 - fix_tui - INFO - Successfully updated /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 23:00:04,504 - fix_tui - INFO - Backup saved at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617230004
+2025-06-17 23:00:04,504 - fix_tui - INFO - Fix completed successfully
+2025-06-17 23:49:10,365 - fix_tui - INFO - Starting fix script
+2025-06-17 23:49:10,365 - fix_tui - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-17 23:49:10,365 - fix_tui - INFO - Using TUI file at: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 23:49:10,366 - fix_tui - INFO - Created backup at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617234910
+2025-06-17 23:49:10,366 - fix_tui - INFO - Updated DataTable initialization
+2025-06-17 23:49:10,367 - fix_tui - INFO - Removed duplicate column setup code
+2025-06-17 23:49:10,367 - fix_tui - INFO - Fixed on_mount method
+2025-06-17 23:49:10,367 - fix_tui - INFO - Fixed refresh_content_list method
+2025-06-17 23:49:10,367 - fix_tui - INFO - Fixed indentation issues
+2025-06-17 23:49:10,367 - fix_tui - INFO - Successfully updated /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 23:49:10,368 - fix_tui - INFO - Backup saved at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617234910
+2025-06-17 23:49:10,369 - fix_tui - INFO - Fix completed successfully
+2025-06-17 23:49:10,502 - fix_tui - INFO - Starting fix script
+2025-06-17 23:49:10,502 - fix_tui - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-17 23:49:10,502 - fix_tui - INFO - Using TUI file at: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 23:49:10,502 - fix_tui - INFO - Created backup at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617234910
+2025-06-17 23:49:10,502 - fix_tui - INFO - Updated DataTable initialization
+2025-06-17 23:49:10,502 - fix_tui - INFO - Removed duplicate column setup code
+2025-06-17 23:49:10,503 - fix_tui - INFO - Fixed on_mount method
+2025-06-17 23:49:10,503 - fix_tui - INFO - Fixed refresh_content_list method
+2025-06-17 23:49:10,503 - fix_tui - INFO - Fixed indentation issues
+2025-06-17 23:49:10,503 - fix_tui - INFO - Successfully updated /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 23:49:10,503 - fix_tui - INFO - Backup saved at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617234910
+2025-06-17 23:49:10,503 - fix_tui - INFO - Fix completed successfully

@@ -1,125 +1,79 @@
-"use client";
+import Link from "next/link";
 
-import { useEffect, useRef } from 'react';
-
-// Define Particle interface for type safety
-interface Particle {
-  x: number;
-  y: number;
-  radius: number;
-  speed: number;
-  angle: number;
-  color: string;
-}
+import React from 'react';
+import Link from "next/link";
 
 export function HeroSection() {
-  // Add HTMLCanvasElement type to the ref
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    if (typeof window === 'undefined' || !canvasRef.current) return;
-
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-
-    // Ensure context exists before proceeding
-    if (!ctx) return;
-
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-
-    // Set canvas dimensions
-    canvas.width = width;
-    canvas.height = height;
-
-    // Explicitly type particles as Particle[]
-    const particles: Particle[] = [];
-
-    // Create particles for background animation
-    for (let i = 0; i < 100; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        radius: Math.random() * 2 + 1,
-        speed: Math.random() * 0.5 + 0.1,
-        angle: Math.random() * Math.PI * 2,
-        color: `rgba(14, 165, 233, ${Math.random() * 0.3 + 0.1})`
-      });
-    }
-
-    // Animation loop
-    const animate = () => {
-      requestAnimationFrame(animate);
-      ctx.clearRect(0, 0, width, height);
-
-      // Draw particles
-      particles.forEach(p => {
-        p.x += Math.cos(p.angle) * p.speed;
-        p.y += Math.sin(p.angle) * p.speed;
-
-        // Boundary check
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-        if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.fill();
-      });
-    };
-
-    animate();
-  }, []);
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 py-20 md:py-32">
-      {/* Animated background canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
-        style={{
-          background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%)'
-        }}
-      />
+    <section className="py-20 md:py-32 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600/20 rounded-full filter blur-3xl opacity-70 animate-pulse-slow"></div>
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-blue-600/20 rounded-full filter blur-3xl opacity-70 animate-pulse-slow animation-delay-2000"></div>
+      </div>
 
-      {/* Content overlay */}
-      <div className="relative z-10 max-w-6xl mx-auto text-center px-4">
-        <div className="inline-flex items-center px-4 py-2 rounded-full bg-teal-500/10 border border-teal-500/20 mb-8 animate-pulse">
-          <span className="text-teal-400 text-sm font-medium tracking-wider">
-            ✨ AI-NATIVE WORKFLOWS
-          </span>
+      <div className="container-padding grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="text-center lg:text-left">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+            Transform Your Workflow with
+            <span className="block mt-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">
+              AI-Powered Automation
+            </span>
+          </h1>
+
+          <p className="mt-6 text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0">
+            Aigency turbocharges your development process with intelligent agents,
+            seamless integrations, and powerful automation tools. Focus on what matters
+            while we handle the complexity.
+          </p>
+
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <Link
+              href="/get-started"
+              className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-medium rounded-lg hover:opacity-90 transition-opacity shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-transform duration-300"
+            >
+              Get Started Free
+            </Link>
+            <Link
+              href="/demo"
+              className="px-8 py-3 bg-slate-800 text-white font-medium rounded-lg hover:bg-slate-700 transition-colors border border-slate-700"
+            >
+              Watch Demo
+            </Link>
+          </div>
+
+          <div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-4 text-slate-400 text-sm">
+            <div className="flex items-center">
+              <div className="w-3 h-3 rounded-full bg-green-500 mr-2 animate-pulse"></div>
+              <span>No credit card required</span>
+            </div>
+            <div className="flex items-center">
+              <div className="w-3 h-3 rounded-full bg-green-500 mr-2 animate-pulse"></div>
+              <span>14-day free trial</span>
+            </div>
+          </div>
         </div>
 
-        <h1 className="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight">
-          Transform Your Workflow with <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
-            AI Agent Teams
-          </span>
-        </h1>
+        <div className="relative flex justify-center">
+          <div className="relative w-full max-w-md aspect-square bg-gradient-to-br from-blue-500/10 to-purple-600/10 rounded-2xl border border-slate-700/50 backdrop-blur-sm overflow-hidden">
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="grid grid-cols-3 gap-4 p-6 w-full">
+                {[...Array(6)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="aspect-square bg-slate-800/50 rounded-xl border border-slate-700/50 flex items-center justify-center"
+                  >
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-purple-500"></div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-        <p className="text-xl md:text-2xl text-slate-300 mb-8 max-w-3xl mx-auto">
-          Aigency connects you with specialized AI agents that collaborate to solve complex tasks,
-          accelerate development, and unlock new possibilities.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-          <button className="bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 min-w-[200px]">
-            Get Started
-          </button>
-          <button className="bg-transparent border-2 border-slate-600 hover:border-slate-500 text-slate-300 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-colors min-w-[200px]">
-            View Demo
-          </button>
-        </div>
-
-        {/* AI Agent Visualization */}
-        <div className="relative mx-auto max-w-4xl h-64 md:h-96 flex items-center justify-center">
-          <div className="absolute w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-r from-teal-500 to-blue-500 opacity-80 animate-pulse"></div>
-          <div className="absolute w-16 h-16 md:w-24 md:h-24 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 opacity-80 top-10 left-1/4 animate-ping animate-delay-1000"></div>
-          <div className="absolute w-20 h-20 md:w-28 md:h-28 rounded-full bg-gradient-to-r from-indigo-500 to-blue-400 opacity-80 top-20 right-1/4 animate-pulse animate-delay-500"></div>
-          <div className="absolute w-14 h-14 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-cyan-400 to-teal-400 opacity-80 bottom-10 left-1/3 animate-ping"></div>
-          <div className="absolute w-18 h-18 md:w-24 md:h-24 rounded-full bg-gradient-to-r from-violet-500 to-purple-500 opacity-80 bottom-20 right-1/3 animate-pulse animate-delay-700"></div>
+            {/* Floating elements */}
+            <div className="absolute top-1/4 left-1/4 w-16 h-16 rounded-full bg-blue-500/20 border border-blue-500/30 animate-float"></div>
+            <div className="absolute top-1/3 right-1/4 w-12 h-12 rounded-full bg-purple-500/20 border border-purple-500/30 animate-float animation-delay-1000"></div>
+            <div className="absolute bottom-1/4 left-1/3 w-10 h-10 rounded-full bg-blue-400/20 border border-blue-400/30 animate-float animation-delay-1500"></div>
+          </div>
         </div>
       </div>
     </section>

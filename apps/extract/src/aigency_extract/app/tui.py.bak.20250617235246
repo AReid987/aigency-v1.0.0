@@ -337,7 +337,7 @@ class ExtractApp(App):
     def action_refresh(self) -> None:
         """Refresh the content list."""
         self.refresh_content_list()
-            def action_new_extract(self) -> None:
+        def action_new_extract(self) -> None:
         """Focus the extract tab."""
         self.logger.info("Action: new_extract")
         
@@ -362,7 +362,7 @@ class ExtractApp(App):
         except Exception as e:
             self.logger.error(f"Error in action_new_extract: {e}")
             self.notify(f"Error: {str(e)}", severity="error")
-
+    
 def _ensure_extract_tab_ready(self) -> None:
         """Ensure the extract tab is ready and then focus the URL input."""
         # Check if we're on the extract tab
@@ -414,7 +414,7 @@ def _ensure_extract_tab_ready(self) -> None:
             self.logger.error(f"Error while focusing URL input: {e}")
             # Try again after a longer delay
             self.set_timer(1.0, self._ensure_extract_tab_ready)
-            def action_new_stitch(self) -> None:
+        def action_new_stitch(self) -> None:
         """Focus the stitch tab."""
         self.logger.info("Action: new_stitch")
         
@@ -439,7 +439,7 @@ def _ensure_extract_tab_ready(self) -> None:
         except Exception as e:
             self.logger.error(f"Error in action_new_stitch: {e}")
             self.notify(f"Error: {str(e)}", severity="error")
-
+    
 def _ensure_stitch_tab_ready(self) -> None:
         """Ensure the stitch tab is ready and then focus the URL input."""
         # Check if we're on the stitch tab
@@ -582,7 +582,7 @@ def _ensure_stitch_tab_ready(self) -> None:
             )
     
     @on(Button.Pressed, "#new-button")
-            def new_extract(self) -> None:
+        def new_extract(self) -> None:
         """Create a new extract."""
         self.logger.info("Creating new extract")
         
@@ -607,7 +607,7 @@ def _ensure_stitch_tab_ready(self) -> None:
         except Exception as e:
             self.logger.error(f"Error in new_extract: {e}")
             self.notify(f"Error: {str(e)}", severity="error")
-
+    
 def _focus_url_input(self, retry_count=0) -> None:
         """Focus the URL input after a short delay."""
         # Limit retries to prevent infinite recursion

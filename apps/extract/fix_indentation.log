@@ -1,0 +1,7 @@
+2025-06-17 23:52:46,169 - fix_indentation - INFO - Starting indentation fix script
+2025-06-17 23:52:46,169 - fix_indentation - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-17 23:52:46,169 - fix_indentation - INFO - Using TUI file at: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 23:52:46,170 - fix_indentation - INFO - Created backup at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617235246
+2025-06-17 23:52:46,171 - fix_indentation - INFO - Successfully fixed indentation in /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 23:52:46,171 - fix_indentation - INFO - Backup saved at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617235246
+2025-06-17 23:52:46,171 - fix_indentation - INFO - Fix completed successfully

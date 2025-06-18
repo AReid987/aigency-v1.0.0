@@ -1,143 +1,106 @@
-"use client";
+import React from "react";
+
+interface FeatureCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+
+const FeatureCard: React.FC<FeatureCardProps> = ({ icon, title, description }) => (
+  <div className="w-full">
+    <div className="feature-card p-6 rounded-2xl bg-slate-800/50 border border-slate-700/50 backdrop-blur-sm h-full transition-all duration-300 hover:border-slate-500/50 hover:bg-slate-800/70 group">
+      <div className="w-14 h-14 rounded-xl bg-gradient-to-r from-blue-500/10 to-purple-600/10 flex items-center justify-center mb-6 group-hover:from-blue-500/20 group-hover:to-purple-600/20 transition-colors">
+        <div className="text-2xl text-blue-400 group-hover:text-blue-300 transition-colors">
+          {icon}
+        </div>
+      </div>
+      <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
+      <p className="text-slate-400 group-hover:text-slate-300 transition-colors">
+        {description}
+      </p>
+    </div>
+  </div>
+);
 
 export function FeaturesSection() {
   const features = [
     {
-      title: "Agentic Squads",
-      description:
-        "Teams of specialized AI agents that co-create with you, each bringing unique expertise to your projects.",
-      icon: "🤖",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 极17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+      ),
+      title: "AI-Powered Agents",
+      description: "Smart agents that automate complex workflows and adapt to your development patterns."
     },
     {
-      title: "Infinite Canvas",
-      description:
-        "Visual workspace for linked thinking, connecting ideas, strategies, and execution in one seamless flow.",
-      icon: "🎨",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+      title: "Lightning Fast Execution",
+      description: "Optimized pipelines that deliver results 10x faster than traditional CI/CD systems."
     },
     {
-      title: "KPI Dashboards",
-      description:
-        "Real-time analytics and atomic systems that track what matters most for your business growth.",
-      icon: "📊",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+      ),
+      title: "Enterprise Security",
+      description: "Military-grade encryption and compliance frameworks to keep your data protected."
     },
     {
-      title: "GTM Automations",
-      description:
-        "Marketing campaigns and go-to-market automations that scale your reach without the overhead.",
-      icon: "🚀",
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+        </svg>
+      ),
+      title: "Seamless Integrations",
+      description: "Connect with your favorite tools and services through our extensive API ecosystem."
     },
-  ];
-
-  const problems = [
-    "Overload of tools and docs",
-    "Slow/misaligned GTM",
-    "LLM unreliability for business-critical workflows",
-    "Creative isolation",
+    {
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      ),
+      title: "Reliable Infrastructure",
+      description: "99.99% uptime guaranteed with our globally distributed, fault-tolerant architecture."
+    },
+    {
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      ),
+      title: "Real-time Analytics",
+      description: "Actionable insights with customizable dashboards and performance metrics."
+    }
   ];
 
   return (
-    <section id="features" className="px-6 py-20 bg-slate-900" data-oid="bgv7rtz">
-      <div className="mx-auto max-w-6xl" data-oid="s7zjl17">
-        {/* Features Section */}
-        <div className="text-center mb-16" data-oid="aoo0x0d">
-          <h2
-            className="text-3xl md:text-4xl font-bold text-white mb-4"
-            data-oid="3hpypzq"
-          >
-            Built Around What You Need
+    <section className="py-20 relative">
+      <div className="container-padding">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            Powerful Features for <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Modern Teams</span>
           </h2>
-          <p
-            className="text-slate-400 text-lg max-w-2xl mx-auto"
-            data-oid="tozsklt"
-          >
-            Everything you need to transform from solo founder to scaling
-            entrepreneur
+          <p className="text-lg text-slate-400">
+            Everything you need to accelerate development, enhance collaboration, and deliver exceptional results.
           </p>
         </div>
 
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20"
-          data-oid="mu_4ebo"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
-            <div
+            <FeatureCard
               key={index}
-              className="bg-gradient-to-br from-slate-800/40 to-slate-900/60 backdrop-blur-sm border border-slate-700/50 rounded-xl p-8 transition-all duration-300 hover:border-teal-500/50 hover:shadow-lg hover:shadow-teal-500/10"
-              data-oid="6xyb-s3"
-            >
-              <div className="w-16 h-16 rounded-full bg-teal-500/10 flex items-center justify-center text-3xl mb-6 mx-auto" data-oid="c9pi-j4">
-                {feature.icon}
-              </div>
-              <h3
-                className="text-xl font-bold text-white mb-3 text-center"
-                data-oid="rw9-yno"
-              >
-                {feature.title}
-              </h3>
-              <p className="text-slate-400 leading-relaxed text-center" data-oid="93lxaaj">
-                {feature.description}
-              </p>
-            </div>
+              icon={feature.icon}
+              title={feature.title}
+              description={feature.description}
+            />
           ))}
-        </div>
-
-        {/* Problems We're Solving */}
-        <div className="text-center mb-16" data-oid="w6d3ddf">
-          <h2
-            className="text-3xl md:text-4xl font-bold text-white mb-8"
-            data-oid="74sb7a-"
-          >
-            We&apos;re Solving
-          </h2>
-          <div
-            className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto"
-            data-oid="-7xxnsi"
-          >
-            {problems.map((problem, index) => (
-              <div
-                key={index}
-                className="flex items-start space-x-4 bg-gradient-to-r from-red-500/10 to-red-600/10 border border-red-500/20 rounded-xl p-5 text-left"
-                data-oid="4s3f1iw"
-              >
-                <div
-                  className="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center flex-shrink-0 mt-1"
-                  data-oid="8kyan9h"
-                >
-                  <div className="w-2 h-2 bg-white rounded-full"></div>
-                </div>
-                <span className="text-slate-300 font-medium" data-oid="iyhg_89">
-                  {problem}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Final CTA */}
-        <div
-          className="text-center bg-gradient-to-r from-teal-500/10 via-teal-600/15 to-teal-500/10 border border-teal-500/30 rounded-2xl p-12 relative overflow-hidden"
-          data-oid="6awoeag"
-        >
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(94,234,212,0.1)_0%,transparent_70%)]"></div>
-          <h3
-            className="text-2xl md:text-3xl font-bold text-white mb-4 relative z-10"
-            data-oid="j5c:kuk"
-          >
-            This isn&apos;t just a SaaS — it&apos;s a founder workflow transformer.
-          </h3>
-          <p
-            className="text-slate-400 mb-8 max-w-2xl mx-auto relative z-10"
-            data-oid="4p_d129"
-          >
-            Join the next generation of entrepreneurs who are scaling faster
-            with AI-native workflows.
-          </p>
-          <button
-            className="bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 shadow-lg shadow-teal-500/20 hover:shadow-teal-500/30 relative z-10"
-            data-oid="odzddbt"
-          >
-            Transform Your Workflow
-          </button>
         </div>
       </div>
     </section>

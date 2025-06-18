@@ -1,0 +1,10 @@
+2025-06-17 23:55:11,019 - fix_complete - INFO - Starting fix script
+2025-06-17 23:55:11,019 - fix_complete - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-17 23:55:11,019 - fix_complete - INFO - Using TUI file at: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 23:55:11,019 - fix_complete - INFO - Found most recent backup: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617235246
+2025-06-17 23:55:11,020 - fix_complete - INFO - Restored /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py from /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617235246
+2025-06-17 23:55:11,021 - fix_complete - INFO - Fixed action_new_extract method
+2025-06-17 23:55:11,021 - fix_complete - INFO - Fixed action_new_stitch method
+2025-06-17 23:55:11,021 - fix_complete - INFO - Fixed new_extract method
+2025-06-17 23:55:11,021 - fix_complete - INFO - Successfully updated /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 23:55:11,021 - fix_complete - INFO - Fix completed successfully

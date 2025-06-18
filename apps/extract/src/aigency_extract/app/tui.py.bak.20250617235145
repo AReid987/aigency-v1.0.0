@@ -337,33 +337,20 @@ class ExtractApp(App):
     def action_refresh(self) -> None:
         """Refresh the content list."""
         self.refresh_content_list()
-            def action_new_extract(self) -> None:
+    def action_new_extract(self) -> None:
         """Focus the extract tab."""
         self.logger.info("Action: new_extract")
         
-        try:
-            # First, check if the extract tab exists
-            tabs = self.query_one(Tabs)
-            tab_ids = [tab.id for tab in tabs.query("TabPane")]
-            
-            if "extract-tab" not in tab_ids:
-                self.logger.error(f"Extract tab not found. Available tabs: {tab_ids}")
-                self.notify("Error: Extract tab not found", severity="error")
-                return
-            
-            # Switch to the extract tab
-            tabs.active = "extract-tab"
-            
-            # Make sure the tab is fully rendered
-            self.refresh()
-            
-            # Use a longer delay to ensure the tab is fully rendered
-            self.set_timer(1.0, self._ensure_extract_tab_ready)
-        except Exception as e:
-            self.logger.error(f"Error in action_new_extract: {e}")
-            self.notify(f"Error: {str(e)}", severity="error")
-
-def _ensure_extract_tab_ready(self) -> None:
+        # First, switch to the extract tab
+        tabs = self.query_one(Tabs)
+        tabs.active = "extract-tab"
+        
+        # Make sure the tab is fully rendered
+        self.refresh()
+        
+        # Use a longer delay to ensure the tab is fully rendered
+        self.set_timer(1.0, self._ensure_extract_tab_ready)
+    def _ensure_extract_tab_ready(self) -> None:
         """Ensure the extract tab is ready and then focus the URL input."""
         # Check if we're on the extract tab
         tabs = self.query_one(Tabs)
@@ -414,33 +401,20 @@ def _ensure_extract_tab_ready(self) -> None:
             self.logger.error(f"Error while focusing URL input: {e}")
             # Try again after a longer delay
             self.set_timer(1.0, self._ensure_extract_tab_ready)
-            def action_new_stitch(self) -> None:
+    def action_new_stitch(self) -> None:
         """Focus the stitch tab."""
         self.logger.info("Action: new_stitch")
         
-        try:
-            # First, check if the stitch tab exists
-            tabs = self.query_one(Tabs)
-            tab_ids = [tab.id for tab in tabs.query("TabPane")]
-            
-            if "stitch-tab" not in tab_ids:
-                self.logger.error(f"Stitch tab not found. Available tabs: {tab_ids}")
-                self.notify("Error: Stitch tab not found", severity="error")
-                return
-            
-            # Switch to the stitch tab
-            tabs.active = "stitch-tab"
-            
-            # Make sure the tab is fully rendered
-            self.refresh()
-            
-            # Use a longer delay to ensure the tab is fully rendered
-            self.set_timer(1.0, self._ensure_stitch_tab_ready)
-        except Exception as e:
-            self.logger.error(f"Error in action_new_stitch: {e}")
-            self.notify(f"Error: {str(e)}", severity="error")
-
-def _ensure_stitch_tab_ready(self) -> None:
+        # First, switch to the stitch tab
+        tabs = self.query_one(Tabs)
+        tabs.active = "stitch-tab"
+        
+        # Make sure the tab is fully rendered
+        self.refresh()
+        
+        # Use a longer delay to ensure the tab is fully rendered
+        self.set_timer(1.0, self._ensure_stitch_tab_ready)
+    def _ensure_stitch_tab_ready(self) -> None:
         """Ensure the stitch tab is ready and then focus the URL input."""
         # Check if we're on the stitch tab
         tabs = self.query_one(Tabs)
@@ -582,33 +556,20 @@ def _ensure_stitch_tab_ready(self) -> None:
             )
     
     @on(Button.Pressed, "#new-button")
-            def new_extract(self) -> None:
-        """Create a new extract."""
-        self.logger.info("Creating new extract")
+    def new_extract(self) -> None:
+        """Switch to extract tab."""
+        self.logger.info("New button pressed, switching to extract tab")
         
-        try:
-            # First, check if the extract tab exists
-            tabs = self.query_one(Tabs)
-            tab_ids = [tab.id for tab in tabs.query("TabPane")]
-            
-            if "extract-tab" not in tab_ids:
-                self.logger.error(f"Extract tab not found. Available tabs: {tab_ids}")
-                self.notify("Error: Extract tab not found", severity="error")
-                return
-            
-            # Switch to the extract tab
-            tabs.active = "extract-tab"
-            
-            # Make sure the tab is fully rendered
-            self.refresh()
-            
-            # Use a longer delay to ensure the tab is fully rendered
-            self.set_timer(1.0, self._ensure_extract_tab_ready)
-        except Exception as e:
-            self.logger.error(f"Error in new_extract: {e}")
-            self.notify(f"Error: {str(e)}", severity="error")
-
-def _focus_url_input(self, retry_count=0) -> None:
+        # First, switch to the extract tab
+        tabs = self.query_one(Tabs)
+        tabs.active = "extract-tab"
+        
+        # Make sure the tab is fully rendered
+        self.refresh()
+        
+        # Use a longer delay to ensure the tab is fully rendered
+        self.set_timer(1.0, self._ensure_extract_tab_ready)
+    def _focus_url_input(self, retry_count=0) -> None:
         """Focus the URL input after a short delay."""
         # Limit retries to prevent infinite recursion
         if retry_count >= 5:

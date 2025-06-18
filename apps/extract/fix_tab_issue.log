@@ -1,0 +1,10 @@
+2025-06-17 23:51:45,661 - fix_tab_issue - INFO - Starting fix script
+2025-06-17 23:51:45,662 - fix_tab_issue - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-17 23:51:45,662 - fix_tab_issue - INFO - Using TUI file at: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 23:51:45,663 - fix_tab_issue - INFO - Created backup at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617235145
+2025-06-17 23:51:45,663 - fix_tab_issue - INFO - Fixed new_extract method
+2025-06-17 23:51:45,663 - fix_tab_issue - INFO - Fixed action_new_extract method
+2025-06-17 23:51:45,663 - fix_tab_issue - INFO - Fixed action_new_stitch method
+2025-06-17 23:51:45,663 - fix_tab_issue - INFO - Successfully updated /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-17 23:51:45,663 - fix_tab_issue - INFO - Backup saved at /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py.bak.20250617235145
+2025-06-17 23:51:45,663 - fix_tab_issue - INFO - Fix completed successfully
