@@ -1,0 +1,63 @@
+[project]
+name = "survey-automation"
+version = "0.1.0"
+description = "Autonomous survey testing framework"
+authors = [
+    {name = "AIgency", email = "team@aigency.dev"},
+]
+dependencies = [
+    "skyvern-python>=0.4.0",
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "websockets>=12.0",
+    "apscheduler>=3.10.0",
+    "pydantic>=2.5.0",
+    "python-multipart>=0.0.6",
+    "aiofiles>=23.2.1",
+    "cryptography>=41.0.0",
+    "pyyaml>=6.0.1",
+    "python-dotenv>=1.0.0",
+    "browser-use>=0.1.0",
+    "playwright>=1.40.0",
+]
+requires-python = ">=3.10"
+readme = "README.md"
+license = {text = "MIT"}
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "black>=23.0.0",
+    "flake8>=6.0.0",
+    "mypy>=1.6.0",
+    "pre-commit>=3.5.0",
+]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[tool.pdm]
+distribution = false
+
+[tool.pdm.scripts]
+dev = "python -m app.main"
+test = "pytest"
+lint = "flake8 app/"
+format = "black app/"
+type-check = "mypy app/"
+
+[tool.black]
+line-length = 88
+target-version = ['py310']
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

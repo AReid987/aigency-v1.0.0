@@ -21,6 +21,9 @@ importers:
         specifier: ^1.10.0
         version: 1.10.0
     devDependencies:
+      cz-git:
+        specifier: ^1.11.2
+        version: 1.11.2
       prettier:
         specifier: ^3.5.3
         version: 3.5.3
@@ -2205,6 +2208,10 @@ packages:
   cytoscape@3.32.0:
     resolution: {integrity: sha512-5JHBC9n75kz5851jeklCPmZWcg3hUe6sjqJvyk3+hVqFaKcHwHgxsjeN1yLmggoUc6STbtm9/NQyabQehfjvWQ==}
     engines: {node: '>=0.10'}
+
+  cz-git@1.11.2:
+    resolution: {integrity: sha512-e54u6yJc80usJCWRQE9z8egpkqEvlM6aC70lTGjIsGI/ggtzeGU6udNAuHSBvLV+hMyss0ZS4KfodfwO9UJpqQ==}
+    engines: {node: '>=v12.20.0'}
 
   d3-array@2.12.1:
     resolution: {integrity: sha512-B0ErZK/66mHtEsR1TkPEEkwdy+WDesimkM5gpZr5Dsg54BiTA5RXtYW5qTLIAcekaS9xfZrzBLF/OAkB3Qn1YQ==}
@@ -6632,6 +6639,8 @@ snapshots:
       cytoscape: 3.32.0
 
   cytoscape@3.32.0: {}
+
+  cz-git@1.11.2: {}
 
   d3-array@2.12.1:
     dependencies:

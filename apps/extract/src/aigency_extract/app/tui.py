@@ -52,133 +52,91 @@ class ExtractApp(App):
     }
     
     .content-list {
-        height: 100%;
-        overflow-y: auto;
+        height: 30%;
+        border: solid $primary;
     }
     
     .content-details {
-        height: 100%;
-        overflow-y: auto;
-    }
-    
-    .search-container {
-        height: auto;
-        margin: 1 0;
-    }
-    
-    .button-container {
-        height: auto;
-        align: center middle;
+        height: 70%;
+        border: solid $primary;
     }
     
     .extraction-form {
-        height: auto;
-        margin: 1 0;
+        padding: 1 2;
     }
     
     .form-row {
         height: auto;
-        margin: 1 0;
+        margin-bottom: 1;
     }
     
     .form-label {
-        width: 30%;
+        width: 20%;
         content-align: right middle;
         padding-right: 1;
     }
     
     .form-input {
-        width: 70%;
+        width: 80%;
     }
     
-    .status-message {
-        text-align: center;
-        background: $boost;
-        color: $text;
-        padding: 1;
-    }
-    
-    .error-message {
-        text-align: center;
-        background: $error;
-        color: $text;
-        padding: 1;
-    }
-    
-    .success-message {
-        text-align: center;
-        background: $success;
-        color: $text;
-        padding: 1;
-    }
-    
-    .tag {
-        background: $accent;
-        color: $text;
-        padding: 0 1;
+    .form-button {
         margin-right: 1;
     }
     
-    .stitch-step {
-        background: $surface;
-        padding: 1;
-        margin: 1 0;
-        border: solid $primary;
+    .settings-section {
+        margin-bottom: 2;
+    }
+    
+    .settings-title {
+        text-style: bold;
+        margin-bottom: 1;
     }
     """
     
     BINDINGS = [
         ("q", "quit", "Quit"),
-        ("n", "new_extract", "New Extract"),
         ("r", "refresh", "Refresh"),
-        ("f", "focus_search", "Search"),
+        ("f", "search", "Search"),
+        ("n", "new_extract", "New Extract"),
         ("s", "new_stitch", "New Stitch"),
+        ("ctrl+p", "palette", "palette"),
     ]
-    def __init__(self):
-        """Initialize the application."""
-        super().__init__()
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.logger = logging.getLogger("ExtractApp")
         self.logger.info("Initializing ExtractApp")
+        
+        # Initialize database
         self.db = ExtractDatabase()
+        
+        # Initialize LLM providers
+        self.providers = ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
+        self.logger.info(f"Available providers: {self.providers}")
+        
+        # Set default provider
+        self.default_provider = os.getenv("DEFAULT_LLM_PROVIDER", "mistral")
+        self.logger.info(f"Default provider: {self.default_provider}")
+        
+        # Track current content
         self.current_content_id = None
         
-        # Get available LLM providers
-        self.available_providers = []
-        for provider in LLMProvider:
-            env_var = f"{provider.value.upper()}_API_KEY"
-            if os.environ.get(env_var):
-                self.available_providers.append(provider.value)
-        
-        # Default provider
-        self.default_provider = os.environ.get("DEFAULT_LLM_PROVIDER")
-        if not self.default_provider and self.available_providers:
-            self.default_provider = self.available_providers[0]
-        
-        self.logger.info(f"Available providers: {self.available_providers}")
-        self.logger.info(f"Default provider: {self.default_provider}")
+        # Track retry counts for focus attempts
+        self.extract_focus_retry_count = 0
+        self.stitch_focus_retry_count = 0
+    
     def compose(self) -> ComposeResult:
-        """Compose the UI layout."""
+        """Create child widgets for the app."""
+        # Create header and footer
         yield Header()
+        yield Footer()
         
+        # Create main layout
         with Horizontal():
-            # Sidebar
+            # Sidebar with content list
             with Vertical(id="sidebar"):
-                with Container(classes="search-container"):
-                    yield Input(placeholder="Search extracts...", id="search-input")
-                    with Horizontal(classes="button-container"):
-                        yield Button("Search", id="search-button", variant="primary")
-                        yield Button("New", id="new-button", variant="success")
-                
-                # Content list
-                yield Static("Extracts", classes="heading")
                 yield DataTable(id="content-table", classes="content-list", show_header=True)
-                
-                
-                
-                
-                
-                
-                
             
             # Main content area
             with Vertical(id="main-content"):
@@ -192,72 +150,61 @@ class ExtractApp(App):
                         with Container(classes="extraction-form"):
                             with Horizontal(classes="form-row"):
                                 yield Label("URL:", classes="form-label")
-                                yield Input(placeholder="YouTube URL or article URL", id="url-input", classes="form-input")
+                                yield Input(placeholder="Enter YouTube URL or article URL", id="extract-url", classes="form-input")
                             
                             with Horizontal(classes="form-row"):
                                 yield Label("Type:", classes="form-label")
                                 yield Select(
-                                    [(label, value) for value, label in [
-                                        ("youtube", "YouTube Video"),
-                                        ("article", "Article"),
-                                    ]],
-                                    id="content-type-select",
-                                    value="youtube",
+                                    [(ct.value, ct.value) for ct in ContentType],
+                                    id="content-type",
+                                    value=ContentType.YOUTUBE.value,
                                     classes="form-input"
                                 )
                             
                             with Horizontal(classes="form-row"):
                                 yield Label("Pattern:", classes="form-label")
                                 yield Select(
-                                    [(pattern, pattern) for pattern in get_pattern_names()],
-                                    id="pattern-select",
-                                    value="youtube_summary" if "youtube_summary" in get_pattern_names() else get_pattern_names()[0] if get_pattern_names() else "",
+                                    [(p, p) for p in get_pattern_names()],
+                                    id="extraction-pattern",
                                     classes="form-input"
                                 )
                             
                             with Horizontal(classes="form-row"):
                                 yield Label("Provider:", classes="form-label")
                                 yield Select(
-                                    [(provider, provider) for provider in self.available_providers],
-                                    id="provider-select",
+                                    [(p, p) for p in self.providers],
+                                    id="llm-provider",
                                     value=self.default_provider,
                                     classes="form-input"
                                 )
                             
-                            with Horizontal(classes="button-container"):
-                                yield Button("Extract", id="extract-button", variant="primary")
-                            
-                            yield Static("", id="extract-status", classes="status-message")
+                            with Horizontal(classes="form-row"):
+                                yield Button("Extract", id="extract-button", variant="primary", classes="form-button")
+                                yield Button("Clear", id="extract-clear-button", variant="default", classes="form-button")
                     
                     # Stitch tab
                     with TabPane("Stitch", id="stitch-tab"):
                         with Container(classes="extraction-form"):
                             with Horizontal(classes="form-row"):
-                                yield Label("URL:", classes="form-label")
-                                yield Input(placeholder="YouTube URL or article URL", id="stitch-url-input", classes="form-input")
+                                yield Label("Name:", classes="form-label")
+                                yield Input(placeholder="Enter stitch name", id="stitch-name", classes="form-input")
                             
                             with Horizontal(classes="form-row"):
-                                yield Label("Stitch:", classes="form-label")
-                                yield Select(
-                                    self._get_stitch_options(),
-                                    id="stitch-select",
-                                    classes="form-input"
-                                )
+                                yield Label("Description:", classes="form-label")
+                                yield Input(placeholder="Enter stitch description", id="stitch-description", classes="form-input")
                             
                             with Horizontal(classes="form-row"):
                                 yield Label("Provider:", classes="form-label")
                                 yield Select(
-                                    [(provider, provider) for provider in self.available_providers],
-                                    id="stitch-provider-select",
+                                    [(p, p) for p in self.providers],
+                                    id="stitch-provider",
                                     value=self.default_provider,
                                     classes="form-input"
                                 )
                             
-                            with Horizontal(classes="button-container"):
-                                yield Button("Run Stitch", id="run-stitch-button", variant="primary")
-                                yield Button("Create New", id="create-stitch-button", variant="success")
-                            
-                            yield Static("", id="stitch-status", classes="status-message")
+                            with Horizontal(classes="form-row"):
+                                yield Button("Create", id="stitch-create-button", variant="primary", classes="form-button")
+                                yield Button("Clear", id="stitch-clear-button", variant="default", classes="form-button")
                     
                     # Settings tab
                     with TabPane("Settings", id="settings-tab"):
@@ -265,29 +212,18 @@ class ExtractApp(App):
                             with Horizontal(classes="form-row"):
                                 yield Label("Default Provider:", classes="form-label")
                                 yield Select(
-                                    [(provider, provider) for provider in self.available_providers],
-                                    id="default-provider-select",
+                                    [(p, p) for p in self.providers],
+                                    id="default-provider",
                                     value=self.default_provider,
                                     classes="form-input"
                                 )
                             
                             with Horizontal(classes="form-row"):
-                                yield Label("Database Path:", classes="form-label")
-                                yield Input(
-                                    value=self.db.db_path,
-                                    id="db-path-input",
-                                    disabled=True,
-                                    classes="form-input"
-                                )
-                            
-                            with Horizontal(classes="button-container"):
-                                yield Button("Save Settings", id="save-settings-button", variant="primary")
-                            
-                            yield Static("", id="settings-status", classes="status-message")
-        
-        yield Footer()
+                                yield Button("Save", id="settings-save-button", variant="primary", classes="form-button")
+                                yield Button("Reset", id="settings-reset-button", variant="default", classes="form-button")
+    
     def on_mount(self) -> None:
-        # Set up the UI when the app is mounted
+        """Set up the UI when the app is mounted."""
         self.logger.info("Mounting app")
         
         # Set up content table columns
@@ -299,21 +235,9 @@ class ExtractApp(App):
         
         # Log that the app is mounted
         self.logger.info("App mounted successfully")
-    def _get_stitch_options(self) -> List[tuple]:
-        """Get options for stitch select."""
-        stitches = self.db.get_all_stitches()
-        options = []
-        
-        # Add option to create a custom stitch
-        options.append(("custom", "Custom (comma-separated patterns)"))
-        
-        # Add saved stitches
-        for stitch in stitches:
-            options.append((str(stitch.id), stitch.name))
-        
-        return options
+    
     def refresh_content_list(self) -> None:
-        # Refresh the content list from the database
+        """Refresh the content list from the database."""
         try:
             table = self.query_one("#content-table", DataTable)
             
@@ -334,10 +258,12 @@ class ExtractApp(App):
                 )
         except Exception as e:
             self.logger.error(f"Error refreshing content list: {e}")
+    
     def action_refresh(self) -> None:
         """Refresh the content list."""
         self.refresh_content_list()
-            def action_new_extract(self) -> None:
+    
+    def action_new_extract(self) -> None:
         """Focus the extract tab."""
         self.logger.info("Action: new_extract")
         
@@ -362,59 +288,56 @@ class ExtractApp(App):
         except Exception as e:
             self.logger.error(f"Error in action_new_extract: {e}")
             self.notify(f"Error: {str(e)}", severity="error")
-
-def _ensure_extract_tab_ready(self) -> None:
+    
+    def _ensure_extract_tab_ready(self) -> None:
         """Ensure the extract tab is ready and then focus the URL input."""
         # Check if we're on the extract tab
         tabs = self.query_one(Tabs)
         if tabs.active != "extract-tab":
             self.logger.error("Extract tab is not active, cannot proceed")
             return
-            
-        # Try to find the extract tab content
+        
+        # Try to focus the URL input
+        self._focus_extract_url_input()
+    
+    def _focus_extract_url_input(self, retry_count=0) -> None:
+        """Focus the URL input in the extract tab."""
+        max_retries = 5
+        
         try:
-            # First, make sure the tab is fully rendered by forcing a refresh
-            self.refresh()
+            # Check if the tab is active before trying to focus
+            tabs = self.query_one(Tabs)
+            if tabs.active != "extract-tab":
+                self.logger.error("Extract tab is not active, cannot focus input")
+                # Try again with incremented retry count after a longer delay
+                if retry_count < max_retries:
+                    self.set_timer(0.5, lambda: self._focus_extract_url_input(retry_count + 1))
+                return
             
-            # Try to find the URL input directly with a more specific selector
+            # Try to find the input directly
             try:
-                url_input = self.query_one("#extract-tab #url-input")
-                if url_input:
-                    url_input.focus()
-                    self.logger.info("Successfully focused URL input")
-                    return
-            except Exception:
-                # If direct query fails, continue with the fallback approach
-                pass
+                url_input = self.query_one("#extract-url", Input)
+                url_input.focus()
+                self.logger.info("Focused extract URL input")
+                return
+            except Exception as e:
+                self.logger.error(f"Could not find extract URL input: {e}")
                 
             # Fallback: try to find the extract tab and then search within it
             extract_tab = self.query_one("#extract-tab", TabPane)
             
             # Check if the tab has been populated with content
-            inputs = extract_tab.query("Input")
-            if not inputs:
-                self.logger.error("Extract tab has no input elements, waiting for UI to update")
-                # Try again after a longer delay
-                self.set_timer(1.0, self._ensure_extract_tab_ready)
-                return
-                
-            # Find the URL input specifically
-            url_input = None
-            for input_elem in inputs:
-                if input_elem.id == "url-input":
-                    url_input = input_elem
-                    break
-                    
-            if url_input:
-                url_input.focus()
-                self.logger.info("Successfully focused URL input")
-            else:
-                self.logger.error("URL input not found in extract tab")
+            url_input = extract_tab.query_one("#extract-url", Input)
+            url_input.focus()
+            self.logger.info("Focused extract URL input (via tab)")
         except Exception as e:
-            self.logger.error(f"Error while focusing URL input: {e}")
-            # Try again after a longer delay
-            self.set_timer(1.0, self._ensure_extract_tab_ready)
-            def action_new_stitch(self) -> None:
+            self.logger.error(f"Error focusing extract URL input: {e}")
+            
+            # Try again with incremented retry count after a longer delay
+            if retry_count < max_retries:
+                self.set_timer(0.5, lambda: self._focus_extract_url_input(retry_count + 1))
+    
+    def action_new_stitch(self) -> None:
         """Focus the stitch tab."""
         self.logger.info("Action: new_stitch")
         
@@ -439,73 +362,86 @@ def _ensure_extract_tab_ready(self) -> None:
         except Exception as e:
             self.logger.error(f"Error in action_new_stitch: {e}")
             self.notify(f"Error: {str(e)}", severity="error")
-
-def _ensure_stitch_tab_ready(self) -> None:
-        """Ensure the stitch tab is ready and then focus the URL input."""
+    
+    def _ensure_stitch_tab_ready(self) -> None:
+        """Ensure the stitch tab is ready and then focus the name input."""
         # Check if we're on the stitch tab
         tabs = self.query_one(Tabs)
         if tabs.active != "stitch-tab":
             self.logger.error("Stitch tab is not active, cannot proceed")
             return
-            
-        # Try to find the stitch tab content
+        
+        # Try to focus the name input
+        self._focus_stitch_name_input()
+    
+    def _focus_stitch_name_input(self, retry_count=0) -> None:
+        """Focus the name input in the stitch tab."""
+        max_retries = 5
+        
         try:
-            # First, make sure the tab is fully rendered by forcing a refresh
-            self.refresh()
+            # Check if the tab is active before trying to focus
+            tabs = self.query_one(Tabs)
+            if tabs.active != "stitch-tab":
+                self.logger.error("Stitch tab is not active, cannot focus input")
+                # Try again with incremented retry count after a longer delay
+                if retry_count < max_retries:
+                    self.set_timer(0.5, lambda: self._focus_stitch_name_input(retry_count + 1))
+                return
             
-            # Try to find the URL input directly with a more specific selector
+            # Try to find the input directly
             try:
-                url_input = self.query_one("#stitch-tab #stitch-url-input")
-                if url_input:
-                    url_input.focus()
-                    self.logger.info("Successfully focused stitch URL input")
-                    return
-            except Exception:
-                # If direct query fails, continue with the fallback approach
-                pass
+                name_input = self.query_one("#stitch-name", Input)
+                name_input.focus()
+                self.logger.info("Focused stitch name input")
+                return
+            except Exception as e:
+                self.logger.error(f"Could not find stitch name input: {e}")
                 
             # Fallback: try to find the stitch tab and then search within it
             stitch_tab = self.query_one("#stitch-tab", TabPane)
             
             # Check if the tab has been populated with content
-            inputs = stitch_tab.query("Input")
-            if not inputs:
-                self.logger.error("Stitch tab has no input elements, waiting for UI to update")
-                # Try again after a longer delay
-                self.set_timer(1.0, self._ensure_stitch_tab_ready)
-                return
-                
-            # Find the URL input specifically
-            url_input = None
-            for input_elem in inputs:
-                if input_elem.id == "stitch-url-input":
-                    url_input = input_elem
-                    break
-                    
-            if url_input:
-                url_input.focus()
-                self.logger.info("Successfully focused stitch URL input")
-            else:
-                self.logger.error("Stitch URL input not found in stitch tab")
+            name_input = stitch_tab.query_one("#stitch-name", Input)
+            name_input.focus()
+            self.logger.info("Focused stitch name input (via tab)")
         except Exception as e:
-            self.logger.error(f"Error while focusing stitch URL input: {e}")
-            # Try again after a longer delay
-            self.set_timer(1.0, self._ensure_stitch_tab_ready)
-    def action_focus_search(self) -> None:
-        """Focus the search input."""
-        search_input = self.query_one("#search-input", Input)
-        search_input.focus()
+            self.logger.error(f"Error focusing stitch name input: {e}")
+            
+            # Try again with incremented retry count after a longer delay
+            if retry_count < max_retries:
+                self.set_timer(0.5, lambda: self._focus_stitch_name_input(retry_count + 1))
+    
+    def action_search(self) -> None:
+        """Show search dialog."""
+        self.logger.info("Action: search")
+        # TODO: Implement search functionality
     
     @on(DataTable.RowSelected)
-    def show_content_details(self, event: DataTable.RowSelected) -> None:
-        """Show content details when a row is selected."""
-        # Get content ID from the first cell
-        content_id = int(event.data_table.get_cell_at((event.row_key, 0)))
+    def on_datatable_row_selected(self, event: DataTable.RowSelected) -> None:
+        """Handle row selection in the content table."""
+        # Get the selected row
+        row = event.data_table.get_row(event.row_key)
+        if not row:
+            return
+        
+        # Get the content ID from the first column
+        content_id = int(row[0])
+        self.logger.info(f"Selected content ID: {content_id}")
+        
+        # Load the content details
+        self.load_content_details(content_id)
+    
+    def load_content_details(self, content_id: int) -> None:
+        """Load content details for the given ID."""
+        self.logger.info(f"Loading content details for ID: {content_id}")
+        
+        # Store the current content ID
         self.current_content_id = content_id
         
-        # Get content from database
+        # Get the content from the database
         content = self.db.get_content(content_id)
         if not content:
+            self.logger.error(f"Content not found for ID: {content_id}")
             return
         
         # Switch to details tab
@@ -513,76 +449,220 @@ def _ensure_stitch_tab_ready(self) -> None:
         tabs.active = "details-tab"
         
         # Create markdown content
-        markdown = f"# {content.title}\n\n"
-        markdown += f"**Source:** [{content.url}]({content.url})  \n"
-        markdown += f"**Type:** {content.content_type.value}  \n"
-        markdown += f"**Extracted:** {content.extracted_at.strftime('%Y-%m-%d %H:%M:%S') if content.extracted_at else 'Unknown'}  \n"
-        markdown += f"**Pattern:** {content.extraction_pattern}  \n"
-        markdown += f"**Provider:** {content.extraction_provider.value}  \n"
-        markdown += f"**Model:** {content.extraction_model}  \n"
+        markdown = f"""# {content.title}
+
+## Metadata
+- **Type:** {content.content_type.value}
+- **URL:** {content.url}
+- **Extracted:** {content.extracted_at.strftime('%Y-%m-%d %H:%M:%S') if content.extracted_at else 'N/A'}
+- **Pattern:** {content.extraction_pattern}
+
+## Content
+{content.content}
+"""
         
-        if content.tags:
-            markdown += f"**Tags:** {', '.join(content.tags)}  \n"
-        
-        if content.stitch_id:
-            markdown += f"**Stitch ID:** {content.stitch_id}, Step: {content.stitch_step}  \n"
-        
-        markdown += "\n## Summary\n\n"
-        markdown += content.summary
-        
-        if content.key_insights:
-            markdown += "\n\n## Key Insights\n\n"
-            for insight in content.key_insights:
-                markdown += f"- {insight}\n"
-        
-        if content.main_points:
-            markdown += "\n\n## Main Points\n\n"
-            for point in content.main_points:
-                markdown += f"- {point}\n"
-        
-        if content.quotes:
-            markdown += "\n\n## Notable Quotes\n\n"
-            for quote in content.quotes:
-                markdown += f"> {quote}\n\n"
-        
-        if content.questions_raised:
-            markdown += "\n\n## Questions Raised\n\n"
-            for question in content.questions_raised:
-                markdown += f"- {question}\n"
-        
-        if content.action_items:
-            markdown += "\n\n## Action Items\n\n"
-            for item in content.action_items:
-                markdown += f"- {item}\n"
-        
-        # Update markdown viewer
+        # Update the markdown viewer
         markdown_viewer = self.query_one("#content-details", MarkdownViewer)
-        markdown_viewer.document = markdown
+        markdown_viewer.update(markdown)
     
-    @on(Button.Pressed, "#search-button")
-    def search_content(self) -> None:
-        """Search for content."""
-        search_input = self.query_one("#search-input", Input)
-        query = search_input.value
+    @on(Button.Pressed, "#extract-button")
+    def on_extract_button_pressed(self, event: Button.Pressed) -> None:
+        """Handle extract button press."""
+        self.logger.info("Extract button pressed")
         
-        table = self.query_one("#content-table", DataTable)
-        table.clear()
+        # Get the URL
+        url_input = self.query_one("#extract-url", Input)
+        url = url_input.value.strip()
+        if not url:
+            self.notify("Please enter a URL", severity="error")
+            return
         
-        # Get content from database
-        results = self.db.search_content(query=query, limit=100)
+        # Get the content type
+        content_type_select = self.query_one("#content-type", Select)
+        content_type_str = content_type_select.value
+        try:
+            content_type = ContentType(content_type_str)
+        except ValueError:
+            self.notify(f"Invalid content type: {content_type_str}", severity="error")
+            return
         
-        # Add to table
-        for content in results:
-            table.add_row(
-                str(content.id),
-                content.title[:50] + ("..." if len(content.title) > 50 else ""),
-                content.content_type.value,
-                content.extracted_at.strftime("%Y-%m-%d") if content.extracted_at else "",
-                content.extraction_pattern
-            )
+        # Get the extraction pattern
+        pattern_select = self.query_one("#extraction-pattern", Select)
+        pattern = pattern_select.value
+        
+        # Get the LLM provider
+        provider_select = self.query_one("#llm-provider", Select)
+        provider = provider_select.value
+        
+        # Disable the button while extracting
+        event.button.disabled = True
+        
+        # Start the extraction
+        self.extract_content(url, content_type, pattern, provider)
+        
+        # Re-enable the button
+        event.button.disabled = False
     
-    @on(Button.Pressed, "#new-button")
-            def new_extract(self) -> None:
+    @work(thread=True)
+    def extract_content(self, url: str, content_type: ContentType, pattern: str, provider: str) -> None:
+        """Extract content from the given URL."""
+        self.logger.info(f"Extracting content from {url} using {pattern} pattern with {provider} provider")
+        
+        try:
+            # Create content shell based on content type
+            if content_type == ContentType.YOUTUBE:
+                # Extract video ID from URL
+                video_id = extract_video_id(url)
+                if not video_id:
+                    self.call_from_thread(self.notify, f"Invalid YouTube URL: {url}", severity="error")
+                    return
+                
+                # Create content shell
+                content = create_youtube_content_shell(url, video_id)
+            elif content_type == ContentType.ARTICLE:
+                # Create content shell
+                content = create_article_content_shell(url)
+            else:
+                self.call_from_thread(self.notify, f"Unsupported content type: {content_type}", severity="error")
+                return
+            
+            # Create extractor
+            extractor = ContentExtractor(provider=provider)
+            
+            # Extract content
+            content = extractor.extract(content, pattern)
+            
+            # Save to database
+            content_id = self.db.add_content(content)
+            
+            # Refresh the content list
+            self.call_from_thread(self.refresh_content_list)
+            
+            # Show success message
+            self.call_from_thread(self.notify, f"Content extracted successfully (ID: {content_id})", severity="information")
+            
+            # Load the content details
+            if content:
+                # Switch to details tab
+                tabs = self.query_one(Tabs)
+                self.call_from_thread(setattr, tabs, "active", "details-tab")
+                
+                # Create markdown content
+                markdown = f"""# {content.title}
+
+## Metadata
+- **Type:** {content.content_type.value}
+- **URL:** {content.url}
+- **Extracted:** {content.extracted_at.strftime('%Y-%m-%d %H:%M:%S') if content.extracted_at else 'N/A'}
+- **Pattern:** {content.extraction_pattern}
+
+## Content
+{content.content}
+"""
+                
+                # Update the markdown viewer
+                markdown_viewer = self.query_one("#content-details", MarkdownViewer)
+                self.call_from_thread(markdown_viewer.update, markdown)
+        except Exception as e:
+            self.logger.error(f"Error extracting content: {e}")
+            self.call_from_thread(self.notify, f"Error extracting content: {str(e)}", severity="error")
+    
+    @on(Button.Pressed, "#extract-clear-button")
+    def on_extract_clear_button_pressed(self, event: Button.Pressed) -> None:
+        """Handle extract clear button press."""
+        self.logger.info("Extract clear button pressed")
+        
+        # Clear the URL input
+        url_input = self.query_one("#extract-url", Input)
+        url_input.value = ""
+        
+        # Focus the URL input
+        url_input.focus()
+    
+    @on(Button.Pressed, "#stitch-create-button")
+    def on_stitch_create_button_pressed(self, event: Button.Pressed) -> None:
+        """Handle stitch create button press."""
+        self.logger.info("Stitch create button pressed")
+        
+        # Get the name
+        name_input = self.query_one("#stitch-name", Input)
+        name = name_input.value.strip()
+        if not name:
+            self.notify("Please enter a name", severity="error")
+            return
+        
+        # Get the description
+        description_input = self.query_one("#stitch-description", Input)
+        description = description_input.value.strip()
+        
+        # Get the LLM provider
+        provider_select = self.query_one("#stitch-provider", Select)
+        provider = provider_select.value
+        
+        # Disable the button while creating
+        event.button.disabled = True
+        
+        # Create the stitch
+        stitch = Stitch(
+            name=name,
+            description=description,
+            provider=provider,
+            steps=[]
+        )
+        
+        # Add to database
+        stitch_id = add_stitch(stitch)
+        
+        # Show success message
+        self.notify(f"Stitch created successfully (ID: {stitch_id})", severity="information")
+        
+        # Clear the form
+        name_input.value = ""
+        description_input.value = ""
+        
+        # Re-enable the button
+        event.button.disabled = False
+    
+    @on(Button.Pressed, "#stitch-clear-button")
+    def on_stitch_clear_button_pressed(self, event: Button.Pressed) -> None:
+        """Handle stitch clear button press."""
+        self.logger.info("Stitch clear button pressed")
+        
+        # Clear the inputs
+        name_input = self.query_one("#stitch-name", Input)
+        name_input.value = ""
+        
+        description_input = self.query_one("#stitch-description", Input)
+        description_input.value = ""
+        
+        # Focus the name input
+        name_input.focus()
+    
+    @on(Button.Pressed, "#settings-save-button")
+    def on_settings_save_button_pressed(self, event: Button.Pressed) -> None:
+        """Handle settings save button press."""
+        self.logger.info("Settings save button pressed")
+        
+        # Get the default provider
+        provider_select = self.query_one("#default-provider", Select)
+        provider = provider_select.value
+        
+        # Update the default provider
+        self.default_provider = provider
+        
+        # Show success message
+        self.notify(f"Settings saved successfully", severity="information")
+    
+    @on(Button.Pressed, "#settings-reset-button")
+    def on_settings_reset_button_pressed(self, event: Button.Pressed) -> None:
+        """Handle settings reset button press."""
+        self.logger.info("Settings reset button pressed")
+        
+        # Reset the default provider
+        provider_select = self.query_one("#default-provider", Select)
+        provider_select.value = os.getenv("DEFAULT_LLM_PROVIDER", "mistral")
+    
+    def new_extract(self) -> None:
         """Create a new extract."""
         self.logger.info("Creating new extract")
         
@@ -608,388 +688,13 @@ def _ensure_stitch_tab_ready(self) -> None:
             self.logger.error(f"Error in new_extract: {e}")
             self.notify(f"Error: {str(e)}", severity="error")
 
-def _focus_url_input(self, retry_count=0) -> None:
-        """Focus the URL input after a short delay."""
-        # Limit retries to prevent infinite recursion
-        if retry_count >= 5:
-            self.logger.error("Failed to focus URL input after multiple attempts")
-            return
-            
-        try:
-            # Check if the tab is active before trying to focus
-            tabs = self.query_one(Tabs)
-            if tabs.active != "extract-tab":
-                self.logger.error("Extract tab is not active, cannot focus input")
-                # Try again with incremented retry count after a longer delay
-                self.set_timer(0.5, lambda: self._focus_url_input(retry_count + 1))
-                return
-            
-            # Check if the input element exists
-            inputs = self.query("Input")
-            url_input = None
-            for input_elem in inputs:
-                if input_elem.id == "url-input":
-                    url_input = input_elem
-                    break
-                    
-            if not url_input:
-                self.logger.error("URL input element not found, waiting for UI to update")
-                # Try again with incremented retry count after a longer delay
-                self.set_timer(0.5, lambda: self._focus_url_input(retry_count + 1))
-                return
-                
-            url_input.focus()
-            self.logger.info("Focused URL input")
-        except Exception as e:
-            self.logger.error(f"Failed to focus URL input: {e}")
-            # Try again with incremented retry count after a longer delay
-            self.set_timer(0.5, lambda: self._focus_url_input(retry_count + 1))
-    def _focus_stitch_url_input(self, retry_count=0) -> None:
-        """Focus the stitch URL input after a short delay."""
-        # Limit retries to prevent infinite recursion
-        if retry_count >= 5:
-            self.logger.error("Failed to focus stitch URL input after multiple attempts")
-            return
-            
-        try:
-            # Check if the tab is active before trying to focus
-            tabs = self.query_one(Tabs)
-            if tabs.active != "stitch-tab":
-                self.logger.error("Stitch tab is not active, cannot focus input")
-                # Try again with incremented retry count after a longer delay
-                self.set_timer(0.5, lambda: self._focus_stitch_url_input(retry_count + 1))
-                return
-            
-            # Check if the input element exists
-            inputs = self.query("Input")
-            url_input = None
-            for input_elem in inputs:
-                if input_elem.id == "stitch-url-input":
-                    url_input = input_elem
-                    break
-                    
-            if not url_input:
-                self.logger.error("Stitch URL input element not found, waiting for UI to update")
-                # Try again with incremented retry count after a longer delay
-                self.set_timer(0.5, lambda: self._focus_stitch_url_input(retry_count + 1))
-                return
-                
-            url_input.focus()
-            self.logger.info("Focused stitch URL input")
-        except Exception as e:
-            self.logger.error(f"Failed to focus stitch URL input: {e}")
-            # Try again with incremented retry count after a longer delay
-            self.set_timer(0.5, lambda: self._focus_stitch_url_input(retry_count + 1))
-    
-    @on(Button.Pressed, "#extract-button")
-    def start_extraction(self) -> None:
-        """Start the extraction process."""
-        url_input = self.query_one("#url-input", Input)
-        content_type_select = self.query_one("#content-type-select", Select)
-        pattern_select = self.query_one("#pattern-select", Select)
-        provider_select = self.query_one("#provider-select", Select)
-        status = self.query_one("#extract-status", Static)
-        
-        url = url_input.value
-        content_type = content_type_select.value
-        pattern = pattern_select.value
-        provider = provider_select.value
-        
-        if not url:
-            status.update("Please enter a URL")
-            status.add_class("error-message")
-            return
-        
-        # Check provider
-        if not provider:
-            status.update("Please select a provider")
-            status.add_class("error-message")
-            return
-        
-        # Start extraction
-        status.update("Extracting content...")
-        status.remove_class("error-message")
-        status.add_class("status-message")
-        
-        # Run extraction in background
-        self.extract_content_background(url, content_type, pattern, provider)
-    
-    @work(thread=True)
-    def extract_content_background(self, url: str, content_type: str, pattern: str, provider: str) -> None:
-        """Extract content in the background."""
-        status = self.query_one("#extract-status", Static)
-        
-        try:
-            # Create content shell based on type
-            if content_type == "youtube":
-                # Validate YouTube URL
-                if not extract_video_id(url):
-                    if len(url) == 11:  # Might be just the video ID
-                        url = f"https://www.youtube.com/watch?v={url}"
-                    else:
-                        self.call_from_thread(status.update, "Invalid YouTube URL or video ID")
-                        self.call_from_thread(status.remove_class, "status-message")
-                        self.call_from_thread(status.add_class, "error-message")
-                        return
-                
-                self.call_from_thread(status.update, "Fetching video information...")
-                content = create_youtube_content_shell(url, provider=LLMProvider(provider))
-            else:  # article
-                self.call_from_thread(status.update, "Fetching article information...")
-                content = create_article_content_shell(url, provider=LLMProvider(provider))
-            
-            # Extract content
-            self.call_from_thread(status.update, "Extracting insights...")
-            extractor = ContentExtractor(provider_name=provider)
-            content = extractor.extract_content(content, pattern_name=pattern)
-            
-            # Save to database
-            self.call_from_thread(status.update, "Saving to database...")
-            content_id = self.db.save_content(content)
-            
-            # Update UI
-            self.call_from_thread(self.refresh_content_list)
-            self.call_from_thread(status.update, f"Extraction complete! Content ID: {content_id}")
-            self.call_from_thread(status.remove_class, "status-message")
-            self.call_from_thread(status.add_class, "success-message")
-            
-            # Clear input
-            url_input = self.query_one("#url-input", Input)
-            self.call_from_thread(url_input.clear)
-            
-            # Select the new content
-            self.current_content_id = content_id
-            
-            # Show the content details
-            content = self.db.get_content(content_id)
-            if content:
-                # Switch to details tab
-                tabs = self.query_one(Tabs)
-                self.call_from_thread(setattr, tabs, "active", "details-tab")
-                
-                # Create markdown content
-                markdown = f"# {content.title}\n\n"
-                markdown += f"**Source:** [{content.url}]({content.url})  \n"
-                markdown += f"**Type:** {content.content_type.value}  \n"
-                markdown += f"**Extracted:** {content.extracted_at.strftime('%Y-%m-%d %H:%M:%S') if content.extracted_at else 'Unknown'}  \n"
-                markdown += f"**Pattern:** {content.extraction_pattern}  \n"
-                markdown += f"**Provider:** {content.extraction_provider.value}  \n"
-                markdown += f"**Model:** {content.extraction_model}  \n"
-                
-                if content.tags:
-                    markdown += f"**Tags:** {', '.join(content.tags)}  \n"
-                
-                markdown += "\n## Summary\n\n"
-                markdown += content.summary
-                
-                if content.key_insights:
-                    markdown += "\n\n## Key Insights\n\n"
-                    for insight in content.key_insights:
-                        markdown += f"- {insight}\n"
-                
-                if content.main_points:
-                    markdown += "\n\n## Main Points\n\n"
-                    for point in content.main_points:
-                        markdown += f"- {point}\n"
-                
-                if content.quotes:
-                    markdown += "\n\n## Notable Quotes\n\n"
-                    for quote in content.quotes:
-                        markdown += f"> {quote}\n\n"
-                
-                if content.questions_raised:
-                    markdown += "\n\n## Questions Raised\n\n"
-                    for question in content.questions_raised:
-                        markdown += f"- {question}\n"
-                
-                if content.action_items:
-                    markdown += "\n\n## Action Items\n\n"
-                    for item in content.action_items:
-                        markdown += f"- {item}\n"
-                
-                # Update markdown viewer
-                markdown_viewer = self.query_one("#content-details", MarkdownViewer)
-                self.call_from_thread(setattr, markdown_viewer, "document", markdown)
-        
-        except Exception as e:
-            self.call_from_thread(status.update, f"Error: {str(e)}")
-            self.call_from_thread(status.remove_class, "status-message")
-            self.call_from_thread(status.add_class, "error-message")
-    
-    @on(Button.Pressed, "#run-stitch-button")
-    def run_stitch(self) -> None:
-        """Run a stitch on a URL."""
-        url_input = self.query_one("#stitch-url-input", Input)
-        stitch_select = self.query_one("#stitch-select", Select)
-        provider_select = self.query_one("#stitch-provider-select", Select)
-        status = self.query_one("#stitch-status", Static)
-        
-        url = url_input.value
-        stitch_id = stitch_select.value
-        provider = provider_select.value
-        
-        if not url:
-            status.update("Please enter a URL")
-            status.add_class("error-message")
-            return
-        
-        if not provider:
-            status.update("Please select a provider")
-            status.add_class("error-message")
-            return
-        
-        # If custom stitch, show input dialog
-        if stitch_id == "custom":
-            # TODO: Implement custom stitch input dialog
-            status.update("Custom stitches not yet implemented in TUI")
-            status.add_class("error-message")
-            return
-        
-        # Start stitch execution
-        status.update("Running stitch...")
-        status.remove_class("error-message")
-        status.add_class("status-message")
-        
-        # Run stitch in background
-        self.run_stitch_background(url, int(stitch_id), provider)
-    
-    @work(thread=True)
-    def run_stitch_background(self, url: str, stitch_id: int, provider: str) -> None:
-        """Run a stitch in the background."""
-        status = self.query_one("#stitch-status", Static)
-        
-        try:
-            # Determine content type
-            is_youtube = extract_video_id(url) is not None
-            
-            # Create content shell
-            self.call_from_thread(status.update, "Fetching content information...")
-            if is_youtube:
-                content = create_youtube_content_shell(url, provider=LLMProvider(provider))
-            else:
-                content = create_article_content_shell(url, provider=LLMProvider(provider))
-            
-            # Get stitch
-            stitch = self.db.get_stitch(stitch_id)
-            if not stitch:
-                self.call_from_thread(status.update, f"Stitch with ID {stitch_id} not found")
-                self.call_from_thread(status.remove_class, "status-message")
-                self.call_from_thread(status.add_class, "error-message")
-                return
-            
-            # Run stitch
-            self.call_from_thread(status.update, f"Running stitch: {stitch.name}...")
-            executor = StitchExecutor(provider_name=provider)
-            result = executor.execute_stitch(stitch, content)
-            
-            # Save to database
-            self.call_from_thread(status.update, "Saving to database...")
-            content_id = self.db.save_content(result)
-            
-            # Update UI
-            self.call_from_thread(self.refresh_content_list)
-            self.call_from_thread(status.update, f"Stitch execution complete! Content ID: {content_id}")
-            self.call_from_thread(status.remove_class, "status-message")
-            self.call_from_thread(status.add_class, "success-message")
-            
-            # Clear input
-            url_input = self.query_one("#stitch-url-input", Input)
-            self.call_from_thread(url_input.clear)
-            
-            # Select the new content
-            self.current_content_id = content_id
-            
-            # Show the content details
-            content = self.db.get_content(content_id)
-            if content:
-                # Switch to details tab
-                tabs = self.query_one(Tabs)
-                self.call_from_thread(setattr, tabs, "active", "details-tab")
-                
-                # Create markdown content
-                markdown = f"# {content.title}\n\n"
-                markdown += f"**Source:** [{content.url}]({content.url})  \n"
-                markdown += f"**Type:** {content.content_type.value}  \n"
-                markdown += f"**Extracted:** {content.extracted_at.strftime('%Y-%m-%d %H:%M:%S') if content.extracted_at else 'Unknown'}  \n"
-                markdown += f"**Pattern:** {content.extraction_pattern}  \n"
-                markdown += f"**Provider:** {content.extraction_provider.value}  \n"
-                markdown += f"**Model:** {content.extraction_model}  \n"
-                
-                if content.tags:
-                    markdown += f"**Tags:** {', '.join(content.tags)}  \n"
-                
-                if content.stitch_id:
-                    markdown += f"**Stitch ID:** {content.stitch_id}, Step: {content.stitch_step}  \n"
-                
-                markdown += "\n## Summary\n\n"
-                markdown += content.summary
-                
-                if content.key_insights:
-                    markdown += "\n\n## Key Insights\n\n"
-                    for insight in content.key_insights:
-                        markdown += f"- {insight}\n"
-                
-                if content.main_points:
-                    markdown += "\n\n## Main Points\n\n"
-                    for point in content.main_points:
-                        markdown += f"- {point}\n"
-                
-                if content.quotes:
-                    markdown += "\n\n## Notable Quotes\n\n"
-                    for quote in content.quotes:
-                        markdown += f"> {quote}\n\n"
-                
-                if content.questions_raised:
-                    markdown += "\n\n## Questions Raised\n\n"
-                    for question in content.questions_raised:
-                        markdown += f"- {question}\n"
-                
-                if content.action_items:
-                    markdown += "\n\n## Action Items\n\n"
-                    for item in content.action_items:
-                        markdown += f"- {item}\n"
-                
-                # Update markdown viewer
-                markdown_viewer = self.query_one("#content-details", MarkdownViewer)
-                self.call_from_thread(setattr, markdown_viewer, "document", markdown)
-        
-        except Exception as e:
-            self.call_from_thread(status.update, f"Error: {str(e)}")
-            self.call_from_thread(status.remove_class, "status-message")
-            self.call_from_thread(status.add_class, "error-message")
-    
-    @on(Button.Pressed, "#create-stitch-button")
-    def show_create_stitch_dialog(self) -> None:
-        """Show dialog to create a new stitch."""
-        # TODO: Implement create stitch dialog
-        status = self.query_one("#stitch-status", Static)
-        status.update("Create stitch dialog not yet implemented in TUI")
-        status.add_class("error-message")
-    
-    @on(Button.Pressed, "#save-settings-button")
-    def save_settings(self) -> None:
-        """Save settings."""
-        default_provider_select = self.query_one("#default-provider-select", Select)
-        status = self.query_one("#settings-status", Static)
-        
-        # Save default provider to environment variable
-        self.default_provider = default_provider_select.value
-        os.environ["DEFAULT_LLM_PROVIDER"] = self.default_provider
-        
-        status.update("Settings saved!")
-        status.add_class("success-message")
-    
 
-def run_tui() -> None:
+def run_tui():
     """Run the TUI application."""
-    logger = logging.getLogger("run_tui")
-    logger.info("Starting TUI application")
-    try:
-        app = ExtractApp()
-        app.run()
-    except Exception as e:
-        logger.error(f"Error running TUI application: {e}", exc_info=True)
-        raise
+    logging.getLogger("run_tui").info("Starting TUI application")
+    app = ExtractApp()
+    app.run()
+
 
 if __name__ == "__main__":
     run_tui()

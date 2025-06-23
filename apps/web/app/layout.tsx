@@ -55,6 +55,7 @@ export const viewport: Viewport = {
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { Metadata } from "next";
 
 export default function RootLayout({
   children,
@@ -63,27 +64,24 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider
-      publishableKey={
-        process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY ||
-        "YOUR_CLERK_PUBLISHABLE_KEY"
-      }
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!}
       appearance={{
-        baseTheme: dark
+        baseTheme: dark,
       }}
       data-oid="_7wpbm_"
     >
       <html
         lang="en"
         suppressHydrationWarning
-        className="dark"
-        data-oid="_8cle84"
-      >
-        <body
-          className={`${inter.variable} font-sans antialiased`}
-          data-oid="a55bw97"
-        >
-          {children}
-          <Toaster data-oid="9806pw6" />
+        className="dark min-h-screen"
+         data-oid="_8cle84"
+       >
+         <body
+           className={`${inter.variable} font-sans antialiased min-h-screen`}
+           data-oid="a55bw97"
+         >
+           {children}
+           <Toaster data-oid="9806pw6" />
         </body>
       </html>
     </ClerkProvider>

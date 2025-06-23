@@ -1,0 +1,38 @@
+# Example user profile configuration
+# This file should be encrypted in production
+
+user_profile:
+  name: "John Doe"
+  email: "john.doe@example.com"
+  age: 30
+  location: "New York, NY"
+  phone: "+1-555-0123"
+
+# Survey-specific answers
+custom_answers:
+  - question: "What is your favorite color?"
+    answer: "Blue"
+  - question: "How often do you shop online?"
+    answer: "Weekly"
+  - question: "What is your income range?"
+    answer: "$50,000 - $75,000"
+
+# Automation settings
+automation_settings:
+  typing_speed_min: 50  # WPM
+  typing_speed_max: 80  # WPM
+  delay_min: 1.0        # seconds
+  delay_max: 3.0        # seconds
+  rest_interval: 300    # seconds (5 minutes)
+  rest_duration: 60     # seconds
+
+# Survey targets
+surveys:
+  - name: "Customer Satisfaction Survey"
+    url: "https://example.com/survey1"
+    frequency: "daily"
+    enabled: true
+  - name: "Product Feedback Survey"
+    url: "https://example.com/survey2"
+    frequency: "weekly"
+    enabled: false

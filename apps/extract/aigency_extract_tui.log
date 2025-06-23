@@ -433,3 +433,61 @@ AttributeError: property 'log' of 'ExtractApp' object has no setter
 2025-06-17 23:49:22,993 - ExtractApp - INFO - Mounting app
 2025-06-17 23:49:22,995 - ExtractApp - INFO - App mounted successfully
 2025-06-17 23:49:30,092 - ExtractApp - INFO - New button pressed, switching to extract tab
+2025-06-17 23:58:35,806 - run_tui - INFO - Starting TUI application
+2025-06-17 23:58:35,827 - ExtractApp - INFO - Initializing ExtractApp
+2025-06-18 00:00:34,241 - run_tui - INFO - Starting TUI application
+2025-06-18 00:00:34,254 - ExtractApp - INFO - Initializing ExtractApp
+2025-06-18 00:00:34,259 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
+2025-06-18 00:00:34,259 - ExtractApp - INFO - Default provider: mistral
+2025-06-18 00:00:34,346 - ExtractApp - INFO - Mounting app
+2025-06-18 00:00:34,346 - ExtractApp - INFO - App mounted successfully
+2025-06-18 00:10:34,375 - ExtractApp - INFO - Action: new_extract
+2025-06-18 00:10:34,378 - ExtractApp - ERROR - Error in action_new_extract: No Tab with id 'extract-tab'
+2025-06-18 00:10:39,465 - ExtractApp - INFO - Action: new_stitch
+2025-06-18 00:10:39,469 - ExtractApp - ERROR - Error in action_new_stitch: No Tab with id 'stitch-tab'
+2025-06-18 00:10:43,442 - ExtractApp - INFO - Action: new_extract
+2025-06-18 00:10:43,445 - ExtractApp - ERROR - Error in action_new_extract: No Tab with id 'extract-tab'
+2025-06-18 00:10:46,031 - ExtractApp - INFO - Action: new_stitch
+2025-06-18 00:10:46,033 - ExtractApp - ERROR - Error in action_new_stitch: No Tab with id 'stitch-tab'
+2025-06-18 00:10:48,154 - ExtractApp - INFO - Action: new_stitch
+2025-06-18 00:10:48,155 - ExtractApp - ERROR - Error in action_new_stitch: No Tab with id 'stitch-tab'
+2025-06-18 00:10:49,244 - ExtractApp - INFO - Action: new_extract
+2025-06-18 00:10:49,247 - ExtractApp - ERROR - Error in action_new_extract: No Tab with id 'extract-tab'
+2025-06-18 00:13:07,424 - run_tui - INFO - Starting TUI application
+2025-06-18 00:13:07,429 - ExtractApp - INFO - Initializing ExtractApp
+2025-06-18 00:13:07,432 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
+2025-06-18 00:13:07,432 - ExtractApp - INFO - Default provider: mistral
+2025-06-18 00:13:07,492 - ExtractApp - INFO - Mounting app
+2025-06-18 00:13:07,493 - ExtractApp - INFO - App mounted successfully
+2025-06-18 00:13:13,553 - ExtractApp - INFO - Action: new_extract
+2025-06-18 00:13:13,555 - ExtractApp - ERROR - Error in action_new_extract: No Tab with id 'extract-tab'
+2025-06-18 00:13:20,876 - ExtractApp - INFO - Action: new_stitch
+2025-06-18 00:13:20,878 - ExtractApp - ERROR - Error in action_new_stitch: No Tab with id 'stitch-tab'
+2025-06-18 00:13:25,635 - ExtractApp - INFO - Action: new_extract
+2025-06-18 00:13:25,636 - ExtractApp - ERROR - Error in action_new_extract: No Tab with id 'extract-tab'
+2025-06-21 15:31:37,117 - httpx - INFO - HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-21 15:31:37,726 - httpx - INFO - HTTP Request: POST https://api.mistral.ai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-06-21 15:43:38,979 - run_tui - INFO - Starting TUI application
+2025-06-21 15:43:38,984 - ExtractApp - INFO - Initializing ExtractApp
+2025-06-21 15:43:38,989 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
+2025-06-21 15:43:38,989 - ExtractApp - INFO - Default provider: mistral
+2025-06-21 15:43:39,055 - ExtractApp - INFO - Mounting app
+2025-06-21 15:43:39,055 - ExtractApp - INFO - App mounted successfully
+2025-06-21 15:43:47,490 - ExtractApp - INFO - Action: new_extract
+2025-06-21 15:43:47,496 - ExtractApp - ERROR - Error in action_new_extract: No Tab with id 'extract-tab'
+2025-06-21 15:43:49,557 - ExtractApp - INFO - Action: new_extract
+2025-06-21 15:43:49,561 - ExtractApp - ERROR - Error in action_new_extract: No Tab with id 'extract-tab'
+2025-06-21 15:43:50,452 - ExtractApp - INFO - Action: new_stitch
+2025-06-21 15:43:50,458 - ExtractApp - ERROR - Error in action_new_stitch: No Tab with id 'stitch-tab'
+2025-06-21 15:44:09,872 - ExtractApp - INFO - Action: search
+2025-06-21 20:17:33,870 - run_tui - INFO - Starting TUI application
+2025-06-21 20:17:33,880 - ExtractApp - INFO - Initializing ExtractApp
+2025-06-21 20:17:33,900 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
+2025-06-21 20:17:33,900 - ExtractApp - INFO - Default provider: mistral
+2025-06-21 20:17:33,970 - ExtractApp - INFO - Mounting app
+2025-06-21 20:17:33,970 - ExtractApp - INFO - App mounted successfully
+2025-06-21 20:18:44,160 - ExtractApp - INFO - Action: search
+2025-06-21 20:18:46,710 - ExtractApp - INFO - Action: new_stitch
+2025-06-21 20:18:46,712 - ExtractApp - ERROR - Error in action_new_stitch: No Tab with id 'stitch-tab'
+2025-06-21 20:18:49,806 - ExtractApp - INFO - Action: new_extract
+2025-06-21 20:18:49,807 - ExtractApp - ERROR - Error in action_new_extract: No Tab with id 'extract-tab'

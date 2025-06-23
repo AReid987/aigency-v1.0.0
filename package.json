@@ -4,14 +4,17 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "dev:js": "turbo run dev --filter=!./apps/extract",
+    "dev:js": "turbo run dev --filter=!./apps/extract --filter=!./apps/survey-automation",
     "dev:extract": "cd apps/extract && pdm run dev",
+    "dev:survey": "cd apps/survey-automation && pdm run dev",
+    "dev:survey-docker": "docker-compose -f docker-compose.survey.yml up --build",
     "tui:extract": "cd apps/extract && .venv/bin/python run_tui.py",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
+    "cz-git": "^1.11.2",
     "prettier": "^3.5.3",
     "turbo": "^2.5.4",
     "typescript": "5.8.3"

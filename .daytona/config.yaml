@@ -1,0 +1,81 @@
+name: aigency-survey-automation
+image: ubuntu:22.04
+
+# Environment setup
+setup:
+  - name: Install system dependencies
+    run: |
+      apt-get update
+      apt-get install -y curl wget git python3 python3-pip nodejs npm
+      
+  - name: Install PDM
+    run: pip3 install pdm
+    
+  - name: Install pnpm
+    run: npm install -g pnpm
+    
+  - name: Install Chrome
+    run: |
+      wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+      echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
+      apt-get update
+      apt-get install -y google-chrome-stable xvfb
+
+# Ports to expose
+ports:
+  - name: Backend API
+    port: 8000
+    protocol: http
+  - name: Frontend Dashboard
+    port: 3000
+    protocol: http
+
+# Environment variables
+env:
+  - name: PYTHONPATH
+    value: /workspace
+  - name: DISPLAY
+    value: ":99"
+
+# Workspace configuration
+workspace:
+  - name: Install dependencies
+    run: |
+      cd /workspace
+      pnpm install
+      cd apps/survey-automation
+      pdm install
+      
+  - name: Setup Playwright
+    run: |
+      cd /workspace/apps/survey-automation
+      pdm run playwright install chromium
+
+# Development commands
+commands:
+  - name: dev-backend
+    description: Start the survey automation backend
+    run: |
+      cd /workspace/apps/survey-automation
+      Xvfb :99 -screen 0 1024x768x24 &
+      pdm run dev
+      
+  - name: dev-frontend
+    description: Start the Next.js dashboard (when created)
+    run: |
+      cd /workspace/apps/dashboard
+      pnpm dev
+      
+  - name: dev-all
+    description: Start all services
+    run: |
+      cd /workspace
+      pnpm dev
+
+# VS Code extensions
+vscode:
+  extensions:
+    - ms-python.python
+    - ms-python.black-formatter
+    - bradlc.vscode-tailwindcss
+    - esbenp.prettier-vscode

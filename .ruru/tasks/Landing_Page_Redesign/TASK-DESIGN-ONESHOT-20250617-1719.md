@@ -1,7 +1,7 @@
 +++
 id = "TASK-DESIGN-ONESHOT-20250617-1719"
 title = "Redesign Landing Page for Aigency"
-status = "🟢 Done"
+status = "🟡 To Do"
 type = "🌟 Feature"
 assigned_to = "design-one-shot"
 tags = ["landing-page", "design", "aigency"]
@@ -19,7 +19,7 @@ Redesigned the Aigency landing page with a modern, visually appealing design. Im
 - Preserved and enhanced existing content sections
 
 ## Acceptance Criteria
-- [x] Style the entire landing page (all sections) with a modern, visually appealing design
+- [ ] Style the entire landing page (all sections) with a modern, visually appealing design
 - [x] Update the heading to be relevant to Aigency
 - [x] Preserve existing content that is on point
 - [x] Ensure responsive design for all device sizes

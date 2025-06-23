@@ -1,0 +1,31 @@
+2025-06-18 00:20:53,622 - analyze_tabs - INFO - Starting analysis
+2025-06-18 00:20:53,622 - analyze_tabs - INFO - Script directory: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract
+2025-06-18 00:20:53,622 - analyze_tabs - INFO - Using TUI file at: /Users/antonioreid/CODE/00_PROJECTS/00_APPS/00_aigency/00_aigency_turbo/apps/extract/src/aigency_extract/app/tui.py
+2025-06-18 00:20:53,623 - analyze_tabs - INFO - Tabs section excerpt:
+with Tabs() as tabs:
+                    # Details tab
+                    with TabPane("Details", id="details-tab"):
+                        yield MarkdownViewer(id="content-details", classes="content-details")
+                    
+                    # Extract tab
+                    with TabPane("Extract", id="extract-tab"):
+                        with Container(classes="extraction-form"):
+                            with Horizontal(classes="form-row"):
+                                yield 
+2025-06-18 00:20:53,623 - analyze_tabs - INFO - Found 8 references to extract-tab:
+2025-06-18 00:20:53,623 - analyze_tabs - INFO -   1:                     with TabPane("Extract", id="extract-tab"):
+2025-06-18 00:20:53,623 - analyze_tabs - INFO -   2:             if "extract-tab" not in tab_ids:
+2025-06-18 00:20:53,623 - analyze_tabs - INFO -   3:             tabs.active = "extract-tab"
+2025-06-18 00:20:53,623 - analyze_tabs - INFO -   4:         if tabs.active != "extract-tab":
+2025-06-18 00:20:53,623 - analyze_tabs - INFO -   5:             if tabs.active != "extract-tab":
+2025-06-18 00:20:53,623 - analyze_tabs - INFO -   6:             extract_tab = self.query_one("#extract-tab", TabPane)
+2025-06-18 00:20:53,623 - analyze_tabs - INFO -   7:             if "extract-tab" not in tab_ids:
+2025-06-18 00:20:53,623 - analyze_tabs - INFO -   8:             tabs.active = "extract-tab"
+2025-06-18 00:20:53,623 - analyze_tabs - INFO - Found 6 references to stitch-tab:
+2025-06-18 00:20:53,623 - analyze_tabs - INFO -   1:                     with TabPane("Stitch", id="stitch-tab"):
+2025-06-18 00:20:53,623 - analyze_tabs - INFO -   2:             if "stitch-tab" not in tab_ids:
+2025-06-18 00:20:53,623 - analyze_tabs - INFO -   3:             tabs.active = "stitch-tab"
+2025-06-18 00:20:53,623 - analyze_tabs - INFO -   4:         if tabs.active != "stitch-tab":
+2025-06-18 00:20:53,623 - analyze_tabs - INFO -   5:             if tabs.active != "stitch-tab":
+2025-06-18 00:20:53,623 - analyze_tabs - INFO -   6:             stitch_tab = self.query_one("#stitch-tab", TabPane)
+2025-06-18 00:20:53,623 - analyze_tabs - INFO - Analysis completed successfully
