@@ -491,3 +491,13 @@ AttributeError: property 'log' of 'ExtractApp' object has no setter
 2025-06-21 20:18:46,712 - ExtractApp - ERROR - Error in action_new_stitch: No Tab with id 'stitch-tab'
 2025-06-21 20:18:49,806 - ExtractApp - INFO - Action: new_extract
 2025-06-21 20:18:49,807 - ExtractApp - ERROR - Error in action_new_extract: No Tab with id 'extract-tab'
+2025-06-24 08:06:50,849 - run_tui - INFO - Starting TUI application
+2025-06-24 08:06:50,855 - ExtractApp - INFO - Initializing ExtractApp
+2025-06-24 08:06:50,868 - ExtractApp - INFO - Available providers: ['gemini', 'mistral', 'groq', 'huggingface', 'openrouter', 'voidai', 'cerebras', 'chutes']
+2025-06-24 08:06:50,868 - ExtractApp - INFO - Default provider: mistral
+2025-06-24 08:06:50,957 - ExtractApp - INFO - Mounting app
+2025-06-24 08:06:50,957 - ExtractApp - INFO - App mounted successfully
+2025-06-24 08:08:17,880 - ExtractApp - INFO - Action: new_extract
+2025-06-24 08:08:17,884 - ExtractApp - ERROR - Error in action_new_extract: No Tab with id 'extract-tab'
+2025-06-24 08:08:19,278 - ExtractApp - INFO - Action: new_stitch
+2025-06-24 08:08:19,279 - ExtractApp - ERROR - Error in action_new_stitch: No Tab with id 'stitch-tab'
