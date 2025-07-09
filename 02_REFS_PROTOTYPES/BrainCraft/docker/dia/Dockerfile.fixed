@@ -1,0 +1,41 @@
+FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-runtime
+
+WORKDIR /app
+
+# Install system dependencies with a more robust approach to handle GPG issues
+RUN apt-get update -y || true && \
+    apt-get install -y --no-install-recommends ca-certificates gnupg && \
+    # Use a more reliable method to update package lists
+    echo "deb http://archive.ubuntu.com/ubuntu focal main restricted universe multiverse" > /etc/apt/sources.list && \
+    echo "deb http://archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
+    echo "deb http://archive.ubuntu.com/ubuntu focal-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
+    echo "deb http://security.ubuntu.com/ubuntu focal-security main restricted universe multiverse" >> /etc/apt/sources.list && \
+    apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+    git \
+    ffmpeg \
+    libsndfile1 \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip setuptools wheel
+
+# Install Dia from GitHub repository
+RUN pip install --no-cache-dir git+https://github.com/nari-labs/dia.git
+
+# Install FastAPI and Uvicorn for the API server
+RUN pip install --no-cache-dir fastapi uvicorn pydantic
+
+# Copy the API server code
+COPY api_server.py /app/
+
+# Expose port 5002
+EXPOSE 5002
+
+# Download model on startup
+ENV TRANSFORMERS_CACHE=/app/models
+ENV HF_HOME=/app/models
+
+# Set up entrypoint to run the API server
+CMD ["python", "api_server.py"]

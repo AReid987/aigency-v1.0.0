@@ -1,0 +1,14 @@
+{
+    "gzip": true,
+    "useRapier": true,
+    "license": {
+        "id": "",
+        "key": ""
+    },
+    "generator": "Needle Engine for Blender 0.52.5",
+    "meta": {
+        "title": "diamond",
+        "description": "Built with Needle Engine for Blender",
+        "image": "include/poster.webp"
+    }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Founder's Insight Weaver",
+  "description": "An AI-powered chat interface and visualizer for startup founders to develop ideas, generate strategic artifacts, and uncover hidden insights through connected concepts on an XYFlow canvas. Uses Gemini API for chat and analysis.",
+  "requestFramePermissions": [
+    "microphone"
+  ],
+  "prompt": ""
+}

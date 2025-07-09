@@ -5,7 +5,7 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**", "dist/**", "build/**"]
+      "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -15,13 +15,7 @@
     },
     "dev": {
       "cache": false,
-      "persistent": true,
-      "dependsOn": []
-    },
-    "test": {
-      "dependsOn": ["^build"]
+      "persistent": true
     }
-  },
-  "globalDependencies": [".env"],
-  "globalEnv": ["NODE_ENV"]
+  }
 }

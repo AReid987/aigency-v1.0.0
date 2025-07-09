@@ -1,0 +1,13 @@
+/*
+ * Filename: /Users/antonioreid/01_DOING/current-projects/XPRT/packages/xprt-commit/src/xprt_commit/main.tcss
+ * Path: /Users/antonioreid/01_DOING/current-projects/XPRT/packages/xprt-commit
+ * Created Date: Sunday, April 13th 2025, 4:14:29 pm
+ * Author: Antonio J. Reid
+ * 
+ * Copyright (c) 2025 10xAigency
+ */
+
+Screen {
+  background: #181825;
+  color: #d9e0ee;
+}

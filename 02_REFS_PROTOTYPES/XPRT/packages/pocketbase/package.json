@@ -1,0 +1,12 @@
+{
+  "name": "@xprt/pocketbase",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "pnpm serve",
+    "serve": "./pocketbase serve",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Antonio J. Reid",
+  "packageManager": "pnpm@10.6.2"
+}

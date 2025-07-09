@@ -1,0 +1,166 @@
+:root {
+    --bg-color: #000000;
+    --div-bg-color: #18181b;
+    --text-color: #e4e4e7;
+    --heading-color: #ffffff;
+    --code-bg: #18181b;
+    --code-color: #569cd6;
+    --link-color: #61afef;
+    --border-color: #333333;
+    --quote-bg: #2a2a2a;
+    --quote-border: #4a4a4a;
+    --text-bold: #d4d4d8;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    text-color: var(--text-bold);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+b, strong {
+    color: var(--text-bold);
+}
+
+div.bg {
+    width: 100%;
+    background-color: var(--div-bg-color);
+    padding: 1rem 2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 0 16px rgba(39, 39, 42, .5);
+    color: var(--text-color);
+}
+
+code {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    border-radius: 8px;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+    background-color: var(--code-bg);
+    color: var(--code-color);
+    box-shadow: 0 0 16px rgba(39, 39, 42, .5);
+}
+
+.grid {
+    grid-auto-flow: row dense;
+    display: grid;  
+    grid-auto-rows: 1fr;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    @media (min-width: 640px) {
+        grid-template-columns: repeat(4, minmax(200px, 2fr));
+    }
+}
+
+img.md {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 0 16px rgba(39, 39, 42, .5);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color);
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+}
+
+h1 { font-size: 2.5em; }
+h2 { font-size: 2em; }
+h3 { font-size: 1.75em; }
+h4 { font-size: 1.5em; }
+h5 { font-size: 1.25em; }
+h6 { font-size: 1em; }
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--link-color);
+}
+
+a:hover {
+    border-bottom-width: 2px;
+}
+
+pre {
+    background-color: var(--code-bg);
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1.5em 0;
+}
+
+code {
+    color: var(--code-color);
+    background-color: var(--code-bg);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', monospace;
+}
+
+blockquote {
+    background-color: var(--quote-bg);
+    border-left: 4px solid var(--quote-border);
+    padding: 1rem;
+    margin: 1.5em 0;
+    color: var(--text-color);
+}
+
+ul, ol {
+    margin: 1em 0;
+    padding-left: 2em;
+    color: var(--text-bold);
+}
+
+li {
+    margin-bottom: 0.5em;
+    color: var(--text-bold);
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 2em 0;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em 0;
+}
+
+.table th,
+.table td {
+    padding: 0.75em;
+    border: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.table th {
+    background-color: var(--code-bg);
+}
+
+.table tr:nth-child(even) {
+    background-color: var(--quote-bg);
+}

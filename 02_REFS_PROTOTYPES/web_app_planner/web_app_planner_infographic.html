@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebApp Planning Workbook - Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0F172A;
+            color: #F8FAFC;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #818CF8, #E040FB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .step-arrow {
+            color: #4F46E5;
+        }
+        .timeline-line {
+            background-color: #4F46E5;
+        }
+        .timeline-dot {
+            background-color: #E040FB;
+            border-color: #0F172A;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+
+        <header class="text-center mb-16 md:mb-24">
+            <h1 class="text-4xl md:text-6xl font-black tracking-tighter leading-tight mb-4">
+                <span class="gradient-text">WebApp Planning Workbook</span>
+            </h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto text-slate-300">
+                An interactive digital workbook to unify fragmented planning workflows into a single, guided, and AI-augmentable experience.
+            </p>
+        </header>
+
+        <main class="space-y-16 md:space-y-24">
+
+            <section id="planning-journey">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">The Blueprint: A Step-by-Step Journey</h2>
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-4 flex-wrap">
+                    <div class="text-center p-4 rounded-lg bg-slate-800 shadow-lg w-48 h-24 flex items-center justify-center">🎯<br>Goals & Objectives</div>
+                    <div class="text-4xl font-thin step-arrow mx-2 hidden md:block">&rarr;</div>
+                    <div class="text-center p-4 rounded-lg bg-slate-800 shadow-lg w-48 h-24 flex items-center justify-center">🧑‍💻<br>User Stories</div>
+                    <div class="text-4xl font-thin step-arrow mx-2 hidden md:block">&rarr;</div>
+                    <div class="text-center p-4 rounded-lg bg-slate-800 shadow-lg w-48 h-24 flex items-center justify-center">📝<br>Core Features</div>
+                    <div class="text-4xl font-thin step-arrow mx-2 hidden md:block">&rarr;</div>
+                    <div class="text-center p-4 rounded-lg bg-slate-800 shadow-lg w-48 h-24 flex items-center justify-center">🖼️<br>Wireframes</div>
+                    <div class="text-4xl font-thin step-arrow mx-2 hidden md:block">&rarr;</div>
+                    <div class="text-center p-4 rounded-lg bg-slate-800 shadow-lg w-48 h-24 flex items-center justify-center">🎨<br>Design System</div>
+                </div>
+            </section>
+
+            <section id="personas" class="bg-slate-900/50 rounded-xl p-8 md:p-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Built for Innovators</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-slate-800 p-6 rounded-lg shadow-lg text-center">
+                        <h3 class="text-2xl font-bold mb-2 gradient-text">Priya</h3>
+                        <p class="font-semibold text-slate-300 mb-4">The Aspiring Developer</p>
+                        <p class="text-slate-400">Needs a structured framework to learn and apply planning principles for her projects.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg shadow-lg text-center ring-2 ring-purple-500">
+                        <h3 class="text-2xl font-bold mb-2 gradient-text">Alex</h3>
+                        <p class="font-semibold text-slate-300 mb-4">The Solo Founder</p>
+                        <p class="text-slate-400">Needs a quick tool to translate business ideas into a tangible plan for validation and scoping.</p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg shadow-lg text-center">
+                        <h3 class="text-2xl font-bold mb-2 gradient-text">Sam</h3>
+                        <p class="font-semibold text-slate-300 mb-4">The PM/Designer</p>
+                        <p class="text-slate-400">Needs a centralized source of truth to ensure team alignment before development begins.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="mvp-scope">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <div class="bg-slate-800 p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6 text-center">Inside the MVP</h3>
+                        <div class="chart-container">
+                             <canvas id="mvpSectionsChart"></canvas>
+                        </div>
+                        <p class="text-center text-slate-400 mt-4">The MVP is focused on core planning sections to provide immediate value.</p>
+                    </div>
+                    <div class="bg-slate-800 p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6 text-center">Focus & Vision</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <h4 class="font-bold text-lg text-green-400 mb-2">In Scope for MVP:</h4>
+                                <ul class="list-disc list-inside text-slate-300 space-y-1">
+                                    <li>Core Workbook SPA</li>
+                                    <li>Anonymous & Token Auth</li>
+                                    <li>Firestore Data Persistence</li>
+                                    <li>All 7 Planning Sections</li>
+                                    <li>Dark/Light Mode</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg text-yellow-400 mb-2">Out of Scope (for now):</h4>
+                                <ul class="list-disc list-inside text-slate-300 space-y-1">
+                                    <li>AI Content Generation</li>
+                                    <li>Advanced Diagramming Tools</li>
+                                    <li>Real-time Collaboration</li>
+                                    <li>PDF/Markdown Export</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="design-system">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Deconstructing the Design System</h2>
+                <div class="max-w-2xl mx-auto text-center space-y-2">
+                    <div class="p-4 bg-purple-500 text-white rounded-t-lg font-bold text-xl">Pages</div>
+                    <div class="p-4 bg-purple-500/80 text-white rounded-lg font-bold text-lg">Templates</div>
+                    <div class="p-4 bg-indigo-500/80 text-white rounded-lg font-bold">Organisms</div>
+                    <div class="p-4 bg-indigo-500/60 text-white rounded-lg font-semibold">Molecules</div>
+                    <div class="p-4 bg-slate-700 rounded-b-lg font-semibold text-slate-200">Atoms (Colors, Fonts, Icons)</div>
+                </div>
+                <p class="text-center text-slate-400 mt-6 max-w-xl mx-auto">The workbook guides users to establish a foundational Atomic Design System, ensuring visual consistency from the start.</p>
+            </section>
+
+            <section id="roadmap">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-16">The Road Ahead</h2>
+                <div class="relative max-w-2xl mx-auto">
+                    <div class="absolute left-1/2 top-0 h-full w-0.5 timeline-line transform -translate-x-1/2"></div>
+                    <div class="space-y-16">
+                        <div class="relative">
+                            <div class="absolute left-1/2 top-1/2 h-4 w-4 rounded-full timeline-dot border-4 transform -translate-x-1/2 -translate-y-1/2"></div>
+                            <div class="md:grid md:grid-cols-2 md:gap-8">
+                                <div class="text-right pr-8">
+                                    <p class="font-bold text-2xl text-slate-200">Q2 2025</p>
+                                </div>
+                                <div class="pl-8 text-left">
+                                    <h3 class="font-bold text-xl mb-1 gradient-text">MVP Launch</h3>
+                                    <p class="text-slate-400">Launch with core features, monitor usage, and gather initial feedback.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute left-1/2 top-1/2 h-4 w-4 rounded-full timeline-dot border-4 transform -translate-x-1/2 -translate-y-1/2"></div>
+                            <div class="md:grid md:grid-cols-2 md:gap-8">
+                                <div class="text-right pr-8">
+                                    <h3 class="font-bold text-xl mb-1 gradient-text">Enhancements</h3>
+                                    <p class="text-slate-400">Implement user feedback mechanism and improve responsive design.</p>
+                                </div>
+                                <div class="pl-8 text-left">
+                                     <p class="font-bold text-2xl text-slate-200">Q3 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute left-1/2 top-1/2 h-4 w-4 rounded-full timeline-dot border-4 transform -translate-x-1/2 -translate-y-1/2"></div>
+                            <div class="md:grid md:grid-cols-2 md:gap-8">
+                                <div class="text-right pr-8">
+                                    <p class="font-bold text-2xl text-slate-200">Q4 2025</p>
+                                </div>
+                                <div class="pl-8 text-left">
+                                    <h3 class="font-bold text-xl mb-1 gradient-text">Expanding Value</h3>
+                                    <p class="text-slate-400">Develop "Export to Markdown" and expand AI assistance PoC.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+             <section id="kpis">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Measuring Success</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+                    <div class="bg-slate-800 p-8 rounded-lg">
+                        <p class="text-5xl font-black gradient-text">500+</p>
+                        <p class="text-slate-400 mt-2">Monthly Active Users</p>
+                    </div>
+                    <div class="bg-slate-800 p-8 rounded-lg">
+                        <p class="text-5xl font-black gradient-text">>20%</p>
+                        <p class="text-slate-400 mt-2">30-Day Retention Rate</p>
+                    </div>
+                    <div class="bg-slate-800 p-8 rounded-lg">
+                        <p class="text-5xl font-black gradient-text">>4.0/5</p>
+                        <p class="text-slate-400 mt-2">User Satisfaction Score</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center mt-16 md:mt-24 border-t border-slate-700 pt-8">
+             <p class="text-slate-400">WebApp Planning Workbook | From Idea to Blueprint</p>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const wrapLabel = (label) => {
+                const maxLength = 16;
+                if (label.length <= maxLength) return label;
+
+                const words = label.split(' ');
+                let lines = [];
+                let currentLine = '';
+
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).trim().length > maxLength) {
+                        lines.push(currentLine.trim());
+                        currentLine = word;
+                    } else {
+                        currentLine = (currentLine + ' ' + word).trim();
+                    }
+                });
+                if (currentLine) {
+                    lines.push(currentLine.trim());
+                }
+                return lines;
+            };
+
+            const ctx = document.getElementById('mvpSectionsChart').getContext('2d');
+            const mvpSectionsChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Branding', 'Goals', 'User Stories', 'Features', 'Wireframes', 'Design System', 'Data Points'],
+                    datasets: [{
+                        label: 'MVP Sections',
+                        data: [1, 1, 1, 1, 1, 1, 1],
+                        backgroundColor: [
+                            '#818CF8',
+                            '#A78BFA',
+                            '#C084FC',
+                            '#E040FB',
+                            '#F472B6',
+                            '#4F46E5',
+                            '#7C3AED'
+                        ],
+                        borderColor: '#1E293B',
+                        borderWidth: 2,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#94A3B8',
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(tooltipItems) {
+                                    const item = tooltipItems[0];
+                                    let label = item.chart.data.labels[item.dataIndex];
+                                    if (Array.isArray(label)) {
+                                      return label.join(' ');
+                                    } else {
+                                      return label;
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    cutout: '60%'
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

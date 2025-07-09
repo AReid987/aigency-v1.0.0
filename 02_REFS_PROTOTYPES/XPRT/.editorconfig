@@ -1,0 +1,15 @@
+
+[*.roomodes]
+indent_style = space
+indent_size = 2
+trim_trailing_whitespace = false
+insert_final_newline = false
+
+/*
+ * Filename: /Users/antonioreid/01_DOING/XPRT/.editorconfig
+ * Path: /Users/antonioreid/01_DOING/XPRT
+ * Created Date: Monday, April 7th 2025, 4:25:36 pm
+ * Author: Antonio J. Reid
+ *
+ * Copyright (c) 2025 10xAigency
+ */

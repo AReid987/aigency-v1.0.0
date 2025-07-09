@@ -1,0 +1,26 @@
+/*
+ * Filename: /Users/antonioreid/01_DOING/XPRT/packages/xprt-commit/config.toml
+ * Path: /Users/antonioreid/01_DOING/XPRT
+ * Created Date: Friday, April 11th 2025, 2:01:05 am
+ * Author: Antonio J. Reid
+ * 
+ * Copyright (c) 2025 10xAigency
+ */
+
+# Configuration for AI-related settings used by xprt-commit
+[ai]
+# Base URL for the Ollama API endpoint used for generating commit messages, etc.
+# Required for features involving local LLMs (e.g., XPRTC-TASK-020)
+ollama_base_url = "http://localhost:11434"
+
+# Configuration for enabling/disabling linters run by xprt-commit
+# These flags control which linters are executed during pre-commit checks or analysis (e.g., XPRTC-TASK-014)
+[linters]
+# Enable or disable ESLint (JavaScript/TypeScript linter)
+eslint_enabled = true
+# Enable or disable Pylint (Python linter)
+pylint_enabled = true
+# Example placeholder for another potential linter
+# flake8_enabled = false
+# Example placeholder for type checking
+# mypy_enabled = false

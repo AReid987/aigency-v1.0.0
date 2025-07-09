@@ -1,0 +1,11 @@
+{
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "marquee.widgets.npm-stats.packageNames": [
+    "xprt"
+  ],
+  "markdown.styles": ["project_documentation/Markdown-Style.css"]
+}

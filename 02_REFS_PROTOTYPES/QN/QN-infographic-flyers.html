@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hartland Ranch Growth Strategy | Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg-body);
+            color: var(--color-text-body);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        :root {
+            /* Light Mode Colors (Brilliant Blues palette) */
+            --color-bg-body: #F0F8FF;
+            --color-bg-card: #FFFFFF;
+            --color-text-header: #023E8A; /* Dark Blue */
+            --color-text-primary-accent: #0077B6; /* Primary Blue */
+            --color-text-secondary-accent: #00B4D8; /* Secondary Blue */
+            --color-text-body: #4A5568; /* Tailwind gray-600 equivalent */
+            --color-border-subtle: #90E0EF; /* Light Blue */
+            --color-button-bg: #0077B6; /* Primary Blue */
+            --color-button-hover: #00B4D8; /* Secondary Blue */
+            --color-response-bg: #f8f8f8;
+            --color-response-border: #ddd;
+            --color-flow-arrow: #90E0EF;
+        }
+
+        .dark-mode {
+            /* Dark Mode Colors */
+            --color-bg-body: #1A202C; /* Dark gray */
+            --color-bg-card: #2D3748; /* Slightly lighter dark gray */
+            --color-text-header: #90E0EF; /* Light Blue for headers */
+            --color-text-primary-accent: #00B4D8; /* Secondary Blue */
+            --color-text-secondary-accent: #0077B6; /* Primary Blue */
+            --color-text-body: #CBD5E0; /* Light gray */
+            --color-border-subtle: #00B4D8; /* Secondary Blue */
+            --color-button-bg: #00B4D8; /* Secondary Blue */
+            --color-button-hover: #0077B6; /* Primary Blue */
+            --color-response-bg: #3A475C;
+            --color-response-border: #5A6A7D;
+            --color-flow-arrow: #00B4D8;
+        }
+
+        /* Applying CSS variables to Tailwind-like classes */
+        h1, h2, h3 { color: var(--color-text-header); }
+        .text-\[\#0077B6\] { color: var(--color-text-primary-accent); }
+        .text-\[\#00B4D8\] { color: var(--color-text-secondary-accent); }
+        .text-\[\#90E0EF\] { color: var(--color-border-subtle); } /* Used for the $150 potential revenue text */
+        .text-gray-600 { color: var(--color-text-body); }
+        .bg-white { background-color: var(--color-bg-card); }
+        .bg-\[\#F0F8FF\] { background-color: var(--color-bg-body); }
+        .border-\[\#90E0EF\] { border-color: var(--color-border-subtle); }
+        .flow-arrow { background-color: var(--color-flow-arrow); }
+        .flow-arrow::after { border-top-color: var(--color-flow-arrow) !important; }
+        button {
+            background-color: var(--color-button-bg);
+            transition: background-color 0.3s ease;
+        }
+        button:hover { background-color: var(--color-button-hover); }
+        .response-box {
+            background-color: var(--color-response-bg);
+            border-color: var(--color-response-border);
+            color: var(--color-text-body);
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .flow-arrow {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--color-flow-arrow);
+            z-index: 0;
+        }
+        .flow-arrow.down {
+            height: 2rem;
+            left: 50%;
+            bottom: -2rem;
+            transform: translateX(-50%);
+        }
+         .flow-arrow.down::after {
+            content: '';
+            position: absolute;
+            left: -5px;
+            bottom: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid var(--color-flow-arrow); /* Use variable for arrow color */
+        }
+        .response-box {
+            background-color: var(--color-response-bg);
+            border: 1px solid var(--color-response-border);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: left;
+            font-size: 0.9rem;
+            color: var(--color-text-body);
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        /* Theme toggle switch styling */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body class="">
+
+    <main class="container mx-auto p-4 md:p-8">
+        <div id="theme-switcher" class="absolute top-4 right-4 z-10 flex items-center space-x-2">
+            <span class="text-sm">Light</span>
+            <label class="switch">
+                <input type="checkbox" id="themeToggle">
+                <span class="slider round"></span>
+            </label>
+            <span class="text-sm">Dark</span>
+        </div>
+        
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-2">The Hartland Ranch Growth Strategy</h1>
+            <p class="text-lg">From Zero Budget to 50+ Signups: A Smarter Way to Grow.</p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <section class="lg:col-span-3 text-center p-6 bg-white rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold mb-4">The Problem with Old-School Flyers</h2>
+                <p class="text-md max-w-3xl mx-auto">Traditional marketing methods like mail flyers are not only expensive and yield minimal results but also risk alienating a significant portion of the community who values eco-conscious practices.</p>
+                <button id="ecoMarketingBtn" class="mt-4 px-4 py-2 text-white rounded-lg shadow-md">Brainstorm Eco-Marketing Ideas ✨</button>
+                <div id="ecoMarketingResponse" class="response-box hidden"></div>
+            </section>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center text-center">
+                <h3 class="text-xl font-bold mb-2">Unsustainable Cost</h3>
+                <p class="text-7xl font-extrabold">$60</p>
+                <p class="text-lg">...is the effective cost <span class="font-semibold">per signup</span> from a $900 flyer campaign that only generates about 15 leads. This is an unsustainable model for a business with a zero-dollar starting budget.</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center text-center">
+                <h3 class="text-xl font-bold mb-2">The Eco-Conscious Risk</h3>
+                <div class="chart-container h-64 max-h-64">
+                    <canvas id="ecoRiskChart"></canvas>
+                </div>
+                <p class="text-sm mt-4">Flyers can be perceived as wasteful "paper spam," potentially creating a negative first impression with the <span class="font-semibold">57% of neighbors</span> who prioritize environmental concerns.</p>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center text-center">
+                <h3 class="text-xl font-bold mb-2">The Smart Alternative</h3>
+                <p class="text-5xl font-extrabold">The Chamber Hustle</p>
+                <p class="text-lg">A low-cost, high-impact strategy focused on building credibility and leveraging community networks for authentic growth.</p>
+            </div>
+
+            <section class="lg:col-span-3 bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-3xl font-bold mb-2 text-center">Flyers vs. Hustle: A Head-to-Head Comparison</h2>
+                <p class="text-md text-center mb-6">The data clearly shows that the Chamber Hustle provides a significantly better return on investment, not just in signups but also in building community trust.</p>
+                <div class="chart-container">
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+            </section>
+            
+            <section class="lg:col-span-3 text-center p-6 bg-white rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold mb-4">Your "Tonight To-Do" Action Plan</h2>
+                <p class="text-md max-w-3xl mx-auto mb-8">Follow these three simple, free, and high-leverage steps to start generating traction immediately.</p>
+                <div class="relative grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="relative flex flex-col items-center bg-[var(--color-bg-body)] p-6 rounded-lg border-2 border-[var(--color-border-subtle)]">
+                        <div class="text-4xl mb-2">1️⃣</div>
+                        <h3 class="font-bold text-lg">Update Website Footer</h3>
+                        <p class="text-sm">Add "Proud member of Hartland Chamber of Commerce" to build instant credibility.</p>
+                        <div class="flow-arrow down hidden md:block"></div>
+                    </div>
+                    <div class="relative flex flex-col items-center bg-[var(--color-bg-body)] p-6 rounded-lg border-2 border-[var(--color-border-subtle)]">
+                        <div class="text-4xl mb-2">2️⃣</div>
+                        <h3 class="font-bold text-lg">Connect with Members</h3>
+                        <p class="text-sm">Text 3 influential Chamber members to set up coffee and discuss cross-promotion.</p>
+                        <button id="coffeeTalkBtn" class="mt-4 px-4 py-2 text-white rounded-lg shadow-md">Brainstorm Coffee Talk Points ✨</button>
+                        <div id="coffeeTalkResponse" class="response-box hidden"></div>
+                        <div class="flow-arrow down hidden md:block"></div>
+                    </div>
+                    <div class="relative flex flex-col items-center bg-[var(--color-bg-body)] p-6 rounded-lg border-2 border-[var(--color-border-subtle)]">
+                        <div class="text-4xl mb-2">3️⃣</div>
+                        <h3 class="font-bold text-lg">Engage on Nextdoor</h3>
+                        <p class="text-sm">Post a community-focused question, then direct message engaged responders with your link.</p>
+                        <button id="nextdoorPostBtn" class="mt-4 px-4 py-2 text-white rounded-lg shadow-md">Generate Nextdoor Post Idea ✨</button>
+                        <div id="nextdoorPostResponse" class="response-box hidden"></div>
+                    </div>
+                </div>
+            </section>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-center mb-4">How to Invest Your First $100</h3>
+                 <p class="text-sm text-center mb-4">Once you have initial revenue, allocate it smartly. This 49/51 split prioritizes a professional foundation and targeted growth.</p>
+                <div class="chart-container h-64 max-h-64">
+                    <canvas id="spendingChart"></canvas>
+                </div>
+                <button id="facebookAdCopyBtn" class="mt-4 px-4 py-2 text-white rounded-lg shadow-md">Generate Facebook Ad Copy ✨</button>
+                <div id="facebookAdCopyResponse" class="response-box hidden"></div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center text-center">
+                 <h3 class="text-xl font-bold mb-2">The Sanity-Saving Rule</h3>
+                 <p class="text-sm mb-4">Don't waste time building features nobody wants. This rule forces validation before development.</p>
+                 <div class="text-center">
+                     <p class="text-5xl font-extrabold">100</p>
+                     <p class="text-lg mb-4">Emails Collected</p>
+                     <p class="text-2xl font-bold">&</p>
+                     <p class="text-5xl font-extrabold mt-4">5</p>
+                     <p class="text-lg">Neighbors who say<br>"I'd pay for this"</p>
+                 </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 flex flex-col items-center justify-center text-center">
+                <h3 class="text-xl font-bold mb-4">Expected Payoff: By <span id="nextFridayDate"></span></h3>
+                <p class="text-sm mb-6">By following this plan, you can achieve tangible results in just one week.</p>
+                <div class="text-center">
+                    <p class="text-6xl font-extrabold">50+</p>
+                    <p class="text-xl mb-6">New Signups</p>
+                    
+                    <p class="text-6xl font-extrabold">&#129309;</p>
+                    <p class="text-xl mb-6">Free Marketing via The Chamber</p>
+
+                    <p class="text-6xl font-extrabold">$150</p>
+                    <p class="text-xl">Potential Revenue</p>
+                </div>
+            </div>
+
+        </div>
+         <footer class="text-center mt-12 py-6 border-t border-[var(--color-border-subtle)]">
+            <p class="text-md">Stop planning. Start coffee-buying.</p>
+            <p class="text-sm mt-2">Hartland Ranch Growth Strategy Infographic</p>
+        </footer>
+    </main>
+
+    <script>
+        // Store chart instances globally to easily update/re-render
+        let ecoRiskChartInstance;
+        let comparisonChartInstance;
+        let spendingChartInstance;
+
+        const tooltipPluginConfig = {
+            tooltip: {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        if (Array.isArray(label)) {
+                            return label.join(' ');
+                        } else {
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        function wrapLabels(label, maxLength) {
+            if (label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            let lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).trim().length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            }
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        }
+
+        function getThemeColors() {
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            if (isDarkMode) {
+                return {
+                    textHeader: '#90E0EF',
+                    textPrimaryAccent: '#00B4D8',
+                    textSecondaryAccent: '#0077B6',
+                    bodyText: '#CBD5E0',
+                    chartColor1: '#00B4D8', // Secondary blue for charts in dark mode
+                    chartColor2: '#0077B6', // Primary blue for charts in dark mode
+                    chartColor3: '#90E0EF', // Lightest blue for charts
+                    chartLabel: '#CBD5E0', // Light gray for chart labels/ticks
+                    background: '#1A202C' // Body background
+                };
+            } else {
+                return {
+                    textHeader: '#023E8A',
+                    textPrimaryAccent: '#0077B6',
+                    textSecondaryAccent: '#00B4D8',
+                    bodyText: '#4A5568',
+                    chartColor1: '#0077B6', // Primary blue for charts in light mode
+                    chartColor2: '#00B4D8', // Secondary blue for charts in light mode
+                    chartColor3: '#90E0EF', // Lightest blue for charts
+                    chartLabel: '#023E8A', // Dark blue for chart labels/ticks
+                    background: '#F0F8FF' // Body background
+                };
+            }
+        }
+
+        function createEcoRiskChart() {
+            if (ecoRiskChartInstance) {
+                ecoRiskChartInstance.destroy();
+            }
+            const colors = getThemeColors();
+            const ctx = document.getElementById('ecoRiskChart').getContext('2d');
+            ecoRiskChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [wrapLabels('Care About Eco-Issues', 16), wrapLabels('Other', 16)],
+                    datasets: [{
+                        label: 'Eco-Conscious Neighbors',
+                        data: [57, 43],
+                        backgroundColor: [colors.chartColor1, colors.chartColor3],
+                        borderColor: colors.background,
+                        borderWidth: 4,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        ...tooltipPluginConfig
+                    }
+                }
+            });
+        }
+        
+        function createComparisonChart() {
+            if (comparisonChartInstance) {
+                comparisonChartInstance.destroy();
+            }
+            const colors = getThemeColors();
+            const ctx = document.getElementById('comparisonChart').getContext('2d');
+            comparisonChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Cost (USD)', 'Signups'],
+                    datasets: [
+                        {
+                            label: 'Mail Flyers',
+                            data: [900, 15],
+                            backgroundColor: colors.chartColor2,
+                            borderColor: colors.chartColor1,
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Chamber Hustle',
+                            data: [150, 50],
+                            backgroundColor: colors.chartColor1,
+                            borderColor: colors.textHeader,
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: colors.chartLabel
+                            },
+                            grid: {
+                                color: 'rgba(128, 128, 128, 0.2)'
+                            }
+                        },
+                        x: {
+                             ticks: {
+                                color: colors.chartLabel
+                            },
+                            grid: {
+                                color: 'rgba(128, 128, 128, 0.2)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                             labels: {
+                                color: colors.chartLabel
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'Return on Investment: Flyers vs. Hustle',
+                            color: colors.textHeader,
+                            font: {
+                                size: 16
+                            }
+                        },
+                         ...tooltipPluginConfig
+                    }
+                }
+            });
+        }
+
+        function createSpendingChart() {
+            if (spendingChartInstance) {
+                spendingChartInstance.destroy();
+            }
+            const colors = getThemeColors();
+            const ctx = document.getElementById('spendingChart').getContext('2d');
+            spendingChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [wrapLabels('Facebook Ads ($51)', 16), wrapLabels('Virtual Mailbox ($49)', 16)],
+                    datasets: [{
+                        data: [51, 49],
+                        backgroundColor: [colors.chartColor1, colors.chartColor2],
+                        borderColor: colors.background,
+                        borderWidth: 4,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '60%',
+                    plugins: {
+                        legend: {
+                           display: true,
+                           position: 'bottom',
+                           labels: {
+                               color: colors.chartLabel
+                           }
+                        },
+                        ...tooltipPluginConfig
+                    }
+                }
+            });
+        }
+
+        async function callGeminiAPI(prompt, targetElementId) {
+            const targetElement = document.getElementById(targetElementId);
+            const button = targetElement.previousElementSibling;
+            const originalButtonText = button.innerHTML;
+
+            targetElement.innerHTML = '<div class="text-center"><div class="animate-spin inline-block w-6 h-6 border-4 border-t-4 border-gray-200 border-t-[var(--color-text-primary-accent)] rounded-full"></div> <p class="text-sm mt-2">Generating...</p></div>';
+            targetElement.classList.remove('hidden');
+            button.disabled = true;
+            button.innerHTML = 'Generating...';
+
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // Canvas will provide this at runtime
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    targetElement.innerHTML = `<p class="whitespace-pre-wrap">${text}</p>`;
+                } else {
+                    targetElement.innerHTML = '<p class="text-red-500">Error: Could not generate response.</p>';
+                    console.error('Gemini API returned an unexpected structure:', result);
+                }
+            } catch (error) {
+                targetElement.innerHTML = `<p class="text-red-500">Error: ${error.message}</p>`;
+                console.error('Error calling Gemini API:', error);
+            } finally {
+                button.disabled = false;
+                button.innerHTML = originalButtonText;
+            }
+        }
+
+        function getNextFridayDate() {
+            const today = new Date();
+            const dayOfWeek = today.getDay(); // 0 for Sunday, 1 for Monday, ..., 5 for Friday, 6 for Saturday
+            let daysUntilFriday = 5 - dayOfWeek;
+            if (daysUntilFriday <= 0) { // If today is Friday or Saturday/Sunday, get next Friday
+                daysUntilFriday += 7;
+            }
+            const nextFriday = new Date(today);
+            nextFriday.setDate(today.getDate() + daysUntilFriday);
+
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return nextFriday.toLocaleDateString('en-US', options);
+        }
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                document.getElementById('themeToggle').checked = true;
+            } else {
+                document.body.classList.remove('dark-mode');
+                document.getElementById('themeToggle').checked = false;
+            }
+            // Re-render charts based on initial theme
+            createEcoRiskChart();
+            createComparisonChart();
+            createSpendingChart();
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const currentTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', currentTheme);
+            // Re-render charts when theme changes
+            createEcoRiskChart();
+            createComparisonChart();
+            createSpendingChart();
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set dynamic next Friday date
+            document.getElementById('nextFridayDate').textContent = getNextFridayDate();
+
+            // Initialize theme on load
+            initTheme();
+
+            // Attach theme toggle listener
+            document.getElementById('themeToggle').addEventListener('change', toggleTheme);
+
+            const coffeeTalkBtn = document.getElementById('coffeeTalkBtn');
+            const nextdoorPostBtn = document.getElementById('nextdoorPostBtn');
+            const ecoMarketingBtn = document.getElementById('ecoMarketingBtn');
+            const facebookAdCopyBtn = document.getElementById('facebookAdCopyBtn');
+
+
+            if (coffeeTalkBtn) {
+                coffeeTalkBtn.addEventListener('click', () => {
+                    const prompt = "Brainstorm 3-5 concise talking points for a coffee meeting with a Hartland Chamber of Commerce member. The goal is to explore cross-promotion opportunities for 'Quality Neighbor', a new local business. Focus on mutual benefits and community value.";
+                    callGeminiAPI(prompt, 'coffeeTalkResponse');
+                });
+            }
+
+            if (nextdoorPostBtn) {
+                nextdoorPostBtn.addEventListener('click', () => {
+                    const prompt = "Generate a friendly and engaging Nextdoor post idea for a new local business called 'Quality Neighbor'. The post should ask neighbors what one thing they would borrow from a neighbor, and subtly lead into an opportunity for Quality Neighbor to provide solutions. Keep it concise and community-focused.";
+                    callGeminiAPI(prompt, 'nextdoorPostResponse');
+                });
+            }
+
+            if (ecoMarketingBtn) {
+                ecoMarketingBtn.addEventListener('click', () => {
+                    const prompt = "Given the 'Quality Neighbor' business focuses on local community and eco-consciousness, brainstorm 3-5 creative, low-cost, and eco-friendly marketing ideas that could replace traditional mail flyers. Think about digital, community-based, or sustainable physical approaches.";
+                    callGeminiAPI(prompt, 'ecoMarketingResponse');
+                });
+            }
+
+            if (facebookAdCopyBtn) {
+                facebookAdCopyBtn.addEventListener('click', () => {
+                    const prompt = "Write 2-3 short, engaging Facebook ad copies (max 2 sentences each) for 'Quality Neighbor', targeting residents in 'Hartland Ranch' who are interested in 'Home Depot', 'Gardening groups', or the 'Hartland Polo Classic'. Emphasize the community aspect of borrowing/sharing items and the benefit of reducing waste. Use a friendly, neighborhood tone.";
+                    callGeminiAPI(prompt, 'facebookAdCopyResponse');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

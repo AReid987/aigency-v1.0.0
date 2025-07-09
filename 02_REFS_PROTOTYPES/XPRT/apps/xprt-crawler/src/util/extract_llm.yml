@@ -1,0 +1,7 @@
+type: "llm"
+provider: ""
+instruction: ""
+api_token: ""
+params:
+  temperature: 0.3
+  max_tokens: 1000

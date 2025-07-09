@@ -1,0 +1,4 @@
+viewport_width: 1280
+user_agent_mode: "random"
+verbose: true
+ignore_https_errors: true

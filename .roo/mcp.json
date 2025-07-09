@@ -1,5 +1,19 @@
 {
   "mcpServers": {
-
+    "repomix": {
+      "command": "/usr/local/bin/npx",
+      "args": [
+        "-y",
+        "repomix",
+        "--mcp"
+      ],
+      "alwaysAllow": [
+        "pack_codebase",
+        "pack_remote_repository",
+        "read_repomix_output",
+        "file_system_read_file",
+        "file_system_read_directory"
+      ]
+    }
   }
 }

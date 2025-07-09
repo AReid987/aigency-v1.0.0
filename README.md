@@ -1,6 +1,14 @@
-# AIgency Turborepo
+# Turborepo starter
 
-This Turborepo contains a mix of JavaScript/TypeScript and Python applications.
+This Turborepo starter is maintained by the Turborepo core team.
+
+## Using this example
+
+Run the following command:
+
+```sh
+npx create-turbo@latest
+```
 
 ## What's inside?
 
@@ -10,12 +18,11 @@ This Turborepo includes the following packages/apps:
 
 - `docs`: a [Next.js](https://nextjs.org/) app
 - `web`: another [Next.js](https://nextjs.org/) app
-- `extract`: a Python app for extracting insights from YouTube videos and articles
 - `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
 - `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
-The JavaScript/TypeScript apps and packages are 100% [TypeScript](https://www.typescriptlang.org/), while the `extract` app is built with Python and PDM.
+Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
 ### Utilities
 
@@ -24,7 +31,6 @@ This Turborepo has some additional tools already setup for you:
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
 - [ESLint](https://eslint.org/) for code linting
 - [Prettier](https://prettier.io) for code formatting
-- [PDM](https://pdm.fming.dev/) for Python dependency management
 
 ### Build
 
@@ -32,66 +38,55 @@ To build all apps and packages, run the following command:
 
 ```
 cd my-turborepo
-pnpm build
+
+# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
+turbo build
+
+# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
+npx turbo build
+yarn dlx turbo build
+pnpm exec turbo build
+```
+
+You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+
+```
+# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
+turbo build --filter=docs
+
+# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
+npx turbo build --filter=docs
+yarn exec turbo build --filter=docs
+pnpm exec turbo build --filter=docs
 ```
 
 ### Develop
 
-To develop all apps and packages (including the Python extract app), run the following command:
+To develop all apps and packages, run the following command:
 
 ```
 cd my-turborepo
-pnpm dev
+
+# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
+turbo dev
+
+# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
+npx turbo dev
+yarn exec turbo dev
+pnpm exec turbo dev
 ```
 
-To develop only JavaScript/TypeScript apps (excluding the Python extract app):
+You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
 
 ```
-cd my-turborepo
-pnpm dev:js
+# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
+turbo dev --filter=web
+
+# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
+npx turbo dev --filter=web
+yarn exec turbo dev --filter=web
+pnpm exec turbo dev --filter=web
 ```
-
-To develop only the Python extract app:
-
-```
-cd my-turborepo
-pnpm dev:extract
-```
-
-### Python App Development
-
-The `extract` app is a Python application managed with PDM. To work with it directly:
-
-```bash
-# Navigate to the extract app directory
-cd apps/extract
-
-# Install dependencies
-pdm install
-
-# Run the app
-pdm run dev
-
-# Run tests
-pdm run test
-
-# Run linting
-pdm run lint
-```
-
-See the [extract app README](./apps/extract/README.md) for more details.
-
-## Roadmap
-
-The following features are planned for future development:
-
-1. **MCP Support for @aigency/extract**: Implement Model Context Protocol support for the extract app to enable enhanced AI capabilities and tool integration
-2. **Unified Authentication**: Single sign-on across all apps in the monorepo
-3. **Shared Data Layer**: Common data access layer between JavaScript and Python apps
-4. **Enhanced CI/CD Pipeline**: Automated testing and deployment for both JS and Python apps
-5. **Documentation Site**: Comprehensive documentation for all apps and packages
-6. **Performance Optimization**: Improve build and runtime performance
-7. **Cross-App Communication**: Enable real-time communication between apps
 
 ### Remote Caching
 
@@ -104,7 +99,14 @@ By default, Turborepo will cache locally. To enable Remote Caching you will need
 
 ```
 cd my-turborepo
+
+# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
+turbo login
+
+# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
 npx turbo login
+yarn exec turbo login
+pnpm exec turbo login
 ```
 
 This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
@@ -112,7 +114,13 @@ This will authenticate the Turborepo CLI with your [Vercel account](https://verc
 Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
 
 ```
+# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
+turbo link
+
+# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
 npx turbo link
+yarn exec turbo link
+pnpm exec turbo link
 ```
 
 ## Useful Links

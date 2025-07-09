@@ -1,0 +1,7 @@
+{
+  "baseUrl": "assets",
+  "buildDirectory": "dist",
+  "assetsDirectory": "static/assets",
+  "scriptsDirectory": "src/scripts",
+  "codegenDirectory": "src/generated"
+} 

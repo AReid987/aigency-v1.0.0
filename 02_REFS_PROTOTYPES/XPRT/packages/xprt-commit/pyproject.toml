@@ -1,0 +1,22 @@
+[project]
+name = "xprt-commit"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Antonio Reid", email = "read.musik@gmail.com"},
+]
+dependencies = ["textual>=3.0.1", "httpx", "linkify-it-py>=2.0.3"]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.scripts]
+start = { cmd = "python -m xprt_commit.main", env = { PYTHONPATH = "src" } }

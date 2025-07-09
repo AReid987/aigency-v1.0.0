@@ -1,0 +1,57 @@
+# See https://github.com/github/gitignore/blob/main/Node.gitignore
+node_modules
+/.next
+/out
+/dist
+
+# Environment files
+.env.local
+.env.*.local
+.env
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Editor directories and files
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage
+
+# Next.js specific
+.next/
+out/
+
+# Vercel specific
+.vercel/
+
+# supabase
+supabase/
+
+# Added by Claude Task Master
+# Logs
+logs
+*.log
+dev-debug.log
+# Dependency directories
+node_modules/
+# Environment variables
+# OS specific
+# Task files
+tasks.json
+tasks/ 

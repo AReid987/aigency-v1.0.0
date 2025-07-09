@@ -1,0 +1,29 @@
+{
+    "name": "@xprt/xprt-commit",
+    "version": "0.1.0",
+    "type": "module",
+    "description": "XPRT Commit CLI and TUI - now as a Turborepo package with lint-staged and lefthook integration.",
+    "author": "10xAigency",
+    "scripts": {
+        "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.py",
+        "format": "prettier --write .",
+        "lint-staged": "lint-staged",
+        "commit": "python3 -m xprt_commit.main"
+    },
+    "devDependencies": {
+        "lint-staged": "^15.2.2",
+        "lefthook": "^1.6.10"
+    },
+    "files": [
+        "src/",
+        "README.md"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/10xaigency/xprt"
+    },
+    "bugs": {
+        "url": "https://github.com/10xaigency/xprt/issues"
+    },
+    "license": "MIT"
+}

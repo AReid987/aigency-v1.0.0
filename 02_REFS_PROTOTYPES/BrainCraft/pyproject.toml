@@ -1,0 +1,19 @@
+[project]
+name = "BrainCraft"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Antonio Reid", email = "read.musik@gmail.com"},
+]
+dependencies = ["aider-chat>=0.83.0", "sourcery>=1.36.0"]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true

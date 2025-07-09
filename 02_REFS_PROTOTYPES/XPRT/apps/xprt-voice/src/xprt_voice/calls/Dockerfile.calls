@@ -1,0 +1,15 @@
+# Use an Ubuntu Base Image
+FROM ubuntu:24.04
+
+# Set environment variables to avoid interactive prompts during installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update package list and install necessary packages
+RUN apt-get update && \
+    apt-get install -y software-properties-common && \
+    add-apt-repository universe && \
+    apt-get update && \
+    apt-get install -y gnome-calls
+
+# Set the default command to run when the container starts
+CMD ["gnome-calls"]

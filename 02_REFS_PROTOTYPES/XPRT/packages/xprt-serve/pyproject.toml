@@ -1,0 +1,21 @@
+[project]
+name = "xprt-serve"
+version = "0.1.0"
+description = "open source model server"
+authors = [
+    {name = "Antonio Reid", email = "read.musik@gmail.com"},
+]
+dependencies = [
+    "litserve>=0.2.7",
+]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[tool.pdm]
+distribution = true

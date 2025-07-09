@@ -1,0 +1,16 @@
+# lefthook.yml for xprt-commit
+# Manages git hooks for this package
+# See: https://github.com/evilmartians/lefthook
+
+pre-commit:
+  # Run lint-staged to lint/format only staged files before commit
+  # Uses npx to resolve local install in node_modules
+  parallel: true
+  commands:
+    lint-staged:
+      run: npx lint-staged
+# Add more hooks as needed (e.g., commit-msg, pre-push)
+# Example:
+# commit-msg:
+#   scripts:
+#     "commitlint": "npx commitlint --edit $1"

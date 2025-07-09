@@ -1,0 +1,17 @@
+# Core dependencies
+fastapi
+uvicorn
+python-dotenv
+pydantic
+requests
+colorama
+
+# LangChain dependencies
+langchain
+langchain-mistralai
+langchain-community
+
+# Additional dependencies
+openai
+lmnt
+python-multipart

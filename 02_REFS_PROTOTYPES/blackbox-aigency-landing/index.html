@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aigency - Your AI Agency</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Aigency</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-actions">
+                <button class="btn-secondary" id="loginBtn">Login</button>
+                <button class="btn-primary" id="signupBtn">Sign Up</button>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="hero">
+        <div class="hero-container">
+            <div class="hero-badge">
+                <span class="badge-icon">🚀</span>
+                <span class="badge-text">100% AI POWERED</span>
+            </div>
+            
+            <h1 class="hero-title">
+                <span class="title-highlight">Aigency</span>, your AI Agency.
+            </h1>
+            
+            <p class="hero-subtitle">
+                Aigency is a generalist AI Agency that acts on your behalf, handling everything from strategy to execution.
+            </p>
+            
+            <div class="hero-cta">
+                <div class="input-container">
+                    <input 
+                        type="text" 
+                        placeholder="Tell Aigency what you need..." 
+                        class="hero-input"
+                        id="heroInput"
+                    >
+                    <button class="input-submit" id="submitBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <button class="btn-cta" id="betaBtn">Join the Beta Test</button>
+            </div>
+        </div>
+        
+        <!-- Background Pattern -->
+        <div class="bg-pattern"></div>
+        
+        <!-- Demo Section -->
+        <div class="demo-section">
+            <div class="demo-container">
+                <div class="demo-placeholder">
+                    <div class="demo-logo">
+                        <span class="logo-text">Aigency</span>
+                        <div class="play-button">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 5V19L19 12L8 5Z" fill="currentColor"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Welcome Back</h2>
+                <button class="modal-close" id="closeLogin">&times;</button>
+            </div>
+            <form class="modal-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn-primary full-width">Sign In</button>
+                <p class="form-footer">
+                    Don't have an account? 
+                    <a href="#" id="switchToSignup">Sign up</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Join Aigency</h2>
+                <button class="modal-close" id="closeSignup">&times;</button>
+            </div>
+            <form class="modal-form" id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <button type="submit" class="btn-primary full-width">Create Account</button>
+                <p class="form-footer">
+                    Already have an account? 
+                    <a href="#" id="switchToLogin">Sign in</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Beta Modal -->
+    <div class="modal" id="betaModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Join the Beta Test</h2>
+                <button class="modal-close" id="closeBeta">&times;</button>
+            </div>
+            <form class="modal-form" id="betaForm">
+                <div class="form-group">
+                    <label for="betaName">Full Name</label>
+                    <input type="text" id="betaName" required>
+                </div>
+                <div class="form-group">
+                    <label for="betaEmail">Email</label>
+                    <input type="email" id="betaEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="betaCompany">Company (Optional)</label>
+                    <input type="text" id="betaCompany">
+                </div>
+                <div class="form-group">
+                    <label for="betaUseCase">What would you use Aigency for?</label>
+                    <textarea id="betaUseCase" rows="3" placeholder="Tell us about your use case..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary full-width">Request Beta Access</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

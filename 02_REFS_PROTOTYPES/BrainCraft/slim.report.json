@@ -1,0 +1,13 @@
+{
+  "document": "doc.report.command",
+  "version": "ov/command/images/1.0",
+  "engine": "darwin/arm64|Aurora|1.41.7|latest|latest",
+  "containerized": false,
+  "host_distro": {
+    "name": "",
+    "version": "",
+    "display_name": "other"
+  },
+  "type": "images",
+  "state": "done"
+}

@@ -1,0 +1,18 @@
+mesh: ai-gateway
+services:
+  - name: ai-gateway
+    port: 8000
+    protocol: http
+    tags:
+      env: production
+traffic:
+  routes:
+    - match:
+        path: /llm
+      destination:
+        service: ai-gateway
+observability:
+  metrics:
+    enabled: true
+    prometheus:
+      port: 9090

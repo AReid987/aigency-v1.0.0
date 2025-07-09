@@ -1,0 +1,177 @@
+workflow:
+  id: windsurf-cascade
+  name: Windsurf Cascade Integration
+  description: >-
+    Specialized workflow for developing and enhancing applications within the Windsurf Cascade
+    environment. Includes specific steps for AI-assisted development and Cascade-specific tooling.
+  type: brownfield
+  project_types:
+    - feature-addition
+    - refactoring
+    - modernization
+    - ai-integration
+
+  sequence:
+    - step: project_analysis
+      agent: analyst
+      action: analyze project scope
+      notes: |
+        Analyze the project to determine the scope of work:
+        - Review existing codebase and documentation
+        - Identify key components and dependencies
+        - Determine integration points with Windsurf Cascade
+
+    - step: requirements_definition
+      agent: po
+      action: define requirements
+      requires: project_analysis
+      notes: |
+        Define clear requirements for the Windsurf Cascade integration:
+        - Document user stories and acceptance criteria
+        - Identify any Cascade-specific requirements
+        - Define success metrics
+
+    - step: technical_design
+      agent: architect
+      action: create technical design
+      requires: requirements_definition
+      notes: |
+        Create technical design documentation:
+        - System architecture
+        - Component interactions
+        - Data flow diagrams
+        - Integration points with Windsurf Cascade
+
+    - step: implementation_plan
+      agent: tech_lead
+      action: create implementation plan
+      requires: technical_design
+      notes: |
+        Break down the work into manageable tasks:
+        - Create implementation tasks
+        - Estimate effort
+        - Identify dependencies
+        - Define acceptance criteria
+
+    - step: development
+      agent: developer
+      action: implement features
+      requires: implementation_plan
+      notes: |
+        Implement the required features:
+        - Follow coding standards
+        - Write unit tests
+        - Document code
+        - Use Cascade's AI assistance effectively
+
+    - step: testing
+      agent: qa
+      action: test implementation
+      requires: development
+      notes: |
+        Test the implementation:
+        - Unit tests
+        - Integration tests
+        - User acceptance testing
+        - Performance testing
+
+    - step: deployment
+      agent: devops
+      action: deploy changes
+      requires: testing
+      notes: |
+        Deploy the changes:
+        - Prepare deployment package
+        - Deploy to staging/production
+        - Verify deployment
+        - Monitor for issues
+
+    - step: documentation
+      agent: technical_writer
+      action: update documentation
+      requires: deployment
+      notes: |
+        Update project documentation:
+        - API documentation
+        - User guides
+        - Release notes
+        - Architecture documentation
+
+  flow_diagram: |
+    ```mermaid
+    graph TD
+        A[Start: Project Analysis] --> B[analyst: analyze project scope]
+        B --> C[po: define requirements]
+        C --> D[architect: create technical design]
+        D --> E[tech_lead: create implementation plan]
+        E --> F[developer: implement features]
+        F --> G[qa: test implementation]
+        G --> H[devops: deploy changes]
+        H --> I[technical_writer: update documentation]
+        I --> J[End: Project Complete]
+    ```
+
+  roles:
+    - analyst:
+        description: Analyzes project requirements and scope
+        skills: [analysis, requirements-gathering]
+    - po:
+        description: Product Owner who defines business requirements
+        skills: [product-management, requirements]
+    - architect:
+        description: Designs the technical solution
+        skills: [architecture, system-design]
+    - tech_lead:
+        description: Leads the technical implementation
+        skills: [technical-leadership, planning]
+    - developer:
+        description: Implements the solution
+        skills: [programming, problem-solving]
+    - qa:
+        description: Tests the implementation
+        skills: [testing, quality-assurance]
+    - devops:
+        description: Manages deployment and operations
+        skills: [devops, deployment]
+    - technical_writer:
+        description: Creates and maintains documentation
+        skills: [documentation, technical-writing]
+
+  configuration:
+    max_concurrent_tasks: 3
+    default_retry_attempts: 3
+    notification_channels: [slack, email]
+    artifact_storage: s3://bmad-artifacts/windsurf-cascade
+
+  hooks:
+    pre_task:
+      - name: validate_environment
+        script: scripts/validate_environment.sh
+    post_task:
+      - name: update_dashboard
+        script: scripts/update_dashboard.sh
+
+  templates:
+    story: templates/windsurf-story-template.md
+    task: templates/windsurf-task-template.md
+    prd: templates/windsurf-prd-template.md
+
+  metrics:
+    - name: velocity
+      type: numeric
+      description: Story points completed per sprint
+    - name: cycle_time
+      type: duration
+      description: Time from start to completion of tasks
+    - name: defect_density
+      type: numeric
+      description: Number of defects per 1000 lines of code
+
+  reports:
+    - name: sprint_report
+      template: templates/sprint-report.md
+      frequency: sprint
+    - name: burndown_chart
+      type: chart
+      data_source: velocity_metrics
+      frequency: daily

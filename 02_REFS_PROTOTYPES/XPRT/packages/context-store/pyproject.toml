@@ -1,0 +1,19 @@
+[project]
+name = "context-store"
+version = "0.1.0"
+description = "context store for aider"
+authors = [
+    {name = "Antonio Reid", email = "read.musik@gmail.com"},
+]
+dependencies = []
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+
+[tool.pdm]
+distribution = true

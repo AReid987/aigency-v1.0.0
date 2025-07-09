@@ -1,0 +1,55 @@
+{
+  "name": "nextjs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "tsx db/seed.ts"
+  },
+  "dependencies": {
+    "@paralleldrive/cuid2": "^2.2.2",
+    "@react-spring/three": "^10.0.1",
+    "@react-three/drei": "^10.1.2",
+    "@react-three/fiber": "^9.1.2",
+    "@types/d3": "^7.4.3",
+    "@types/pg": "^8.15.2",
+    "d3": "^7.9.0",
+    "drizzle-orm": "^0.44.1",
+    "framer-motion": "^12.15.0",
+    "next": "15.2.0",
+    "postgres": "^3.4.7",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "three": "^0.177.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/react": "19.0.10",
+    "@types/react-dom": "19.0.4",
+    "@types/three": "^0.176.0",
+    "drizzle-kit": "^0.31.1",
+    "eslint": "^9",
+    "eslint-config-next": "15.2.0",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.0.10",
+      "@types/react-dom": "19.0.4"
+    },
+    "onlyBuiltDependencies": [
+      "sharp",
+      "unrs-resolver"
+    ]
+  }
+}

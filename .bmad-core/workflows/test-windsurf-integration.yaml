@@ -1,0 +1,91 @@
+workflow:
+  id: test-windsurf-integration
+  name: Test Windsurf Cascade Integration
+  description: >-
+    A test workflow to verify the BMAD integration with Windsurf Cascade.
+    This workflow performs basic operations to ensure the environment is properly configured.
+  type: test
+  
+  sequence:
+    - step: environment_check
+      agent: system
+      action: check_environment
+      notes: |
+        Verify that the Windsurf Cascade environment is properly configured:
+        - Check for required tools and dependencies
+        - Verify file system access
+        - Check network connectivity
+
+    - step: create_test_files
+      agent: windsurf-cascade-agent
+      action: create_test_files
+      notes: |
+        Create test files to verify file system operations:
+        - Create a test directory structure
+        - Generate sample files
+        - Verify file creation
+
+    - step: code_generation_test
+      agent: windsurf-cascade-agent
+      action: generate_test_code
+      notes: |
+        Test code generation capabilities:
+        - Generate a simple function
+        - Create a test case
+        - Verify the generated code
+
+    - step: documentation_test
+      agent: windsurf-cascade-agent
+      action: generate_documentation
+      notes: |
+        Test documentation generation:
+        - Generate API documentation
+        - Create a README file
+        - Verify documentation format
+
+    - step: cleanup
+      agent: system
+      action: cleanup_test_files
+      notes: |
+        Clean up test files and temporary data:
+        - Remove test directories
+        - Clean up any temporary files
+        - Verify cleanup
+
+  expected_outputs:
+    - path: tests/integration/results.json
+      description: Test results in JSON format
+    - path: docs/test-report.md
+      description: Human-readable test report
+
+  success_criteria:
+    - All test steps complete without errors
+    - Generated files match expected formats
+    - No permission or access issues encountered
+
+  failure_handling:
+    - On failure, preserve test artifacts for debugging
+    - Generate detailed error reports
+    - Provide clear error messages for troubleshooting
+
+  hooks:
+    pre_execution:
+      - name: setup_environment
+        script: scripts/test/setup.sh
+    post_execution:
+      - name: generate_report
+        script: scripts/test/generate_report.sh
+
+  metadata:
+    author: BMAD Integration Team
+    version: 1.0.0
+    last_updated: 2025-07-06
+    dependencies:
+      - BMAD Core >= 4.22.0
+      - Windsurf Cascade
+
+  tags:
+    - test
+    - integration
+    - windsurf-cascade
+    - bmad
