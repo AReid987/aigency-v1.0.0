@@ -56,7 +56,7 @@ const CollaboratoryPage: React.FC = () => {
 
     try {
       // const { data: { session } } = await supabase.auth.getSession();
-      const session = { access_token: "" }; // Placeholder
+      const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         setMessages((prevMessages) => [...prevMessages, { id: prevMessages.length + 1, sender: 'ai', text: 'Please log in to send messages.' }]);
         setIsLoading(false);

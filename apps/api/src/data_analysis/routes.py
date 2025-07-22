@@ -2,12 +2,12 @@ from fastapi import APIRouter, UploadFile, File, Depends, HTTPException, status,
 from typing import Dict, Any
 
 from .controllers import analyze_csv_data, generate_bar_chart
-# from ..auth.controllers import get_current_user
+from apps.api.src.auth.controllers import get_current_user
 
 data_analysis_router = APIRouter(
     prefix="/data-analysis",
     tags=["data-analysis"],
-    # dependencies=[Depends(get_current_user)],
+    dependencies=[Depends(get_current_user)],
 )
 
 @data_analysis_router.post("/analyze-csv")

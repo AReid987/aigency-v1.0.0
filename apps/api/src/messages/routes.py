@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
 from uuid import UUID
-from gotrue.types import User as SupabaseUser
 
+from apps.api.src.auth.controllers import get_current_user
+from apps.api.src.auth0.auth import TokenData
 from .controllers import handle_message
-from ..auth.controllers import get_current_user
 
 message_router = APIRouter(
     prefix="/projects/{project_id}/messages",
@@ -20,7 +20,7 @@ class MessageRequest(BaseModel):
 async def post_message(
     project_id: UUID,
     message_request: MessageRequest,
-    current_user: SupabaseUser = Depends(get_current_user)
+    current_user: TokenData = Depends(get_current_user)
 ):
     """
     Handles incoming messages for a specific project.

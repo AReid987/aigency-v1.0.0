@@ -2,6 +2,19 @@
 
 ## 2025-07-22
 
+### Supabase Integration
+- Initialized Supabase client in `apps/api/main.py`.
+- Created `.env` file in `apps/api` for Supabase credentials.
+- Moved `projects`, `messages`, and `user` modules from `02_REFS_PROTOTYPES/uXPRT/uxprt/src/` to `apps/api/src/`.
+- Refactored `projects/controllers.py`, `messages/controllers.py`, and `user/controllers.py` to accept Supabase client as a dependency.
+- Updated `projects/routes.py`, `messages/routes.py`, and `user/routes.py` to pass the Supabase client dependency.
+- Created `apps/api/src/auth/controllers.py` and `apps/api/src/auth/routes.py` for Supabase authentication (login, register, get current user).
+- Re-enabled `get_current_user` dependency in `apps/api/src/data_analysis/routes.py`.
+- Installed `@supabase/supabase-js` and `@supabase/ssr` in `apps/web`.
+- Created `apps/web/lib/supabase.ts` for Supabase client utility.
+- Created `.env.local` in `apps/web` for Supabase environment variables.
+- Updated `apps/web/app/dashboard/page.tsx` and `apps/web/app/collaboratory/[projectId]/page.tsx` to use Supabase for authentication.
+
 ### Corrected Backend Implementation Location
 - Reverted all changes made in `02_REFS_PROTOTYPES/uXPRT/uxprt/`.
 - Created `apps/api` directory for the FastAPI backend.
@@ -61,7 +74,6 @@
 - Verified that `apps/api/main.py` includes the data analysis router.
 - Verified that `apps/web/app/dashboard/page.tsx` correctly implements file upload, analysis results display, and chart generation.
 - Moved `02_REFS_PROTOTYPES/uXPRT/uxprt/src/data_analysis/controllers.py` and `routes.py` to `apps/api/src/data_analysis/`.
-- Temporarily commented out `get_current_user` dependency in `apps/api/src/data_analysis/routes.py`.
 - This completes the verification of Story 3.2.
 
 ## 2025-07-18

@@ -50,9 +50,7 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
-import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
-
+import { Auth0Provider } from '@auth0/auth0-react';
 
 export default function RootLayout({
   children,
@@ -60,12 +58,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider
-      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY!}
-      appearance={{
-        baseTheme: dark,
+    <Auth0Provider
+      domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN!}
+      clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID!}
+      authorizationParams={{
+        redirect_uri: typeof window !== 'undefined' ? window.location.origin : '',
+        audience: process.env.NEXT_PUBLIC_AUTH0_AUDIENCE!,
       }}
-      data-oid="_7wpbm_"
     >
       <html
         lang="en"
@@ -84,6 +83,6 @@ export default function RootLayout({
            <Toaster data-oid="9806pw6" />
         </body>
       </html>
-    </ClerkProvider>
+    </Auth0Provider>
   );
 }

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Upload, BarChart2, Loader2, Rocket } from 'lucide-react';
 import NewProjectModal from '@/components/new-project-modal';
-// import { createClientComponentClient } from '@supabase/ssr';
+import { createClientComponentClient } from '@supabase/ssr';
 
 const DashboardPage = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -18,7 +18,7 @@ const DashboardPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCreatingProject, setIsCreatingProject] = useState(false);
 
-  // const supabase = createClientComponentClient();
+  const supabase = createClientComponentClient();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -92,7 +92,7 @@ const DashboardPage = () => {
 
     try {
       // const { data: { session } } = await supabase.auth.getSession();
-      const session = { access_token: "" }; // Placeholder
+      const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         setMessage('User not authenticated. Please log in to create a project.');
         setIsCreatingProject(false);

@@ -12,6 +12,7 @@
     "auth:dev": "next dev --port 3000 --header 'x-next-auth-dev=1'"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.4.0",
     "@clerk/nextjs": "^6.22.0",
     "@clerk/themes": "^2.2.50",
     "@clerk/types": "^4.68.0",
