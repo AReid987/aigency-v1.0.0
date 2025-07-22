@@ -27,6 +27,14 @@
 - Updated `apps/web/app/collaboratory/[projectId]/page.tsx` to use the `CodeBlock` component and call the code generation endpoint.
 - This completes the backend and frontend tasks for Story 1.3.
 
+### Completed Story 1.4: Add a Functional Contact Form
+- Created `apps/api/src/contact/controllers.py` and `apps/api/src/contact/routes.py` for the contact form backend.
+- Updated `apps/api/main.py` to include the new contact router.
+- Created `apps/web/components/ui/contact-form.tsx` for the frontend contact form component.
+- Created `apps/web/components/ui/textarea.tsx` for the textarea component used in the contact form.
+- Updated `apps/web/app/page.tsx` to render the `ContactForm` component.
+- This completes the backend and frontend tasks for Story 1.4.
+
 ## 2025-07-18
 
 ### Completed Data Visualization (Story 3.2)
