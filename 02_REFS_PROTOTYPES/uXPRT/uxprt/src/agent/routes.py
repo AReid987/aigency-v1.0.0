@@ -1,19 +1,9 @@
-from fastapi import APIRouter
+
+from fastapi import APIRouter, Depends
+from src.agent.controllers import get_agent_response, Message
 
 router = APIRouter()
 
-@router.post("/chat")
-async def chat():
-    # TODO: Implement chat logic
-    pass
-
-# Optional endpoints
-# @router.get("/state")
-# async def get_state():
-#     # TODO: Implement get state logic
-#     pass
-
-# @router.post("/command")
-# async def handle_command():
-#     # TODO: Implement handle command logic
-#     pass
+@router.post("/agent/respond")
+def respond(message: Message):
+    return get_agent_response(message)

@@ -8,8 +8,12 @@
     ],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
-    }
+      "@/*": [
+        "./*"
+      ]
+    },
+    "jsx": "preserve",
+    "jsxImportSource": "react"
   },
   "include": [
     "**/*.ts",

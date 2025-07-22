@@ -1,3 +1,4 @@
+import React from "react";
 import { Progress } from "@repo/ui/progress";
 
 interface ProgressTrackerProps {

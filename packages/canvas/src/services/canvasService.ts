@@ -115,7 +115,8 @@ class CanvasService {
     undo(): { nodes: CanvasNode[]; edges: CanvasEdge[] } | null {
         if (this.currentHistoryIndex > 0) {
             this.currentHistoryIndex--;
-            return this.history[this.currentHistoryIndex];
+            const state = this.history[this.currentHistoryIndex];
+            return state !== undefined ? state : null;
         }
         return null;
     }
@@ -123,7 +124,8 @@ class CanvasService {
     redo(): { nodes: CanvasNode[]; edges: CanvasEdge[] } | null {
         if (this.currentHistoryIndex < this.history.length - 1) {
             this.currentHistoryIndex++;
-            return this.history[this.currentHistoryIndex];
+            const state = this.history[this.currentHistoryIndex];
+            return state !== undefined ? state : null;
         }
         return null;
     }

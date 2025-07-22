@@ -5,7 +5,7 @@ description = "Default template for PDM package"
 authors = [
     {name = "Antonio Reid", email = "read.musik@gmail.com"},
 ]
-dependencies = ["uvicorn[standard]>=0.34.2", "python-dotenv>=1.1.0", "fastapi>=0.115.12", "supabase>=2.15.1", "bcrypt>=4.3.0", "h2>=4.2.0", "pydantic[email]>=2.11.4"]
+dependencies = ["uvicorn[standard]>=0.34.2", "python-dotenv>=1.1.0", "fastapi>=0.115.12", "supabase>=2.15.1", "bcrypt>=4.3.0", "h2>=4.2.0", "pydantic[email]>=2.11.4", "pandas>=2.2.2", "plotly>=5.22.0"]
 requires-python = ">=3.12"
 readme = "README.md"
 license = {text = "MIT"}

@@ -10,7 +10,8 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
 } from "reactflow";
-import { ViewType } from "../../types";
+import { ViewType } from "../../types/index";
+import { BackgroundVariant } from "reactflow";
 import { canvasService } from "../../services/canvasService";
 
 interface ArchVisionCanvasProps {
@@ -92,16 +93,20 @@ export const ArchVisionCanvas: React.FC<ArchVisionCanvasProps> = ({
 
   // Convert back to ReactFlow format
   const reactFlowNodes = useMemo(() => {
-    return transformedData.nodes.map((node) => ({
-      ...node,
-      style:
-        view === "iso"
-          ? {
-              transform: "perspective(1000px) rotateX(30deg) rotateY(-30deg)",
-              ...node.style,
-            }
-          : node.style,
-    }));
+    return transformedData.nodes.map((node) => {
+      const reactFlowNode: Node = {
+        ...node,
+        style: node.style || {},
+      };
+
+      if (view === "iso") {
+        reactFlowNode.style = {
+          ...reactFlowNode.style,
+          transform: "perspective(1000px) rotateX(30deg) rotateY(-30deg)",
+        };
+      }
+      return reactFlowNode;
+    });
   }, [transformedData.nodes, view]);
 
   const handleAutoLayout = useCallback(() => {
@@ -134,7 +139,7 @@ export const ArchVisionCanvas: React.FC<ArchVisionCanvasProps> = ({
         data-oid="d1t_hby"
       >
         <Background
-          variant={view === "iso" ? "dots" : "lines"}
+          variant={view === "iso" ? "dots" as BackgroundVariant : "lines" as BackgroundVariant}
           gap={view === "iso" ? 20 : 12}
           data-oid="7ozshyo"
         />
@@ -205,11 +210,7 @@ export const ArchVisionCanvas: React.FC<ArchVisionCanvasProps> = ({
         </Panel>
       </ReactFlow>
 
-      <style jsx data-oid="wfg51lr">{`
-        .perspective-canvas {
-          transform-style: preserve-3d;
-        }
-      `}</style>
+      
     </div>
   );
 };

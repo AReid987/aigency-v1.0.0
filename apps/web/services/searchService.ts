@@ -4,6 +4,12 @@ import axios from 'axios';
 const API_KEY = process.env.GOOGLE_PSE_API_KEY;
 const SEARCH_ENGINE_ID = process.env.GOOGLE_PSE_ENGINE_ID;
 
+interface SearchItem {
+  title: string;
+  link: string;
+  snippet: string;
+}
+
 const searchService = {
   async search(query: string) {
     try {
@@ -15,7 +21,7 @@ const searchService = {
         }
       });
 
-      return response.data.items.map(item => ({
+      return response.data.items.map((item: SearchItem) => ({
         title: item.title,
         link: item.link,
         snippet: item.snippet

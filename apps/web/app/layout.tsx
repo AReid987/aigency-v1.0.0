@@ -1,9 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
 import { Toaster } from "../src/components/ui/toaster";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: {
@@ -55,7 +52,7 @@ export const viewport: Viewport = {
 
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
-import { Metadata } from "next";
+
 
 export default function RootLayout({
   children,
@@ -76,8 +73,11 @@ export default function RootLayout({
         className="dark min-h-screen"
          data-oid="_8cle84"
        >
+        <head>
+          <link href="https://api.fontshare.com/v2/css?f[]=chillax@400,500,600,700&f[]=zodiak@300,400,500,600,700&display=swap" rel="stylesheet" />
+        </head>
          <body
-           className={`${inter.variable} font-sans antialiased min-h-screen`}
+           className={`antialiased min-h-screen`}
            data-oid="a55bw97"
          >
            {children}

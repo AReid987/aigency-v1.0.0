@@ -1,23 +1,20 @@
-import {
+import React, {
  useContext,
  createContext,
  useState,
  useEffect,
 } from 'react';
 import { useUser } from '@clerk/nextjs';
-import { User as UserResource } from '@clerk/nextjs';
-import { Clerk } from '@clerk/backend';
+import { UserResource } from '@clerk/types';
 
 interface AuthContextType {
   isSignedIn: boolean;
   user: UserResource | null;
-  clerk: any;
 }
 
 const AuthContext = createContext<AuthContextType>({
   isSignedIn: false,
   user: null,
-  clerk: null,
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -31,12 +28,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setLocalUser(null);
     }
   }, [isSignedIn, user, isLoaded]);
-const value: AuthContextType = {
-const value: AuthContextType = {
+
 const value: AuthContextType = {
 isSignedIn: !!localUser,
 user: localUser,
-clerk: clerk || null,
 };
 
 

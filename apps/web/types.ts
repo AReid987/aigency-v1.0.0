@@ -68,3 +68,12 @@ export interface DocumentState {
   isLoading: boolean;
   error?: string;
 }
+
+export interface SearchResult {
+  id: string;
+  title: string;
+  description: string;
+  url: string;
+  type: string;
+  snippet: string;
+}

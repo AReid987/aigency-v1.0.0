@@ -13,12 +13,12 @@ This document outlines the project backlog, organized by Epics. Each task within
 - [x] Task: User Authentication (Complexity: 5) - FastAPI endpoints with Supabase Auth (local) complete.
 - [x] Task: Basic Data Storage (Complexity: 6) - Core schema defined, Supabase local DB reset & migrations applied.
 - [x] Task: User Interface Framework Setup (Complexity: 4) - Basic Next.js structure, layout, and placeholder Login/Signup forms at `/auth` route are functional.
-- [ ] Task: Implement Custom Auth Form UI (based on 21st.dev example, XPRT branding, Radix UI) (Complexity: 5)
-- [ ] Task: Add visual feedback (e.g., loading state) to login/signup form submit buttons (Complexity: 3)
-- [ ] Task: Implement email confirmation flow for new user sign-ups (Complexity: 5)
-- [ ] Task: Design and implement micro-interactions for successful login/signup (Complexity: 3)
-- [ ] Task: Design and implement micro-interactions for unsuccessful login/signup attempts (Complexity: 3)
-- [ ] Task: Implement client-side and server-side form field validation for auth forms (email format, password strength, required fields) (Complexity: 5)
+- [x] Task: Implement Custom Auth Form UI (based on 21st.dev example, XPRT branding, Radix UI) (Complexity: 5)
+- [x] Task: Add visual feedback (e.g., loading state) to login/signup form submit buttons (Complexity: 3)
+- [x] Task: Implement email confirmation flow for new user sign-ups (Complexity: 5)
+- [x] Task: Design and implement micro-interactions for successful login/signup (Complexity: 3)
+- [x] Task: Design and implement micro-interactions for unsuccessful login/signup attempts (Complexity: 3)
+- [x] Task: Implement client-side and server-side form field validation for auth forms (email format, password strength, required fields) (Complexity: 5)
 
 ### Epic 2: Advanced Features
 
@@ -28,7 +28,7 @@ This document outlines the project backlog, organized by Epics. Each task within
 
 - [x] Task: Implement Search Functionality (API Structure & DB) (Complexity: 4 of 7) - FastAPI endpoint for search created, authenticates user, stores placeholder results in DB linked to `auth.users`.
   - [ ] Sub-Task: Integrate Brave Search MCP Tool into Search API (Complexity: 3 of 7)
-- [ ] Task: Add User Profiles (Complexity: 5)
+- [x] Task: Add User Profiles (Complexity: 5)
 - [ ] Task: Develop Reporting Module (Complexity: 8)
 - [ ] Task: Implement Mem0 for user personalization
   - Enable Agents to determine and remember User Preferences & Habits

@@ -23,6 +23,7 @@ Operational Guidelines:
 - Use `read_file` to confirm content before applying diffs if unsure.
 - Execute CLI commands using `execute_command`, explaining clearly.
 - Escalate tasks outside core expertise to appropriate specialists via the lead or coordinator.
+- **BMAD Handoff:** If the user's request involves initial project planning, such as creating a "project brief," "system architecture," "technical specifications," or "refined backlog," delegate this to the `bmad-bmad-orchestrator` mode. The delegation message should be clear, for example: "Please initiate the project planning workflow to produce the project brief, system architecture, and refined backlog."
 """ # << REQUIRED >> (Adapted from source, added standard guidelines, updated KB guidance)
 
 # --- LLM Configuration (Optional) ---
@@ -57,6 +58,7 @@ categories = ["Executive", "Project Management", "Coordination", "Core System"] 
 delegate_to = [
   # Directors (01x)
   "manager-product", "manager-project", "manager-onboarding", "core-architect",
+"bmad-bmad-orchestrator",
   # Leads (02x)
   "lead-backend", "lead-db", "lead-design", "cloud-aws", "cloud-azure",
   "lead-devops", "cloud-gcp", "lead-frontend", "lead-qa", "lead-security",

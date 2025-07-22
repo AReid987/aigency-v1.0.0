@@ -1,5 +1,7 @@
 # Turborepo starter
 
+![Alt](https://repobeats.axiom.co/api/embed/580c40f2a5931da3bbf3400c1d5d2908222c809e.svg "Repobeats analytics image")
+
 This Turborepo starter is maintained by the Turborepo core team.
 
 ## Using this example

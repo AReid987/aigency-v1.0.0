@@ -1,10 +1,21 @@
 import { useEffect, useRef } from "react";
 import * as d3 from "d3";
+import { SimulationNodeDatum, SimulationLinkDatum } from 'd3';
+
+interface GraphNode extends SimulationNodeDatum {
+  id: string;
+  label: string;
+}
+
+interface GraphLink extends SimulationLinkDatum<GraphNode> {
+  source: string | GraphNode;
+  target: string | GraphNode;
+}
 
 interface KnowledgeGraphProps {
   data: {
-    nodes: { id: string; label: string }[];
-    links: { source: string; target: string }[];
+    nodes: GraphNode[];
+    links: GraphLink[];
   };
 }
 
@@ -23,10 +34,10 @@ export default function KnowledgeGraph({ data }: KnowledgeGraphProps) {
 
     // Create a force simulation
     const simulation = d3
-      .forceSimulation(data.nodes)
+      .forceSimulation<GraphNode, GraphLink>(data.nodes)
       .force(
         "link",
-        d3.forceLink(data.links).id((d) => (d as any).id),
+        d3.forceLink<GraphNode, GraphLink>(data.links).id((d) => d.id),
       )
       .force("charge", d3.forceManyBody().strength(-100))
       .force("center", d3.forceCenter(width / 2, height / 2));
@@ -52,7 +63,7 @@ export default function KnowledgeGraph({ data }: KnowledgeGraphProps) {
       .attr("fill", "#69b3a2")
       .call(
         d3
-          .drag()
+          .drag<SVGCircleElement, GraphNode>()
           .on("start", (event) => {
             if (!event.active) simulation.alphaTarget(0.3).restart();
             event.subject.fx = event.subject.x;
@@ -84,14 +95,14 @@ export default function KnowledgeGraph({ data }: KnowledgeGraphProps) {
     // Update positions on each tick
     simulation.on("tick", () => {
       link
-        .attr("x1", (d) => (d.source as any).x)
-        .attr("y1", (d) => (d.source as any).y)
-        .attr("x2", (d) => (d.target as any).x)
-        .attr("y2", (d) => (d.target as any).y);
+        .attr("x1", (d) => (d.source as GraphNode).x!)
+        .attr("y1", (d) => (d.source as GraphNode).y!)
+        .attr("x2", (d) => (d.target as GraphNode).x!)
+        .attr("y2", (d) => (d.target as GraphNode).y!);
 
-      node.attr("cx", (d) => d.x).attr("cy", (d) => d.y);
+      node.attr("cx", (d) => d.x!).attr("cy", (d) => d.y!);
 
-      label.attr("x", (d) => d.x).attr("y", (d) => d.y);
+      label.attr("x", (d) => d.x!).attr("y", (d) => d.y!);
     });
 
     // Cleanup on unmount

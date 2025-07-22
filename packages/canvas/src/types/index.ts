@@ -10,6 +10,7 @@ export interface CanvasNode {
     type: string;
     position: { x: number; y: number };
     data: Record<string, any>;
+    style?: React.CSSProperties;
 }
 
 export interface CanvasEdge {

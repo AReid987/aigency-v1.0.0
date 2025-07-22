@@ -1,3 +1,4 @@
+import React from 'react';
 import Image, { type ImageProps } from "next/image";
 import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
@@ -18,7 +19,9 @@ const ThemeImage = (props: Props) => {
   );
 };
 
-export default function Home() {
+interface HomePageProps {}
+
+export default function Home({}: HomePageProps) {
   return (
     <div className={styles.page} data-oid="r5h47l8">
       <main className={styles.main} data-oid="cyg1jqs">
