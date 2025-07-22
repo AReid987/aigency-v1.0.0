@@ -2,19 +2,30 @@
 
 ## 2025-07-22
 
+### Corrected Backend Implementation Location
+- Reverted all changes made in `02_REFS_PROTOTYPES/uXPRT/uxprt/`.
+- Created `apps/api` directory for the FastAPI backend.
+- Re-implemented agent logic in `apps/api/src/agent/controllers.py` and `apps/api/src/agent/routes.py`.
+- Re-implemented scaffolding logic in `apps/api/src/scaffolding/controllers.py` and `apps/api/src/scaffolding/routes.py`.
+- Re-implemented code generation logic in `apps/api/src/code_generation/controllers.py` and `apps/api/src/code_generation/routes.py`.
+- Updated `apps/api/main.py` to include the new routers.
+
 ### Completed Story 1.1: Initiate a New Project via Conversation
 - Integrated the initial AI agent logic to provide a simple acknowledgment response to the user's first message.
-- Created `02_REFS_PROTOTYPES/uXPRT/uxprt/src/agent/controllers.py` with basic response logic.
-- Created `02_REFS_PROTOTYPES/uXPRT/uxprt/src/agent/routes.py` to expose the agent endpoint.
-- Updated `02_REFS_PROTOTYPES/uXPRT/uxprt/main.py` to include the new agent router.
-- Updated `apps/web/app/collaboratory/[projectId]/page.tsx` to call the new agent endpoint.
+- Updated `apps/web/app/collaboratory/[projectId]/page.tsx` to call the new agent endpoint in `apps/api`.
 - This completes the "Integrate the initial AI agent logic to provide a simple acknowledgment response to the user's first message" backend task.
 
 ### Completed Story 1.2: Scaffold the Project's File Structure
-- Verified the backend scaffolding logic in `02_REFS_PROTOTYPES/uXPRT/uxprt/src/scaffolding/controllers.py`.
+- Verified the backend scaffolding logic in `apps/api/src/scaffolding/controllers.py`.
 - Created a `FileTree` component in `apps/web/components/ui/file-tree.tsx` to display the file structure.
 - Updated `apps/web/app/collaboratory/[projectId]/page.tsx` to display the file tree and "Approve" and "Request Changes" buttons.
 - This completes the "Design and build a UI component to display a file tree structure within the chat interface", "Implement the logic to receive the file structure data from the backend and render it using the new component", and "Create 'Approve' and 'Request Changes' buttons that appear after the file structure is displayed" frontend tasks.
+
+### Completed Story 1.3: Generate Initial Boilerplate Code
+- Created a "Code Generation" service in `apps/api/src/code_generation/controllers.py` and `apps/api/src/code_generation/routes.py`.
+- Created a `CodeBlock` component in `apps/web/components/ui/code-block.tsx` for displaying code with syntax highlighting.
+- Updated `apps/web/app/collaboratory/[projectId]/page.tsx` to use the `CodeBlock` component and call the code generation endpoint.
+- This completes the backend and frontend tasks for Story 1.3.
 
 ## 2025-07-18
 

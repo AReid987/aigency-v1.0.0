@@ -12,12 +12,15 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
 import FileTree from '@/components/ui/file-tree';
+import CodeBlock from '@/components/ui/code-block';
 
 interface Message {
   id: number;
   sender: 'user' | 'ai';
   text: string;
   fileTree?: any;
+  code?: string;
+  language?: string;
 }
 
 const CollaboratoryPage: React.FC = () => {
@@ -58,25 +61,97 @@ const CollaboratoryPage: React.FC = () => {
         return;
       }
 
-      const response = await fetch(`http://localhost:8000/api/agent/respond`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${session.access_token}`,
-        },
-        body: JSON.stringify({ text: userMessageText }),
-      });
+      let aiResponse: Message;
+
+      if (userMessageText.toLowerCase().includes('create web application')) {
+        // Call scaffolding endpoint
+        const scaffoldResponse = await fetch(`http://localhost:8000/api/projects/${projectId}/scaffold`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({ project_name: `project-${projectId}` }),
+        });
+
+        const scaffoldData = await scaffoldResponse.json();
+
+        if (scaffoldResponse.ok) {
+          aiResponse = { id: messages.length + 2, sender: 'ai', text: `Project scaffolding generated successfully! Here's the structure:`, fileTree: scaffoldData.file_tree };
+        } else {
+          aiResponse = { id: messages.length + 2, sender: 'ai', text: `Error generating scaffolding: ${scaffoldData.detail || 'An error occurred.'}` };
+        }
+      } else if (userMessageText.toLowerCase().includes('generate boilerplate code')) {
+        // Call code generation endpoint for main.py
+        const mainPyContent = `from fastapi import FastAPI\n\napp = FastAPI(\n    title=\"My App\",\n    description=\"My awesome FastAPI application\",\n    version=\"1.0.0\",\n)\n\n@app.get(\"/\")\nasync def read_root():\n    return {\"message\": \"Hello from FastAPI!\"}\n`;
+        const mainPyResponse = await fetch(`http://localhost:8000/api/code-generation/generate`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({ file_path: `/tmp/project-${projectId}/apps/api/main.py`, content: mainPyContent }),
+        });
+
+        const mainPyData = await mainPyResponse.json();
+
+        // Call code generation endpoint for layout.tsx
+        const layoutTsxContent = `import './globals.css';\n\nexport default function RootLayout({ children }: { children: React.ReactNode }) {\n  return (\n    <html lang=\"en\">\n      <body>{children}</body>\n    </html>\n  );\n}\n`;
+        const layoutTsxResponse = await fetch(`http://localhost:8000/api/code-generation/generate`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({ file_path: `/tmp/project-${projectId}/apps/web/app/layout.tsx`, content: layoutTsxContent }),
+        });
+
+        const layoutTsxData = await layoutTsxResponse.json();
+
+        // Call code generation endpoint for page.tsx
+        const pageTsxContent = `export default function Page() {\n  return ((\n    <div className=\"flex min-h-screen flex-col items-center justify-between p-24\">\n      <h1>Welcome to your new Aigency project!</h1>\n    </div>\n  ));\n}\n`;
+        const pageTsxResponse = await fetch(`http://localhost:8000/api/code-generation/generate`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({ file_path: `/tmp/project-${projectId}/apps/web/app/page.tsx`, content: pageTsxContent }),
+        });
+
+        const pageTsxData = await pageTsxResponse.json();
+
+        if (mainPyResponse.ok && layoutTsxResponse.ok && pageTsxResponse.ok) {
+          aiResponse = {
+            id: messages.length + 2,
+            sender: 'ai',
+            text: `Boilerplate code generated successfully! You can find the files in /tmp/project-${projectId}.`,
+            code: `// apps/api/main.py\n${mainPyContent}\n\n// apps/web/app/layout.tsx\n${layoutTsxContent}\n\n// apps/web/app/page.tsx\n${pageTsxContent}`,
+            language: 'python' // Or 'typescript' depending on what you want to show first
+          };
+        } else {
+          aiResponse = { id: messages.length + 2, sender: 'ai', text: `Error generating boilerplate code: ${mainPyData.detail || layoutTsxData.detail || pageTsxData.detail || 'An error occurred.'}` };
+        }
+      } else {
+        // Handle other messages (e.g., send to generic agent endpoint)
+        const response = await fetch(`http://localhost:8000/api/agent/respond`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}`,
+          },
+          body: JSON.stringify({ text: userMessageText }),
+        });
 
         const data = await response.json();
 
         if (response.ok) {
-          const aiResponse: Message = { id: messages.length + 2, sender: 'ai', text: data.text, fileTree: data.file_tree };
-          setMessages((prevMessages) => [...prevMessages, aiResponse]);
+          aiResponse = { id: messages.length + 2, sender: 'ai', text: data.text };
         } else {
-          const errorResponse: Message = { id: messages.length + 2, sender: 'ai', text: `Error: ${data.detail || 'Failed to get response from AI.'}` };
-          setMessages((prevMessages) => [...prevMessages, errorResponse]);
+          aiResponse = { id: messages.length + 2, sender: 'ai', text: `Error: ${data.detail || 'Failed to get response from AI.'}` };
         }
       }
+      setMessages((prevMessages) => [...prevMessages, aiResponse]);
     } catch (error) {
       const errorResponse: Message = { id: messages.length + 2, sender: 'ai', text: 'An unexpected error occurred. Please try again.' };
       setMessages((prevMessages) => [...prevMessages, errorResponse]);
