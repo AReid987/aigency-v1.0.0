@@ -21,6 +21,7 @@ interface Message {
   fileTree?: any;
   code?: string;
   language?: string;
+  previewUrl?: string;
 }
 
 const CollaboratoryPage: React.FC = () => {
@@ -31,6 +32,7 @@ const CollaboratoryPage: React.FC = () => {
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [currentPreviewUrl, setCurrentPreviewUrl] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   // const supabase = createClientComponentClient();
 
@@ -132,6 +134,24 @@ const CollaboratoryPage: React.FC = () => {
         } else {
           aiResponse = { id: messages.length + 2, sender: 'ai', text: `Error generating boilerplate code: ${mainPyData.detail || layoutTsxData.detail || pageTsxData.detail || 'An error occurred.'}` };
         }
+      } else if (userMessageText.toLowerCase().includes('preview web application')) {
+        // Call preview endpoint
+        const previewResponse = await fetch(`http://localhost:8000/api/projects/${projectId}/preview`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${session.access_token}`,
+          },
+        });
+
+        const previewData = await previewResponse.json();
+
+        if (previewResponse.ok) {
+          aiResponse = { id: messages.length + 2, sender: 'ai', text: `Preview generated successfully!`, previewUrl: previewData.preview_url };
+          setCurrentPreviewUrl(previewData.preview_url);
+        } else {
+          aiResponse = { id: messages.length + 2, sender: 'ai', text: `Error generating preview: ${previewData.detail || 'An error occurred.'}` };
+        }
       } else {
         // Handle other messages (e.g., send to generic agent endpoint)
         const response = await fetch(`http://localhost:8000/api/agent/respond`, {
@@ -183,6 +203,12 @@ const CollaboratoryPage: React.FC = () => {
                 {msg.text}
               </ReactMarkdown>
               {msg.fileTree && <FileTree fileTree={msg.fileTree} />}
+              {msg.code && <CodeBlock language={msg.language || 'tsx'} value={msg.code} />}
+              {msg.previewUrl && (
+                <div className="mt-4 w-full h-96 bg-white rounded-lg overflow-hidden">
+                  <iframe src={msg.previewUrl} className="w-full h-full border-none" title="Web Application Preview"></iframe>
+                </div>
+              )}
               {msg.fileTree && (
                 <div className="flex space-x-2 mt-2">
                   <Button className="bg-green-500 hover:bg-green-600">Approve</Button>

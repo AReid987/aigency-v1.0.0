@@ -49,6 +49,21 @@
 - Implemented drag-and-drop functionality with optimistic UI updates and API calls to update story status.
 - This completes the backend and frontend tasks for Story 2.2.
 
+### Completed Story 3.1: Preview Generated Web Application
+- Created `apps/api/src/preview/controllers.py` to simulate preview generation.
+- Created `apps/api/src/preview/routes.py` to expose the preview endpoint.
+- Updated `apps/api/main.py` to include the new preview router.
+- Updated `apps/web/app/collaboratory/[projectId]/page.tsx` to include preview functionality (button to trigger, iframe to display).
+- This completes the backend and frontend tasks for Story 3.1.
+
+### Verified Story 3.2: Create and Display Data Visualization
+- Verified that `apps/api/src/data_analysis/controllers.py` and `apps/api/src/data_analysis/routes.py` are correctly implemented for CSV analysis and chart generation.
+- Verified that `apps/api/main.py` includes the data analysis router.
+- Verified that `apps/web/app/dashboard/page.tsx` correctly implements file upload, analysis results display, and chart generation.
+- Moved `02_REFS_PROTOTYPES/uXPRT/uxprt/src/data_analysis/controllers.py` and `routes.py` to `apps/api/src/data_analysis/`.
+- Temporarily commented out `get_current_user` dependency in `apps/api/src/data_analysis/routes.py`.
+- This completes the verification of Story 3.2.
+
 ## 2025-07-18
 
 ### Completed Data Visualization (Story 3.2)
