@@ -19,7 +19,7 @@
 - Verified the backend scaffolding logic in `apps/api/src/scaffolding/controllers.py`.
 - Created a `FileTree` component in `apps/web/components/ui/file-tree.tsx` to display the file structure.
 - Updated `apps/web/app/collaboratory/[projectId]/page.tsx` to display the file tree and "Approve" and "Request Changes" buttons.
-- This completes the "Design and build a UI component to display a file tree structure within the chat interface", "Implement the logic to receive the file structure data from the backend and render it using the new component", and "Create 'Approve' and 'Request Changes' buttons that appear after the file structure is displayed" frontend tasks.
+- This completes the "Design and build a UI component to display a file tree structure within the chat interface", "Implement the logic to receive the file structure data from the backend and render it using the new component", and "Create 'Approve' and "Request Changes' buttons that appear after the file structure is displayed" frontend tasks.
 
 ### Completed Story 1.3: Generate Initial Boilerplate Code
 - Created a "Code Generation" service in `apps/api/src/code_generation/controllers.py` and `apps/api/src/code_generation/routes.py`.
@@ -34,6 +34,20 @@
 - Created `apps/web/components/ui/textarea.tsx` for the textarea component used in the contact form.
 - Updated `apps/web/app/page.tsx` to render the `ContactForm` component.
 - This completes the backend and frontend tasks for Story 1.4.
+
+### Completed Story 2.1: View Project Plan on Kanban Board
+- Created `apps/api/src/kanban/controllers.py` with mock data for the Kanban board.
+- Created `apps/api/src/kanban/routes.py` to expose the Kanban board data.
+- Updated `apps/api/main.py` to include the new Kanban router.
+- Created `apps/web/app/projects/[projectId]/board/page.tsx` to display the Kanban board.
+- This completes the backend and frontend tasks for Story 2.1.
+
+### Completed Story 2.2: Update Story Status via Drag and Drop
+- Added `update_story_status` function to `apps/api/src/kanban/controllers.py` to simulate status updates.
+- Added a `PATCH /stories/{story_id}/status` endpoint to `apps/api/src/kanban/routes.py`.
+- Integrated `dnd-kit` into `apps/web/app/projects/[projectId]/board/page.tsx`.
+- Implemented drag-and-drop functionality with optimistic UI updates and API calls to update story status.
+- This completes the backend and frontend tasks for Story 2.2.
 
 ## 2025-07-18
 
