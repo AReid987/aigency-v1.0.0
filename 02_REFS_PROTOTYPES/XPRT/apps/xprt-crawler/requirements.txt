@@ -8,7 +8,7 @@ aiohappyeyeballs==2.4.6
     # via
     #   xprt-crawler (pyproject.toml)
     #   aiohttp
-aiohttp==3.11.12
+aiohttp==3.13.3
     # via
     #   xprt-crawler (pyproject.toml)
     #   litellm
@@ -62,7 +62,7 @@ colorama==0.4.6
     # via
     #   xprt-crawler (pyproject.toml)
     #   crawl4ai
-crawl4ai==0.4.248
+crawl4ai==0.8.0
     # via xprt-crawler (pyproject.toml)
 cryptography==44.0.1
     # via
@@ -84,7 +84,7 @@ fake-useragent==2.0.3
     # via
     #   xprt-crawler (pyproject.toml)
     #   crawl4ai
-filelock==3.17.0
+filelock==3.20.3
     # via
     #   xprt-crawler (pyproject.toml)
     #   huggingface-hub
@@ -101,7 +101,7 @@ greenlet==3.1.1
     # via
     #   xprt-crawler (pyproject.toml)
     #   playwright
-h11==0.14.0
+h11==0.16.0
     # via
     #   xprt-crawler (pyproject.toml)
     #   httpcore
@@ -150,7 +150,7 @@ jsonschema-specifications==2024.10.1
     # via
     #   xprt-crawler (pyproject.toml)
     #   jsonschema
-litellm==1.61.11
+litellm==1.61.15
     # via
     #   xprt-crawler (pyproject.toml)
     #   crawl4ai
@@ -175,7 +175,7 @@ multidict==6.1.0
     #   xprt-crawler (pyproject.toml)
     #   aiohttp
     #   yarl
-nltk==3.9.1
+nltk==3.9.2
     # via
     #   xprt-crawler (pyproject.toml)
     #   crawl4ai
@@ -192,7 +192,7 @@ packaging==24.2
     # via
     #   xprt-crawler (pyproject.toml)
     #   huggingface-hub
-pillow==10.4.0
+pillow==12.1.0
     # via
     #   xprt-crawler (pyproject.toml)
     #   crawl4ai
@@ -259,7 +259,7 @@ regex==2024.11.6
     #   xprt-crawler (pyproject.toml)
     #   nltk
     #   tiktoken
-requests==2.32.3
+requests==2.32.4
     # via
     #   xprt-crawler (pyproject.toml)
     #   crawl4ai
@@ -319,7 +319,7 @@ typing-extensions==4.12.2
     #   pyee
     #   pyopenssl
     #   referencing
-urllib3==2.3.0
+urllib3==2.6.3
     # via
     #   xprt-crawler (pyproject.toml)
     #   requests
