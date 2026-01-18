@@ -1,0 +1,14 @@
+app = "scout-agent"
+primary_region = "iad"  # Virginia
+
+[build]
+  image = "scout-agent:latest"
+
+[env]
+  CONFIG_PATH = "/app/config.ini"
+
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+  auto_stop_machines = true
+  auto_start_machines = true

@@ -1,0 +1,22 @@
+# Technical Stack
+
+- application_framework: Python (for core logic), Rust (for performance-critical components like `semtools`)
+- database_system: ChromaDB (Vector DB), Neo4j (Graph DB), Pixeltable (for multimodal data storage and built-in vector search)
+- javascript_framework: N/A (core is Python), but potential for web-based UI for monitoring/configuration.
+- import_strategy: uv (for Python package management, as seen in `web-crawler`)
+- css_framework: N/A
+- ui_component_library: N/A
+- fonts_provider: N/A
+- icon_library: N/A
+- application_hosting: User-deployed (e.g., Docker, Kubernetes), potentially with agentic orchestration (PandaAGI)
+- database_hosting: User-deployed (e.g., self-hosted, cloud managed services), Pixeltable for integrated data persistence.
+- asset_hosting: N/A
+- deployment_solution: User-managed (e.g., pip install, Docker images), potentially with agent-driven deployment.
+- code_repository_url: [To be determined, e.g., GitHub URL for KnowledgeWeaver]
+- key_libraries:
+    - Crawling: Crawl4AI, financial-datasets/web-crawler
+    - RAG & Vector Ingestion: LightRAG, run-llama/semtools
+    - Knowledge Graph: Graphiti, GraphFusion/GraphFusion-NMN, coleam00/ottomator-agents/agentic-rag-knowledge-graph
+    - ETL & Data Processing: pixeltable/pixeltable, sinaptik-ai/panda-etl, FlowETL (concept from arXiv paper)
+    - Agentic Frameworks: sinaptik-ai/panda-agi, coleam00/ottomator-agents (various agents like mem0-agent, multi-page-scraper-agent, n8n-agentic-rag-agent)
+    - Conversational AI: sinaptik-ai/pandas-ai

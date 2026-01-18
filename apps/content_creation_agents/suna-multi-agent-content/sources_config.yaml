@@ -1,0 +1,32 @@
+sources:
+  startup_grind:
+    url: "https://www.startupgrind.com/forum"
+    selectors:
+      posts: "div.post"
+      title: "h3"
+      content: "div.content"
+    frequency: "hourly"  # [hourly, daily, weekly]
+    enabled: true
+
+  growthmentor:
+    url: "https://www.growthmentor.com/questions"
+    selectors:
+      posts: "div.question"
+      title: "h2"
+      content: "div.content"
+    frequency: "daily"
+    enabled: true
+
+  indie_hackers:
+    url: "https://indiehackers.com"
+    selectors:
+      posts: "article.post"
+      title: "h3"
+      content: "div.post-body"
+    frequency: "daily"
+    enabled: false  # Example disabled source
+
+constraints:
+  max_sources: 10
+  min_frequency: "hourly"
+  max_frequency: "weekly"

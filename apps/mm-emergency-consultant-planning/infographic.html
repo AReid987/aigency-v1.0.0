@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Automation Services | Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #0A9396, #EE9B00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .flowchart-step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 150px;
+            text-align: center;
+            padding: 1rem;
+            border-radius: 50%;
+            font-weight: 600;
+        }
+        .flowchart-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #94D2BD;
+            flex-grow: 1;
+        }
+        @media (max-width: 767px) {
+            .flowchart-arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+
+        <header class="text-center py-12 md:py-20 border-b-4 border-[#0A9396]">
+            <h1 class="text-4xl md:text-7xl font-black uppercase tracking-tighter mb-4">Business Crisis?</h1>
+            <p class="text-2xl md:text-4xl font-bold gradient-text">Emergency Automation is the Answer</p>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">When mission-critical operations fail, you need more than a solution—you need a lifeline. We specialize in ultra-fast deployment of custom automation to solve your most urgent business challenges, guaranteed.</p>
+        </header>
+
+        <main class="mt-12 md:mt-16">
+
+            <section id="services" class="mb-16">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#005F73]">Our Crisis Automation Toolkit</h2>
+                    <p class="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">We provide swift, strategic solutions designed for immediate impact. The chart below shows the typical rapid delivery times for our core services.</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-xl p-4 md:p-8">
+                    <div class="chart-container">
+                        <canvas id="servicesChart"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="results" class="mb-16">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#005F73]">Proven High-Impact Results</h2>
+                    <p class="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">Our rapid response translates into tangible business outcomes. See how we turn hours of work into significant client wins.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center justify-center text-center">
+                        <span class="text-6xl font-black text-[#CA6702]">100+</span>
+                        <p class="mt-2 text-lg font-semibold">Qualified Leads Generated</p>
+                        <p class="mt-2 text-sm text-gray-500">For a startup product launch, achieved in just <span class="font-bold text-[#BB3E03]">2 hours</span>.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center justify-center text-center">
+                        <div class="chart-container" style="height:250px; max-height:250px;">
+                             <canvas id="rfpChart"></canvas>
+                        </div>
+                        <p class="mt-4 text-lg font-semibold">Secured a $2M RFP Win</p>
+                        <p class="mt-2 text-sm text-gray-500">Critical competitive pricing analysis was delivered in only <span class="font-bold text-[#BB3E03]">4 hours</span>.</p>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-xl p-6 flex flex-col items-center justify-center text-center">
+                         <span class="text-6xl font-black text-[#CA6702]">3 Hours</span>
+                        <p class="mt-2 text-lg font-semibold">Emergency Monitoring Deployed</p>
+                        <p class="mt-2 text-sm text-gray-500">A full website monitoring system was set up post-competitor launch to safeguard market position.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="why-us" class="mb-16 bg-[#005F73] text-white rounded-2xl shadow-xl p-8 md:p-12">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold">Why Partner With Us?</h2>
+                    <p class="mt-2 text-lg text-blue-100 max-w-2xl mx-auto">In a crisis, you need proven expertise you can trust. We bring unparalleled experience and a commitment to immediate action.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
+                    <div class="bg-[#0A9396] rounded-lg p-6">
+                        <div class="text-5xl mb-3">🏆</div>
+                        <h3 class="text-2xl font-bold">15+ Years Experience</h3>
+                        <p class="mt-1 text-blue-200">Principal & CTO-level expertise driving every project.</p>
+                    </div>
+                    <div class="bg-[#0A9396] rounded-lg p-6">
+                        <div class="text-5xl mb-3">⚡</div>
+                        <h3 class="text-2xl font-bold">&lt; 15 Min Response</h3>
+                        <p class="mt-1 text-blue-200">Your emergency is our priority. We engage immediately.</p>
+                    </div>
+                    <div class="bg-[#0A9396] rounded-lg p-6">
+                        <div class="text-5xl mb-3">✅</div>
+                        <h3 class="text-2xl font-bold">Same-Day Delivery</h3>
+                        <p class="mt-1 text-blue-200">We guarantee delivery for urgent, crisis-level situations.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="process" class="mb-16">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#005F73]">Our Emergency Engagement Process</h2>
+                    <p class="mt-2 text-lg text-gray-600 max-w-2xl mx-auto">We've streamlined our process for maximum speed and efficiency. From first contact to live deployment in three simple steps.</p>
+                </div>
+                <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0">
+                        <div class="flowchart-step bg-[#E9D8A6] text-[#BB3E03]">1. Initial Crisis Consultation</div>
+                        <div class="flowchart-arrow">→</div>
+                        <div class="flowchart-step bg-[#94D2BD] text-[#005F73]">2. Rapid Solution Deployment</div>
+                        <div class="flowchart-arrow">→</div>
+                        <div class="flowchart-step bg-[#0A9396] text-white">3. Automation Live & Monitored</div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="text-center py-12 border-t-2 border-gray-200">
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="text-center md:text-left">
+                     <h3 class="text-2xl md:text-3xl font-bold text-[#005F73]">Available NOW for Your Emergency</h3>
+                    <p class="mt-2 text-gray-600">Don't wait. Contact us for immediate assistance with your automation needs.</p>
+                    <p class="mt-4 text-sm text-gray-500">#EmergencyAutomation #ProcessAutomation #MultiAgentSystems #CTO</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <p class="text-lg font-semibold text-gray-700">Emergency Project Rates</p>
+                    <p class="text-4xl font-black text-[#AE2012] my-2">$200 - $500 / hour</p>
+                    <p class="text-sm text-gray-500">For critical, time-sensitive situations demanding expert intervention.</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        const brilliantBlues = {
+            darkBlue: '#005F73',
+            teal: '#0A9396',
+            aqua: '#94D2BD',
+            sand: '#E9D8A6',
+            gold: '#EE9B00',
+            orange: '#CA6702',
+            rust: '#BB3E03',
+            red: '#AE2012',
+            darkRed: '#9B2226'
+        };
+
+        const globalTooltipOptions = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+        function wrapLabel(label, maxLength = 16) {
+            if (label.length <= maxLength) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + ' ' + word).trim().length > maxLength) {
+                    lines.push(currentLine.trim());
+                    currentLine = word;
+                } else {
+                    currentLine = (currentLine + ' ' + word).trim();
+                }
+            }
+            if (currentLine) {
+                lines.push(currentLine.trim());
+            }
+            return lines;
+        }
+
+        const servicesData = {
+            labels: [
+                wrapLabel('Emergency Web Scraping & Data Collection'),
+                wrapLabel('Crisis Response Process Automation'),
+                wrapLabel('Competitive Intelligence Gathering'),
+                wrapLabel('API Integration & Synchronization')
+            ],
+            deliveryTimes: [6, 8, 4, 1] 
+        };
+
+        const ctxServices = document.getElementById('servicesChart').getContext('2d');
+        new Chart(ctxServices, {
+            type: 'bar',
+            data: {
+                labels: servicesData.labels,
+                datasets: [{
+                    label: 'Max Delivery Time (Hours)',
+                    data: servicesData.deliveryTimes,
+                    backgroundColor: [brilliantBlues.teal, brilliantBlues.aqua, brilliantBlues.gold, brilliantBlues.orange],
+                    borderColor: brilliantBlues.darkBlue,
+                    borderWidth: 2,
+                    borderRadius: 5,
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                ...globalTooltipOptions,
+                plugins: {
+                    ...globalTooltipOptions.plugins,
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        text: 'Rapid Service Delivery Times',
+                        font: { size: 18, weight: 'bold' },
+                        color: brilliantBlues.darkBlue,
+                        padding: { bottom: 20 }
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Maximum Hours to Delivery',
+                            font: { size: 14 }
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+
+        const ctxRfp = document.getElementById('rfpChart').getContext('2d');
+        new Chart(ctxRfp, {
+            type: 'doughnut',
+            data: {
+                labels: ['Time Spent (4 Hrs)', 'Remaining Work Week (36 Hrs)'],
+                datasets: [{
+                    data: [4, 36],
+                    backgroundColor: [brilliantBlues.rust, '#e9ecef'],
+                    borderColor: ['#ffffff', '#ffffff'],
+                    borderWidth: 4,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                ...globalTooltipOptions,
+                plugins: {
+                     ...globalTooltipOptions.plugins,
+                    legend: {
+                        display: false
+                    },
+                    title: {
+                        display: true,
+                        position: 'bottom',
+                        text: 'Analysis vs. Standard Work Week',
+                        font: { size: 12 },
+                        color: brilliantBlues.darkBlue
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
+e/e82f7637993d

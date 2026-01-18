@@ -1,0 +1,326 @@
+/* Tesla Research Hub - Enhanced Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+header {
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 2em 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+    animation: sparkle 3s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}
+
+header h1 {
+    font-size: 2.5em;
+    font-weight: 300;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+}
+
+main {
+    max-width: 1000px;
+    margin: 2em auto;
+    padding: 0 20px;
+}
+
+section {
+    background: rgba(255, 255, 255, 0.95);
+    margin: 2em 0;
+    padding: 2em;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h2 {
+    color: #2c3e50;
+    font-size: 2em;
+    margin-bottom: 1em;
+    position: relative;
+    padding-bottom: 0.5em;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 2px;
+}
+
+h3 {
+    color: #34495e;
+    font-size: 1.3em;
+    margin: 1.5em 0 0.5em 0;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+h3.expandable {
+    position: relative;
+    padding-right: 30px;
+}
+
+h3.expandable::after {
+    content: '▼';
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: transform 0.3s ease;
+    font-size: 0.8em;
+}
+
+h3.expandable.expanded::after {
+    transform: rotate(180deg);
+}
+
+h3:hover {
+    color: #667eea;
+}
+
+p {
+    margin-bottom: 1em;
+    text-align: justify;
+    transition: all 0.3s ease;
+}
+
+p.expanded {
+    max-height: none;
+    opacity: 1;
+}
+
+ul {
+    margin: 1em 0 1em 2em;
+}
+
+li {
+    margin-bottom: 0.5em;
+    position: relative;
+}
+
+li::before {
+    content: '⚡';
+    position: absolute;
+    left: -1.5em;
+    color: #667eea;
+}
+
+a {
+    color: #667eea;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transition: width 0.3s ease;
+}
+
+a:hover::after {
+    width: 100%;
+}
+
+a.external-link::before {
+    content: '🔗';
+    margin-right: 5px;
+}
+
+/* Floating Navigation */
+.floating-nav {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 25px;
+    padding: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.floating-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.floating-nav li {
+    margin: 5px 0;
+}
+
+.floating-nav a {
+    display: block;
+    padding: 8px 15px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.floating-nav a:hover,
+.floating-nav a.active {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    color: white;
+    transform: translateX(-5px);
+}
+
+/* Audio Player */
+#podcast-player {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+#podcast-player h2 {
+    color: white;
+}
+
+#podcast-player h2::after {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.audio-player {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.audio-player audio {
+    flex: 1;
+    min-width: 300px;
+    height: 50px;
+    border-radius: 25px;
+    outline: none;
+}
+
+.audio-info {
+    flex: 1;
+    min-width: 250px;
+}
+
+.audio-info p {
+    margin: 0;
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+/* Executive Summary Special Styling */
+#executive-summary {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+#executive-summary h2 {
+    color: white;
+}
+
+#executive-summary h2::after {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .floating-nav {
+        display: none;
+    }
+    
+    header h1 {
+        font-size: 1.8em;
+    }
+    
+    main {
+        padding: 0 10px;
+    }
+    
+    section {
+        padding: 1.5em;
+        margin: 1em 0;
+    }
+    
+    .audio-player {
+        flex-direction: column;
+    }
+    
+    .audio-player audio {
+        width: 100%;
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 2em;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(0, 0, 0, 0.1);
+    margin-top: 2em;
+}
+
+/* Loading Animation */
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+.loading {
+    animation: pulse 2s ease-in-out infinite;
+}
+

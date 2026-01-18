@@ -1,8 +1,0 @@
-packages:
-  - apps/*
-  - packages/*
-onlyBuiltDependencies:
-  - sharp
-  - unrs-resolver
-overrides:
-  next@>=13.0 <15.2.2: '>=15.2.2'

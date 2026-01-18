@@ -1,2 +1,0 @@
-This is a test document for upload functionality testing.
-It contains some sample content to verify the file upload works correctly.
