@@ -37,7 +37,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build & Publish to Github Container Registry
-        uses: elgohr/Publish-Docker-Github-Action@v5
+        uses: elgohr/Publish-Docker-Github-Action@4feac4d53e4e55dcc5d3e2ad0ed2e0a76028ff7a # v5
         with:
           name: ${{ github.repository_owner }}/${{ env.IMAGE_NAME_PREFIX }}${{ matrix.image_name }}
           username: ${{ github.actor }}
